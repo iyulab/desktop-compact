@@ -33,6 +33,10 @@
   --dc-radius-lg: 10px;
   --dc-radius-full: 9999px;
 
+  /* State (theme-agnostic) */
+  --dc-opacity-disabled: 0.5;
+  --dc-focus-ring-width: 2px;
+
   /* Typography */
   --dc-font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
   --dc-font-size-xs: 11px;
