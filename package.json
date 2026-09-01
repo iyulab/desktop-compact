@@ -23,6 +23,10 @@
       "types": "./dist/components/input/dc-input.d.ts",
       "import": "./dist/input.js"
     },
+    "./select": {
+      "types": "./dist/components/select/dc-select.d.ts",
+      "import": "./dist/select.js"
+    },
     "./badge": {
       "types": "./dist/components/badge/dc-badge.d.ts",
       "import": "./dist/badge.js"
