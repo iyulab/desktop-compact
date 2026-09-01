@@ -39,6 +39,10 @@
       "types": "./dist/components/confirm-dialog/dc-confirm-dialog.d.ts",
       "import": "./dist/confirm-dialog.js"
     },
+    "./status-strip": {
+      "types": "./dist/components/status-strip/dc-status-strip.d.ts",
+      "import": "./dist/status-strip.js"
+    },
     "./badge": {
       "types": "./dist/components/badge/dc-badge.d.ts",
       "import": "./dist/badge.js"
