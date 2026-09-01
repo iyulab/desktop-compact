@@ -56,4 +56,10 @@ describe('dc-input', () => {
     const el = await fixture<DcInput>(html`<dc-input placeholder="Email"></dc-input>`)
     await expect(el).to.be.accessible()
   })
+
+  it('forwards a host aria-label onto the internal input', async () => {
+    const el = await fixture<DcInput>(html`<dc-input aria-label="Email"></dc-input>`)
+    const inner = el.shadowRoot!.querySelector('input')!
+    expect(inner.getAttribute('aria-label')).to.equal('Email')
+  })
 })

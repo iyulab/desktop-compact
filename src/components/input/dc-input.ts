@@ -1,5 +1,6 @@
 import { html, css } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { LitElement, type PropertyValues } from 'lit'
 import { FormAssociatedMixin } from '../../mixins/form-associated.js'
 
@@ -97,6 +98,7 @@ export class DcInput extends FormAssociatedMixin(LitElement) {
         placeholder=${this.placeholder}
         ?disabled=${this.disabled}
         ?required=${this.required}
+        aria-label=${ifDefined(this.ariaLabel ?? undefined)}
         @input=${this._handleInput}
         part="input"
       />
