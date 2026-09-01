@@ -21,10 +21,10 @@ export class DcCard extends LitElement {
       transition: border-color 0.15s ease;
     }
     :host([interactive]:hover) {
-      border-color: var(--dc-color-accent, #3b82f6);
+      border-color: var(--dc-color-accent, #2563eb);
     }
     :host([interactive]:focus-visible) {
-      outline: 2px solid var(--dc-color-accent, #3b82f6);
+      outline: 2px solid var(--dc-color-accent, #2563eb);
       outline-offset: 2px;
     }
   `

@@ -22,7 +22,7 @@ export class DcEmptyState extends LitElement {
       height: 48px;
       margin-bottom: var(--dc-space-3, 12px);
       border-radius: var(--dc-radius-lg, 10px);
-      background: color-mix(in srgb, var(--dc-color-accent, #3b82f6) 12%, transparent);
+      background: color-mix(in srgb, var(--dc-color-accent, #2563eb) 12%, transparent);
       font-size: 22px;
     }
     .icon[hidden] {

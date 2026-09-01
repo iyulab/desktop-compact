@@ -32,12 +32,12 @@ export class DcTabBar extends LitElement {
       cursor: pointer;
     }
     button[aria-selected='true'] {
-      color: var(--dc-color-accent, #3b82f6);
-      border-bottom-color: var(--dc-color-accent, #3b82f6);
+      color: var(--dc-color-accent, #2563eb);
+      border-bottom-color: var(--dc-color-accent, #2563eb);
       font-weight: var(--dc-font-weight-medium, 500);
     }
     button:focus-visible {
-      outline: 2px solid var(--dc-color-accent, #3b82f6);
+      outline: 2px solid var(--dc-color-accent, #2563eb);
       outline-offset: -2px;
     }
   `

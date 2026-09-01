@@ -33,4 +33,9 @@ describe('dc-tab-bar', () => {
     const el = await fixture<DcTabBar>(html`<dc-tab-bar .items=${ITEMS} active-id="overview"></dc-tab-bar>`)
     expect(el.getAttribute('role')).to.equal('tablist')
   })
+
+  it('is accessible', async () => {
+    const el = await fixture<DcTabBar>(html`<dc-tab-bar .items=${ITEMS} active-id="overview"></dc-tab-bar>`)
+    await expect(el).to.be.accessible()
+  })
 })

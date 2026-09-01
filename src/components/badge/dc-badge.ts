@@ -25,8 +25,8 @@ export class DcBadge extends LitElement {
       color: var(--dc-color-text-secondary, #55555c);
     }
     :host([variant='accent']) span {
-      background: color-mix(in srgb, var(--dc-color-accent, #3b82f6) 15%, transparent);
-      color: var(--dc-color-accent, #3b82f6);
+      background: color-mix(in srgb, var(--dc-color-accent, #2563eb) 15%, transparent);
+      color: var(--dc-color-accent, #2563eb);
     }
     :host([variant='success']) span {
       background: color-mix(in srgb, var(--dc-color-success, #16a34a) 15%, transparent);

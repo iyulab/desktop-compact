@@ -25,5 +25,12 @@ export default defineConfig({
       external: [/^lit/],
     },
   },
-  plugins: [dts({ include: ['src'], rollupTypes: false, entryRoot: 'src' })],
+  plugins: [
+    dts({
+      include: ['src'],
+      exclude: ['**/*.test.ts', '**/*.stories.ts'],
+      rollupTypes: false,
+      entryRoot: 'src',
+    }),
+  ],
 })

@@ -10,7 +10,7 @@ export class DcSpinner extends LitElement {
   static styles = css`
     :host {
       display: inline-flex;
-      color: var(--dc-color-accent, #3b82f6);
+      color: var(--dc-color-accent, #2563eb);
     }
     svg {
       animation: dc-spin 0.75s linear infinite;
