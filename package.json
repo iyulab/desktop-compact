@@ -16,27 +16,27 @@
       "import": "./dist/index.js"
     },
     "./badge": {
-      "types": "./dist/badge.d.ts",
+      "types": "./dist/components/badge/dc-badge.d.ts",
       "import": "./dist/badge.js"
     },
     "./spinner": {
-      "types": "./dist/spinner.d.ts",
+      "types": "./dist/components/spinner/dc-spinner.d.ts",
       "import": "./dist/spinner.js"
     },
     "./card": {
-      "types": "./dist/card.d.ts",
+      "types": "./dist/components/card/dc-card.d.ts",
       "import": "./dist/card.js"
     },
     "./empty-state": {
-      "types": "./dist/empty-state.d.ts",
+      "types": "./dist/components/empty-state/dc-empty-state.d.ts",
       "import": "./dist/empty-state.js"
     },
     "./section-heading": {
-      "types": "./dist/section-heading.d.ts",
+      "types": "./dist/components/section-heading/dc-section-heading.d.ts",
       "import": "./dist/section-heading.js"
     },
     "./tab-bar": {
-      "types": "./dist/tab-bar.d.ts",
+      "types": "./dist/components/tab-bar/dc-tab-bar.d.ts",
       "import": "./dist/tab-bar.js"
     },
     "./tokens.css": "./tokens.css"

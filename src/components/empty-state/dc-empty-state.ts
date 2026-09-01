@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, property, state } from 'lit/decorators.js'
 
 @customElement('dc-empty-state')
 export class DcEmptyState extends LitElement {
@@ -25,6 +25,9 @@ export class DcEmptyState extends LitElement {
       background: color-mix(in srgb, var(--dc-color-accent, #3b82f6) 12%, transparent);
       font-size: 22px;
     }
+    .icon[hidden] {
+      display: none;
+    }
     h2 {
       margin: 0 0 var(--dc-space-1, 4px);
       font-size: var(--dc-font-size-lg, 15px);
@@ -44,9 +47,19 @@ export class DcEmptyState extends LitElement {
   @property()
   description = ''
 
+  @state()
+  private hasIcon = false
+
+  #handleIconSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement
+    this.hasIcon = slot.assignedNodes({ flatten: true }).length > 0
+  }
+
   render() {
     return html`
-      <div class="icon"><slot name="icon"></slot></div>
+      <div class="icon" ?hidden=${!this.hasIcon}>
+        <slot name="icon" @slotchange=${this.#handleIconSlotChange}></slot>
+      </div>
       <h2>${this.heading}</h2>
       ${this.description ? html`<p>${this.description}</p>` : ''}
       <slot name="actions"></slot>
