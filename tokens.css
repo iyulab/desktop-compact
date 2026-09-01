@@ -1,0 +1,78 @@
+/*
+ * Design tokens for @iyulab/desktop-compact.
+ * Import this once in the consuming app's global stylesheet (or index.html)
+ * for consistent theming. Every component also ships sane fallback values,
+ * so it still renders correctly even if this file is never imported.
+ */
+:root {
+  /* Color -- light (default) */
+  --dc-color-bg: #ffffff;
+  --dc-color-surface: #f7f7f8;
+  --dc-color-surface-hover: #ececed;
+  --dc-color-border: #e2e2e4;
+  --dc-color-text: #1a1a1e;
+  --dc-color-text-secondary: #55555c;
+  --dc-color-text-muted: #8a8a92;
+  --dc-color-accent: #3b82f6;
+  --dc-color-accent-contrast: #ffffff;
+  --dc-color-success: #16a34a;
+  --dc-color-warning: #d97706;
+  --dc-color-danger: #dc2626;
+
+  /* Spacing -- 4px base, compact density */
+  --dc-space-1: 4px;
+  --dc-space-2: 8px;
+  --dc-space-3: 12px;
+  --dc-space-4: 16px;
+  --dc-space-5: 20px;
+  --dc-space-6: 24px;
+
+  /* Radius */
+  --dc-radius-sm: 4px;
+  --dc-radius-md: 6px;
+  --dc-radius-lg: 10px;
+  --dc-radius-full: 9999px;
+
+  /* Typography */
+  --dc-font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --dc-font-size-xs: 11px;
+  --dc-font-size-sm: 12px;
+  --dc-font-size-md: 13px;
+  --dc-font-size-lg: 15px;
+  --dc-font-weight-normal: 400;
+  --dc-font-weight-medium: 500;
+  --dc-font-weight-semibold: 600;
+}
+
+/* Dark theme -- OS preference unless the consumer opts out via
+   [data-theme="light"], or opts in explicitly via [data-theme="dark"]. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --dc-color-bg: #17181c;
+    --dc-color-surface: #1f2024;
+    --dc-color-surface-hover: #2a2b30;
+    --dc-color-border: #313236;
+    --dc-color-text: #f0f0f2;
+    --dc-color-text-secondary: #b8b8bf;
+    --dc-color-text-muted: #86868f;
+    --dc-color-accent: #5b9bf7;
+    --dc-color-accent-contrast: #0b1220;
+    --dc-color-success: #22c55e;
+    --dc-color-warning: #f59e0b;
+    --dc-color-danger: #ef4444;
+  }
+}
+:root[data-theme='dark'] {
+  --dc-color-bg: #17181c;
+  --dc-color-surface: #1f2024;
+  --dc-color-surface-hover: #2a2b30;
+  --dc-color-border: #313236;
+  --dc-color-text: #f0f0f2;
+  --dc-color-text-secondary: #b8b8bf;
+  --dc-color-text-muted: #86868f;
+  --dc-color-accent: #5b9bf7;
+  --dc-color-accent-contrast: #0b1220;
+  --dc-color-success: #22c55e;
+  --dc-color-warning: #f59e0b;
+  --dc-color-danger: #ef4444;
+}
