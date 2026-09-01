@@ -18,6 +18,7 @@
   --dc-color-success: #16a34a;
   --dc-color-warning: #d97706;
   --dc-color-danger: #dc2626;
+  --dc-color-backdrop: rgba(0, 0, 0, 0.4);
 
   /* Spacing -- 4px base, compact density */
   --dc-space-1: 4px;
@@ -64,6 +65,7 @@
     --dc-color-success: #22c55e;
     --dc-color-warning: #f59e0b;
     --dc-color-danger: #ef4444;
+    --dc-color-backdrop: rgba(0, 0, 0, 0.6);
   }
 }
 :root[data-theme='dark'] {
@@ -79,4 +81,5 @@
   --dc-color-success: #22c55e;
   --dc-color-warning: #f59e0b;
   --dc-color-danger: #ef4444;
+  --dc-color-backdrop: rgba(0, 0, 0, 0.6);
 }

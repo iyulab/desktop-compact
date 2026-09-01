@@ -31,6 +31,10 @@
       "types": "./dist/components/textarea/dc-textarea.d.ts",
       "import": "./dist/textarea.js"
     },
+    "./dialog": {
+      "types": "./dist/components/dialog/dc-dialog.d.ts",
+      "import": "./dist/dialog.js"
+    },
     "./badge": {
       "types": "./dist/components/badge/dc-badge.d.ts",
       "import": "./dist/badge.js"
