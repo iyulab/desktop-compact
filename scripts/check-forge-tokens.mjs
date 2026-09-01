@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
+import { pathToFileURL } from 'node:url'
 
 export const FORBIDDEN_PATTERNS = [
   /forge/i,
@@ -48,6 +49,6 @@ function main() {
   console.log('forge-ignorance guard passed — no forbidden tokens in src/.')
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   main()
 }

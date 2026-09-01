@@ -20,7 +20,7 @@
     "test": "web-test-runner \"src/**/*.test.ts\"",
     "test:watch": "web-test-runner \"src/**/*.test.ts\" --watch",
     "guard": "node scripts/check-forge-tokens.mjs",
-    "guard:test": "node --test scripts/",
+    "guard:test": "node --test scripts/*.test.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
