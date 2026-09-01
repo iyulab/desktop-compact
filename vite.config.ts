@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
-import { existsSync, readdirSync, statSync } from 'node:fs'
+import { existsSync, readdirSync, statSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 function discoverComponentEntries(): Record<string, string> {
@@ -25,5 +25,23 @@ export default defineConfig({
       external: [/^lit/],
     },
   },
-  plugins: [dts({ include: ['src'] })],
+  plugins: [
+    dts({ include: ['src'] }),
+    {
+      name: 'dts-wrapper-generator',
+      apply: 'build',
+      enforce: 'post',
+      closeBundle() {
+        // Generate wrapper .d.ts files for each component entry
+        const entries = discoverComponentEntries()
+        const distDir = 'dist'
+        for (const [name, entryPath] of Object.entries(entries)) {
+          if (name === 'index') continue
+          const wrapperPath = join(distDir, `${name}.d.ts`)
+          const componentName = name.replace(/-/g, '_')
+          writeFileSync(wrapperPath, `export * from './components/${componentName}/${entryPath.split('/').pop()?.replace('.ts', '')}.js';\n`)
+        }
+      },
+    },
+  ],
 })
