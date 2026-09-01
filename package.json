@@ -23,6 +23,10 @@
       "types": "./dist/spinner.d.ts",
       "import": "./dist/spinner.js"
     },
+    "./card": {
+      "types": "./dist/card.d.ts",
+      "import": "./dist/card.js"
+    },
     "./tokens.css": "./tokens.css"
   },
   "scripts": {
