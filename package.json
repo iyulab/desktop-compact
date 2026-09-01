@@ -35,6 +35,10 @@
       "types": "./dist/section-heading.d.ts",
       "import": "./dist/section-heading.js"
     },
+    "./tab-bar": {
+      "types": "./dist/tab-bar.d.ts",
+      "import": "./dist/tab-bar.js"
+    },
     "./tokens.css": "./tokens.css"
   },
   "scripts": {
