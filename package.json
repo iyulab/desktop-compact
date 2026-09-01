@@ -31,6 +31,10 @@
       "types": "./dist/empty-state.d.ts",
       "import": "./dist/empty-state.js"
     },
+    "./section-heading": {
+      "types": "./dist/section-heading.d.ts",
+      "import": "./dist/section-heading.js"
+    },
     "./tokens.css": "./tokens.css"
   },
   "scripts": {
