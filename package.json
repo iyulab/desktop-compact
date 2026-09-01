@@ -19,6 +19,10 @@
       "types": "./dist/components/button/dc-button.d.ts",
       "import": "./dist/button.js"
     },
+    "./input": {
+      "types": "./dist/components/input/dc-input.d.ts",
+      "import": "./dist/input.js"
+    },
     "./badge": {
       "types": "./dist/components/badge/dc-badge.d.ts",
       "import": "./dist/badge.js"
