@@ -75,6 +75,10 @@
       "types": "./dist/components/toast/dc-toast.d.ts",
       "import": "./dist/toast.js"
     },
+    "./paste-rows-zone": {
+      "types": "./dist/components/paste-rows-zone/dc-paste-rows-zone.d.ts",
+      "import": "./dist/paste-rows-zone.js"
+    },
     "./tokens.css": "./tokens.css"
   },
   "scripts": {
