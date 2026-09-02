@@ -67,6 +67,10 @@
       "types": "./dist/components/tab-bar/dc-tab-bar.d.ts",
       "import": "./dist/tab-bar.js"
     },
+    "./toast": {
+      "types": "./dist/components/toast/dc-toast.d.ts",
+      "import": "./dist/toast.js"
+    },
     "./tokens.css": "./tokens.css"
   },
   "scripts": {
