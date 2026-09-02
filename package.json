@@ -79,6 +79,10 @@
       "types": "./dist/components/paste-rows-zone/dc-paste-rows-zone.d.ts",
       "import": "./dist/paste-rows-zone.js"
     },
+    "./context-menu": {
+      "types": "./dist/components/context-menu/dc-context-menu.d.ts",
+      "import": "./dist/context-menu.js"
+    },
     "./tokens.css": "./tokens.css"
   },
   "scripts": {
