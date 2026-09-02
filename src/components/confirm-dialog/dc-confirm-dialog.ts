@@ -1,5 +1,6 @@
 import { html, css, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import '../dialog/dc-dialog.js'
 import '../button/dc-button.js'
 
@@ -30,10 +31,10 @@ export class DcConfirmDialog extends LitElement {
   heading = ''
 
   @property({ attribute: 'confirm-label' })
-  confirmLabel = 'Confirm'
+  confirmLabel = ''
 
   @property({ attribute: 'cancel-label' })
-  cancelLabel = 'Cancel'
+  cancelLabel = ''
 
   @property({ type: Boolean, reflect: true })
   danger = false
@@ -52,7 +53,7 @@ export class DcConfirmDialog extends LitElement {
     return html`
       <dc-dialog
         .open=${this.open}
-        aria-label=${this.heading || 'Confirm'}
+        aria-label=${ifDefined(this.heading || undefined)}
         @close=${this._handleCancel}
       >
         ${this.heading ? html`<h2 part="heading">${this.heading}</h2>` : null}

@@ -18,14 +18,40 @@ describe('dc-confirm-dialog', () => {
     expect(el.textContent?.trim()).to.equal('Are you sure?')
   })
 
-  it('defaults confirmLabel/cancelLabel and renders them on the buttons', async () => {
+  it('defaults confirmLabel/cancelLabel to empty — no baked-in text (no-i18n)', async () => {
     const el = await fixture<DcConfirmDialog>(html`<dc-confirm-dialog open></dc-confirm-dialog>`)
     await el.updateComplete
-    expect(el.confirmLabel).to.equal('Confirm')
-    expect(el.cancelLabel).to.equal('Cancel')
+    expect(el.confirmLabel).to.equal('')
+    expect(el.cancelLabel).to.equal('')
     const buttons = el.shadowRoot!.querySelectorAll('dc-button')
-    expect(buttons[0].textContent?.trim()).to.equal('Cancel')
-    expect(buttons[1].textContent?.trim()).to.equal('Confirm')
+    expect(buttons[0].textContent?.trim()).to.equal('')
+    expect(buttons[1].textContent?.trim()).to.equal('')
+  })
+
+  it('renders consumer-supplied confirmLabel/cancelLabel on the buttons', async () => {
+    const el = await fixture<DcConfirmDialog>(
+      html`<dc-confirm-dialog open confirm-label="Delete" cancel-label="Keep"></dc-confirm-dialog>`,
+    )
+    await el.updateComplete
+    const buttons = el.shadowRoot!.querySelectorAll('dc-button')
+    expect(buttons[0].textContent?.trim()).to.equal('Keep')
+    expect(buttons[1].textContent?.trim()).to.equal('Delete')
+  })
+
+  it('omits aria-label on the inner dialog when no heading is given — no baked-in fallback text', async () => {
+    const el = await fixture<DcConfirmDialog>(html`<dc-confirm-dialog open></dc-confirm-dialog>`)
+    await el.updateComplete
+    const inner = el.shadowRoot!.querySelector('dc-dialog')!
+    expect(inner.hasAttribute('aria-label')).to.be.false
+  })
+
+  it('forwards heading as aria-label on the inner dialog when given', async () => {
+    const el = await fixture<DcConfirmDialog>(
+      html`<dc-confirm-dialog open heading="Delete item?"></dc-confirm-dialog>`,
+    )
+    await el.updateComplete
+    const inner = el.shadowRoot!.querySelector('dc-dialog')!
+    expect(inner.getAttribute('aria-label')).to.equal('Delete item?')
   })
 
   it('dispatches confirm and closes when the confirm button is clicked', async () => {

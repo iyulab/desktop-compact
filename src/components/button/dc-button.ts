@@ -1,5 +1,6 @@
 import { html, css } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { LitElement } from 'lit'
 import { FormAssociatedMixin } from '../../mixins/form-associated.js'
 
@@ -69,7 +70,13 @@ export class DcButton extends FormAssociatedMixin(LitElement) {
 
   render() {
     return html`
-      <button type="button" ?disabled=${this.disabled} @click=${this._handleClick} part="button">
+      <button
+        type="button"
+        ?disabled=${this.disabled}
+        aria-label=${ifDefined(this.ariaLabel ?? undefined)}
+        @click=${this._handleClick}
+        part="button"
+      >
         <slot></slot>
       </button>
     `

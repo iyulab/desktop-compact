@@ -72,4 +72,10 @@ describe('dc-button', () => {
     const el = await fixture<DcButton>(html`<dc-button>Save</dc-button>`)
     await expect(el).to.be.accessible()
   })
+
+  it('forwards host aria-label to the inner button — required for icon-only buttons with no visible text', async () => {
+    const el = await fixture<DcButton>(html`<dc-button aria-label="Close">&times;</dc-button>`)
+    const inner = el.shadowRoot!.querySelector('button')!
+    expect(inner.getAttribute('aria-label')).to.equal('Close')
+  })
 })
