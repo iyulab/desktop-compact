@@ -14,6 +14,8 @@ of its own.
 
 ## Install
 
+Requires Node ≥22.
+
 ```bash
 npm install @iyulab/desktop-compact
 ```
