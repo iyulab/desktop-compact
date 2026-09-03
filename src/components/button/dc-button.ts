@@ -4,8 +4,9 @@ import { ifDefined } from 'lit/directives/if-defined.js'
 import { LitElement } from 'lit'
 import { FormAssociatedMixin } from '../../mixins/form-associated.js'
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger'
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline'
 export type ButtonType = 'button' | 'submit' | 'reset'
+export type ButtonSize = 'sm' | 'md'
 
 @customElement('dc-button')
 export class DcButton extends FormAssociatedMixin(LitElement) {
@@ -51,10 +52,22 @@ export class DcButton extends FormAssociatedMixin(LitElement) {
       background: var(--dc-color-danger, #dc2626);
       color: var(--dc-color-accent-contrast, #ffffff);
     }
+    :host([variant='outline']) button {
+      background: transparent;
+      color: var(--dc-color-accent, #2563eb);
+      border-color: var(--dc-color-accent, #2563eb);
+    }
+    :host([size='sm']) button {
+      padding: var(--dc-space-1, 4px) var(--dc-space-2, 8px);
+      font-size: var(--dc-font-size-sm, 12px);
+    }
   `
 
   @property({ reflect: true })
   variant: ButtonVariant = 'secondary'
+
+  @property({ reflect: true })
+  size: ButtonSize = 'md'
 
   @property({ reflect: true })
   type: ButtonType = 'button'

@@ -8,10 +8,17 @@ describe('dc-button', () => {
     expect(el.textContent?.trim()).to.equal('Save')
   })
 
-  it('defaults to type=button and variant=secondary', async () => {
+  it('defaults to type=button, variant=secondary, size=md', async () => {
     const el = await fixture<DcButton>(html`<dc-button>Save</dc-button>`)
     expect(el.type).to.equal('button')
     expect(el.variant).to.equal('secondary')
+    expect(el.size).to.equal('md')
+  })
+
+  it('reflects variant=outline and size=sm as attributes', async () => {
+    const el = await fixture<DcButton>(html`<dc-button variant="outline" size="sm">Save</dc-button>`)
+    expect(el.getAttribute('variant')).to.equal('outline')
+    expect(el.getAttribute('size')).to.equal('sm')
   })
 
   it('does not submit the owning form when type=button', async () => {

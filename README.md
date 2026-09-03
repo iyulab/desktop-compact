@@ -78,7 +78,7 @@ themselves have no light/dark awareness.
 
 | Component | Description |
 |---|---|
-| `dc-button` | Button with `primary`/`secondary`/`ghost`/`danger` variants, form-associated (`type="submit"`/`"reset"` participate in the owning `<form>`) |
+| `dc-button` | Button with `primary`/`secondary`/`ghost`/`danger`/`outline` variants and `sm`/`md` sizes, form-associated (`type="submit"`/`"reset"` participate in the owning `<form>`) |
 | `dc-input` | Text/email/password/number/search input, form-associated with native constraint validation |
 | `dc-select` | Select control, data-driven `options` property (not slotted `<option>`s — works around a shadow-DOM `<select>` HTML spec gap) |
 | `dc-textarea` | Multi-line text input, form-associated |
