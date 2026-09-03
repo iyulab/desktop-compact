@@ -92,6 +92,10 @@ export class DcSelect extends FormAssociatedMixin(LitElement) {
 
   private _handleChange(): void {
     this.value = this._inner.value
+    // The inner <select>'s native `change` is non-bubbling and, even if it
+    // were, would stop at this component's own shadow boundary — a consumer
+    // outside has no way to observe a value change without this re-dispatch.
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }))
   }
 
   render() {

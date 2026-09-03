@@ -29,6 +29,18 @@ describe('dc-select', () => {
     expect(new FormData(form).get('letter')).to.equal('b')
   })
 
+  it('dispatches a bubbling, composed change event on the host when the value changes', async () => {
+    const el = await fixture<DcSelect>(html`<dc-select .options=${OPTIONS}></dc-select>`)
+    const seen: Event[] = []
+    el.addEventListener('change', (e) => seen.push(e))
+    const inner = el.shadowRoot!.querySelector('select')!
+    inner.value = 'c'
+    inner.dispatchEvent(new Event('change', { bubbles: true }))
+    expect(seen.length).to.equal(1)
+    expect(seen[0].bubbles).to.be.true
+    expect(seen[0].composed).to.be.true
+  })
+
   it('renders a disabled placeholder option when value is empty and placeholder is set', async () => {
     const el = await fixture<DcSelect>(
       html`<dc-select .options=${OPTIONS} placeholder="Choose one"></dc-select>`,
