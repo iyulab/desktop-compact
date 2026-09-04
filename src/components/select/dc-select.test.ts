@@ -85,4 +85,9 @@ describe('dc-select', () => {
     const inner = el.shadowRoot!.querySelector('select')!
     expect(inner.getAttribute('aria-label')).to.equal('Status')
   })
+
+  it('reflects size and applies the sm variant styling hook', async () => {
+    const el = await fixture<DcSelect>(html`<dc-select .options=${OPTIONS} size="sm"></dc-select>`)
+    expect(el.getAttribute('size')).to.equal('sm')
+  })
 })

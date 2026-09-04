@@ -10,6 +10,8 @@ export interface SelectOption {
   disabled?: boolean
 }
 
+export type SelectSize = 'sm' | 'md'
+
 @customElement('dc-select')
 export class DcSelect extends FormAssociatedMixin(LitElement) {
   static styles = css`
@@ -39,10 +41,17 @@ export class DcSelect extends FormAssociatedMixin(LitElement) {
     :host(:state(invalid)) select {
       border-color: var(--dc-color-danger, #dc2626);
     }
+    :host([size='sm']) select {
+      padding: var(--dc-space-1, 4px) var(--dc-space-2, 8px);
+      font-size: var(--dc-font-size-sm, 12px);
+    }
   `
 
   @property({ reflect: true })
   name = ''
+
+  @property({ reflect: true })
+  size: SelectSize = 'md'
 
   @property()
   value = ''
