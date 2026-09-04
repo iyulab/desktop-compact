@@ -93,9 +93,19 @@ export class DcContextMenu extends LitElement {
 
   constructor() {
     super()
+    this.addEventListener('toggle', this._handleToggle as EventListener)
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    // A custom element must not carry attributes before it is inserted (Custom
+    // Elements spec: "the result must not have attributes") - Chrome/Firefox/Safari
+    // all enforce this and throw on `document.createElement()` (the exact path React
+    // uses) if a constructor sets one. `popover`/`role` are static for this component,
+    // so connectedCallback is the correct place (this repo's own dc-card follows the
+    // same pattern for its own role attribute).
     this.setAttribute('popover', 'auto')
     this.setAttribute('role', 'menu')
-    this.addEventListener('toggle', this._handleToggle as EventListener)
   }
 
   // Syncs `open` back to false when the popover is dismissed by the platform itself (Escape or an

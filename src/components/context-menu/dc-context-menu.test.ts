@@ -108,6 +108,15 @@ describe('dc-context-menu', () => {
     expect(event.detail.item.value).to.equal('rename')
   })
 
+  it('does not carry attributes when constructed but not yet connected (Custom Elements spec)', () => {
+    // A constructed-but-unattached element must have no attributes - Chrome/Firefox/
+    // Safari all enforce this and throw on document.createElement() (the exact path
+    // React uses) if a constructor sets one. popover/role are set in connectedCallback
+    // instead (see the class doc comment), so this must hold before insertion.
+    const el = document.createElement('dc-context-menu')
+    expect(el.attributes.length).to.equal(0)
+  })
+
   it('has role=menu on the host and forwards a host aria-label', async () => {
     const el = await fixture<DcContextMenu>(
       html`<dc-context-menu aria-label="Row actions"></dc-context-menu>`,
