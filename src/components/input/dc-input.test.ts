@@ -52,6 +52,24 @@ describe('dc-input', () => {
     expect(el.value).to.equal('')
   })
 
+  it('forwards min/max onto the internal input', async () => {
+    const el = await fixture<DcInput>(
+      html`<dc-input type="number" min="0" max="10"></dc-input>`,
+    )
+    const inner = el.shadowRoot!.querySelector('input')!
+    expect(inner.getAttribute('min')).to.equal('0')
+    expect(inner.getAttribute('max')).to.equal('10')
+  })
+
+  it('is invalid when the value falls outside min/max', async () => {
+    const el = await fixture<DcInput>(
+      html`<dc-input type="number" min="0" max="10" value="20"></dc-input>`,
+    )
+    await el.updateComplete
+    expect(el.checkValidity()).to.be.false
+    expect(el.matches(':state(invalid)')).to.be.true
+  })
+
   it('is accessible', async () => {
     const el = await fixture<DcInput>(html`<dc-input placeholder="Email"></dc-input>`)
     await expect(el).to.be.accessible()

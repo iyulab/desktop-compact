@@ -52,6 +52,14 @@ export class DcInput extends FormAssociatedMixin(LitElement) {
   @property({ type: Boolean, reflect: true })
   required = false
 
+  /** Forwarded to the native `min` attribute — meaningful for `type="number"`. */
+  @property()
+  min?: string
+
+  /** Forwarded to the native `max` attribute — meaningful for `type="number"`. */
+  @property()
+  max?: string
+
   @query('input')
   private _inner!: HTMLInputElement
 
@@ -61,7 +69,13 @@ export class DcInput extends FormAssociatedMixin(LitElement) {
   }
 
   protected updated(changed: PropertyValues<this>): void {
-    if (changed.has('value') || changed.has('required') || changed.has('type')) {
+    if (
+      changed.has('value') ||
+      changed.has('required') ||
+      changed.has('type') ||
+      changed.has('min') ||
+      changed.has('max')
+    ) {
       this.internals.setFormValue(this.value)
       this._syncValidity()
     }
@@ -98,6 +112,8 @@ export class DcInput extends FormAssociatedMixin(LitElement) {
         placeholder=${this.placeholder}
         ?disabled=${this.disabled}
         ?required=${this.required}
+        min=${ifDefined(this.min)}
+        max=${ifDefined(this.max)}
         aria-label=${ifDefined(this.ariaLabel ?? undefined)}
         @input=${this._handleInput}
         part="input"
