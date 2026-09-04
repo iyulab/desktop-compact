@@ -55,4 +55,19 @@ describe('dc-dialog', () => {
     const inner = el.shadowRoot!.querySelector('dialog')!
     expect(inner.getAttribute('aria-label')).to.equal('Settings')
   })
+
+  it('honors a consumer-set --dc-dialog-max-width, keeping the default when unset', async () => {
+    // Below the 480px default and well under any reasonable test-runner viewport,
+    // so this exercises the var() substitution itself rather than the separate
+    // `calc(100vw - ...)` viewport clamp the same expression also applies.
+    const narrow = await fixture<DcDialog>(
+      html`<dc-dialog style="--dc-dialog-max-width: 300px">Content</dc-dialog>`,
+    )
+    const inner = narrow.shadowRoot!.querySelector('dialog')!
+    expect(getComputedStyle(inner).maxWidth).to.equal('300px')
+
+    const plain = await fixture<DcDialog>(html`<dc-dialog>Content</dc-dialog>`)
+    const innerPlain = plain.shadowRoot!.querySelector('dialog')!
+    expect(getComputedStyle(innerPlain).maxWidth).to.equal('480px')
+  })
 })
