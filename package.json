@@ -16,75 +16,93 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./button": {
       "types": "./dist/components/button/dc-button.d.ts",
-      "import": "./dist/button.js"
+      "import": "./dist/button.js",
+      "default": "./dist/button.js"
     },
     "./input": {
       "types": "./dist/components/input/dc-input.d.ts",
-      "import": "./dist/input.js"
+      "import": "./dist/input.js",
+      "default": "./dist/input.js"
     },
     "./select": {
       "types": "./dist/components/select/dc-select.d.ts",
-      "import": "./dist/select.js"
+      "import": "./dist/select.js",
+      "default": "./dist/select.js"
     },
     "./textarea": {
       "types": "./dist/components/textarea/dc-textarea.d.ts",
-      "import": "./dist/textarea.js"
+      "import": "./dist/textarea.js",
+      "default": "./dist/textarea.js"
     },
     "./dialog": {
       "types": "./dist/components/dialog/dc-dialog.d.ts",
-      "import": "./dist/dialog.js"
+      "import": "./dist/dialog.js",
+      "default": "./dist/dialog.js"
     },
     "./confirm-dialog": {
       "types": "./dist/components/confirm-dialog/dc-confirm-dialog.d.ts",
-      "import": "./dist/confirm-dialog.js"
+      "import": "./dist/confirm-dialog.js",
+      "default": "./dist/confirm-dialog.js"
     },
     "./delete-confirm-button": {
       "types": "./dist/components/delete-confirm-button/dc-delete-confirm-button.d.ts",
-      "import": "./dist/delete-confirm-button.js"
+      "import": "./dist/delete-confirm-button.js",
+      "default": "./dist/delete-confirm-button.js"
     },
     "./status-strip": {
       "types": "./dist/components/status-strip/dc-status-strip.d.ts",
-      "import": "./dist/status-strip.js"
+      "import": "./dist/status-strip.js",
+      "default": "./dist/status-strip.js"
     },
     "./badge": {
       "types": "./dist/components/badge/dc-badge.d.ts",
-      "import": "./dist/badge.js"
+      "import": "./dist/badge.js",
+      "default": "./dist/badge.js"
     },
     "./spinner": {
       "types": "./dist/components/spinner/dc-spinner.d.ts",
-      "import": "./dist/spinner.js"
+      "import": "./dist/spinner.js",
+      "default": "./dist/spinner.js"
     },
     "./card": {
       "types": "./dist/components/card/dc-card.d.ts",
-      "import": "./dist/card.js"
+      "import": "./dist/card.js",
+      "default": "./dist/card.js"
     },
     "./empty-state": {
       "types": "./dist/components/empty-state/dc-empty-state.d.ts",
-      "import": "./dist/empty-state.js"
+      "import": "./dist/empty-state.js",
+      "default": "./dist/empty-state.js"
     },
     "./section-heading": {
       "types": "./dist/components/section-heading/dc-section-heading.d.ts",
-      "import": "./dist/section-heading.js"
+      "import": "./dist/section-heading.js",
+      "default": "./dist/section-heading.js"
     },
     "./tab-bar": {
       "types": "./dist/components/tab-bar/dc-tab-bar.d.ts",
-      "import": "./dist/tab-bar.js"
+      "import": "./dist/tab-bar.js",
+      "default": "./dist/tab-bar.js"
     },
     "./toast": {
       "types": "./dist/components/toast/dc-toast.d.ts",
-      "import": "./dist/toast.js"
+      "import": "./dist/toast.js",
+      "default": "./dist/toast.js"
     },
     "./paste-rows-zone": {
       "types": "./dist/components/paste-rows-zone/dc-paste-rows-zone.d.ts",
-      "import": "./dist/paste-rows-zone.js"
+      "import": "./dist/paste-rows-zone.js",
+      "default": "./dist/paste-rows-zone.js"
     },
     "./context-menu": {
       "types": "./dist/components/context-menu/dc-context-menu.d.ts",
-      "import": "./dist/context-menu.js"
+      "import": "./dist/context-menu.js",
+      "default": "./dist/context-menu.js"
     },
     "./tokens.css": "./tokens.css"
   },
