@@ -84,6 +84,11 @@
       "import": "./dist/section-heading.js",
       "default": "./dist/section-heading.js"
     },
+    "./segmented-control": {
+      "types": "./dist/components/segmented-control/dc-segmented-control.d.ts",
+      "import": "./dist/segmented-control.js",
+      "default": "./dist/segmented-control.js"
+    },
     "./tab-bar": {
       "types": "./dist/components/tab-bar/dc-tab-bar.d.ts",
       "import": "./dist/tab-bar.js",
