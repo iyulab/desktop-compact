@@ -48,25 +48,64 @@ export class DcTabBar extends LitElement {
   @property({ attribute: 'active-id' })
   activeId = ''
 
+  /**
+   * How arrow-key focus relates to selection (WAI-ARIA APG tabs pattern).
+   * `automatic`: moving focus selects the tab — fine when a panel shows without
+   * noticeable delay. `manual`: arrows only move focus; Enter or Space selects —
+   * for panels that are slow to show.
+   */
+  @property()
+  activation: 'automatic' | 'manual' = 'automatic'
+
   connectedCallback() {
     super.connectedCallback()
     this.setAttribute('role', 'tablist')
   }
 
   render() {
+    // Roving tabindex: the tab list is one Tab stop, landing on the selected tab
+    // (or the first one when nothing is selected); arrows move within it.
+    const selected = this.items.some((item) => item.id === this.activeId)
     return html`
       ${this.items.map(
-        (item) => html`
+        (item, index) => html`
           <button
             role="tab"
             aria-selected=${item.id === this.activeId ? 'true' : 'false'}
+            tabindex=${item.id === this.activeId || (!selected && index === 0) ? '0' : '-1'}
             @click=${() => this.#select(item.id)}
+            @keydown=${(e: KeyboardEvent) => this.#onKeydown(e, index)}
           >
             ${item.label}
           </button>
         `
       )}
     `
+  }
+
+  #onKeydown(e: KeyboardEvent, index: number) {
+    const last = this.items.length - 1
+    let target: number
+    switch (e.key) {
+      case 'ArrowRight':
+        target = index === last ? 0 : index + 1
+        break
+      case 'ArrowLeft':
+        target = index === 0 ? last : index - 1
+        break
+      case 'Home':
+        target = 0
+        break
+      case 'End':
+        target = last
+        break
+      default:
+        return
+    }
+    e.preventDefault()
+    const buttons = this.shadowRoot!.querySelectorAll<HTMLButtonElement>('button[role="tab"]')
+    buttons[target]?.focus()
+    if (this.activation === 'automatic') this.#select(this.items[target].id)
   }
 
   #select(id: string) {

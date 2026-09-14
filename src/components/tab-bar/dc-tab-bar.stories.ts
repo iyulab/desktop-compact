@@ -22,3 +22,17 @@ export const Default: Story = {
     ></dc-tab-bar>
   `,
 }
+
+export const ManualActivation: Story = {
+  render: () => html`
+    <dc-tab-bar
+      .items=${[
+        { id: 'overview', label: 'Overview' },
+        { id: 'settings', label: 'Settings' },
+        { id: 'history', label: 'History' },
+      ]}
+      active-id="overview"
+      activation="manual"
+    ></dc-tab-bar>
+  `,
+}
