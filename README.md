@@ -74,6 +74,13 @@ dependency. Override any `--dc-*` custom property to theme; light/dark is handle
 values (via your app's own `data-theme` attribute or a `prefers-color-scheme` media query) — components
 themselves have no light/dark awareness.
 
+Colour tokens come in two forms. `--dc-color-accent`, `-success`, `-warning` and `-danger` are fills:
+borders, solid buttons, the tint behind a badge. Their text forms — `--dc-color-accent-text`,
+`-success-text`, `-warning-text`, `-danger-text` — are what a label is painted with: an outline
+button's label, a tinted badge's label, a danger menu item. A fill that reads well as a border is
+often under 4.5:1 as small text, so a theme that overrides a fill should override its text form too.
+A component falls back to the fill when the text form is not set.
+
 ## Components (v1 — complete, 17/17)
 
 | Component | Description |

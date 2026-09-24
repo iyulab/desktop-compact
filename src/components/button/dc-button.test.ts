@@ -86,4 +86,22 @@ describe('dc-button', () => {
     const inner = el.shadowRoot!.querySelector('button')!
     expect(inner.getAttribute('aria-label')).to.equal('Close')
   })
+
+  it('paints an outline label with the accent text colour when the host supplies one', async () => {
+    // The accent is a fill. As a label on the page ground it measured 2.05-3.60:1
+    // in three consumer themes; --dc-color-accent-text is the shade chosen to read.
+    const el = await fixture<DcButton>(
+      html`<dc-button variant="outline" style="--dc-color-accent: rgb(245, 158, 11); --dc-color-accent-text: rgb(180, 83, 9)">Go</dc-button>`,
+    )
+    const inner = el.shadowRoot!.querySelector('button')!
+    expect(getComputedStyle(inner).color).to.equal('rgb(180, 83, 9)')
+    expect(getComputedStyle(inner).borderTopColor).to.equal('rgb(245, 158, 11)')
+  })
+
+  it('falls back to the accent for an outline label when no text colour is supplied', async () => {
+    const el = await fixture<DcButton>(
+      html`<dc-button variant="outline" style="--dc-color-accent: rgb(245, 158, 11)">Go</dc-button>`,
+    )
+    expect(getComputedStyle(el.shadowRoot!.querySelector('button')!).color).to.equal('rgb(245, 158, 11)')
+  })
 })

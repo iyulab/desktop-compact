@@ -54,7 +54,10 @@ export class DcButton extends FormAssociatedMixin(LitElement) {
     }
     :host([variant='outline']) button {
       background: transparent;
-      color: var(--dc-color-accent, #2563eb);
+      /* The accent is a fill; as a label on the page ground it needs the shade chosen
+         to read there. Hosts that define one pass it as --dc-color-accent-text, the
+         same hook dp-sidebar reads; without it the label keeps the accent. */
+      color: var(--dc-color-accent-text, var(--dc-color-accent, #2563eb));
       border-color: var(--dc-color-accent, #2563eb);
     }
     :host([size='sm']) button {

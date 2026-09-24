@@ -24,21 +24,24 @@ export class DcBadge extends LitElement {
       background: var(--dc-color-surface-hover, #ececed);
       color: var(--dc-color-text-secondary, #55555c);
     }
+    /* Tinted variants: the ground is a 15% tint of the fill, the label is the fill's
+       text form when the host supplies one (--dc-color-<variant>-text). The fill as
+       text on its own tint is what drops a label under 4.5:1 on light themes. */
     :host([variant='accent']) span {
       background: color-mix(in srgb, var(--dc-color-accent, #2563eb) 15%, transparent);
-      color: var(--dc-color-accent, #2563eb);
+      color: var(--dc-color-accent-text, var(--dc-color-accent, #2563eb));
     }
     :host([variant='success']) span {
       background: color-mix(in srgb, var(--dc-color-success, #16a34a) 15%, transparent);
-      color: var(--dc-color-success, #16a34a);
+      color: var(--dc-color-success-text, var(--dc-color-success, #16a34a));
     }
     :host([variant='warning']) span {
       background: color-mix(in srgb, var(--dc-color-warning, #d97706) 15%, transparent);
-      color: var(--dc-color-warning, #d97706);
+      color: var(--dc-color-warning-text, var(--dc-color-warning, #d97706));
     }
     :host([variant='danger']) span {
       background: color-mix(in srgb, var(--dc-color-danger, #dc2626) 15%, transparent);
-      color: var(--dc-color-danger, #dc2626);
+      color: var(--dc-color-danger-text, var(--dc-color-danger, #dc2626));
     }
   `
 

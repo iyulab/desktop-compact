@@ -24,4 +24,13 @@ describe('dc-badge', () => {
     const el = await fixture<DcBadge>(html`<dc-badge>Active</dc-badge>`)
     await expect(el).to.be.accessible()
   })
+
+  it('paints each tinted variant label with its text colour, over a tint of the fill', async () => {
+    for (const v of ['accent', 'success', 'warning', 'danger'] as const) {
+      const el = await fixture<DcBadge>(
+        html`<dc-badge variant=${v} style=${`--dc-color-${v}: rgb(10, 20, 30); --dc-color-${v}-text: rgb(1, 2, 3)`}>x</dc-badge>`,
+      )
+      expect(getComputedStyle(el.shadowRoot!.querySelector('span')!).color, v).to.equal('rgb(1, 2, 3)')
+    }
+  })
 })

@@ -67,7 +67,7 @@ export class DcContextMenu extends LitElement {
       cursor: not-allowed;
     }
     [part='item'][data-danger]:not(:disabled) {
-      color: var(--dc-color-danger, #dc2626);
+      color: var(--dc-color-danger-text, var(--dc-color-danger, #dc2626));
     }
     [part='icon'] {
       width: 16px;

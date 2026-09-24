@@ -18,6 +18,13 @@
   --dc-color-success: #16a34a;
   --dc-color-warning: #d97706;
   --dc-color-danger: #dc2626;
+  /* Text forms of the fills: what a label is painted with, on the page ground or
+     on a tint of its own fill (dc-badge, an outline dc-button, a danger menu item).
+     The fills themselves read 3.2-3.3:1 as text here (success, warning). */
+  --dc-color-accent-text: #1d4ed8;
+  --dc-color-success-text: #166534;
+  --dc-color-warning-text: #92400e;
+  --dc-color-danger-text: #b91c1c;
   --dc-color-backdrop: rgba(0, 0, 0, 0.4);
 
   /* Spacing -- 4px base, compact density */
@@ -65,6 +72,10 @@
     --dc-color-success: #22c55e;
     --dc-color-warning: #f59e0b;
     --dc-color-danger: #ef4444;
+    --dc-color-accent-text: #8ab8fa;
+    --dc-color-success-text: #4ade80;
+    --dc-color-warning-text: #fbbf24;
+    --dc-color-danger-text: #f87171;
     --dc-color-backdrop: rgba(0, 0, 0, 0.6);
   }
 }
@@ -81,5 +92,9 @@
   --dc-color-success: #22c55e;
   --dc-color-warning: #f59e0b;
   --dc-color-danger: #ef4444;
+  --dc-color-accent-text: #8ab8fa;
+  --dc-color-success-text: #4ade80;
+  --dc-color-warning-text: #fbbf24;
+  --dc-color-danger-text: #f87171;
   --dc-color-backdrop: rgba(0, 0, 0, 0.6);
 }
