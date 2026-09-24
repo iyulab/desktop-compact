@@ -24,6 +24,19 @@ describe('dc-paste-rows-zone', () => {
     expect(inner.placeholder).to.equal('Paste rows here')
   })
 
+  it('grows to show its whole placeholder instead of scrolling inside one row', async () => {
+    // A consumer's hint wraps at a narrow width, and an emoji glyph from a fallback font is
+    // taller than the text line; a fixed rows=1 box then scrolled its own placeholder.
+    const el = await fixture<DcPasteRowsZone>(
+      html`<dc-paste-rows-zone
+        style="display:block;width:180px"
+        placeholder="📋 Paste rows from Excel or Word here - first column is the name"
+      ></dc-paste-rows-zone>`,
+    )
+    const inner = el.shadowRoot!.querySelector('textarea')!
+    expect(inner.scrollHeight).to.be.at.most(inner.clientHeight)
+  })
+
   it('dispatches rows with the parsed matrix on paste', async () => {
     const el = await fixture<DcPasteRowsZone>(html`<dc-paste-rows-zone></dc-paste-rows-zone>`)
     const inner = el.shadowRoot!.querySelector('textarea')!

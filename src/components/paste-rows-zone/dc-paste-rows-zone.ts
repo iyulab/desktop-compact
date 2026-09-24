@@ -16,6 +16,11 @@ export class DcPasteRowsZone extends LitElement {
       display: block;
       width: 100%;
       resize: none;
+      /* The box never holds a value (input is cleared, paste is intercepted), so the placeholder is
+         its only content. Size to it: a fixed rows=1 scrolled its own hint when the hint wrapped at a
+         narrow width or an emoji from a fallback font stood taller than the line. Browsers without
+         field-sizing keep rows=1. */
+      field-sizing: content;
       text-align: center;
       padding: var(--dc-space-2, 8px) var(--dc-space-3, 12px);
       border: 1px dashed var(--dc-color-border, #e2e2e4);
