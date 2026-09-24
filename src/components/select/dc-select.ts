@@ -8,6 +8,23 @@ export interface SelectOption {
   value: string
   label: string
   disabled?: boolean
+  /**
+   * Heading of the group this option belongs to. Consecutive options with the
+   * same `group` render inside one `<optgroup label>`; options without one render
+   * ungrouped. The array stays flat, so a consumer that never groups is unaffected.
+   */
+  group?: string
+}
+
+/** Consecutive runs of options sharing a `group` (undefined = ungrouped). */
+export function groupRuns(options: SelectOption[]): { group?: string; options: SelectOption[] }[] {
+  const runs: { group?: string; options: SelectOption[] }[] = []
+  for (const opt of options) {
+    const last = runs[runs.length - 1]
+    if (last && last.group === opt.group) last.options.push(opt)
+    else runs.push({ group: opt.group, options: [opt] })
+  }
+  return runs
 }
 
 export type SelectSize = 'sm' | 'md'
@@ -107,6 +124,14 @@ export class DcSelect extends FormAssociatedMixin(LitElement) {
     this.dispatchEvent(new Event('change', { bubbles: true, composed: true }))
   }
 
+  private _option(opt: SelectOption) {
+    return html`
+      <option value=${opt.value} ?selected=${opt.value === this.value} ?disabled=${opt.disabled}>
+        ${opt.label}
+      </option>
+    `
+  }
+
   render() {
     const showPlaceholder = this.placeholder !== ''
     return html`
@@ -122,12 +147,10 @@ export class DcSelect extends FormAssociatedMixin(LitElement) {
               ${this.placeholder}
             </option>`
           : null}
-        ${this.options.map(
-          (opt) => html`
-            <option value=${opt.value} ?selected=${opt.value === this.value} ?disabled=${opt.disabled}>
-              ${opt.label}
-            </option>
-          `,
+        ${groupRuns(this.options).map((run) =>
+          run.group === undefined
+            ? run.options.map((opt) => this._option(opt))
+            : html`<optgroup label=${run.group}>${run.options.map((opt) => this._option(opt))}</optgroup>`,
         )}
       </select>
     `

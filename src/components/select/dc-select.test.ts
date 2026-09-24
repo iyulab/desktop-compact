@@ -92,3 +92,27 @@ describe('dc-select', () => {
     expect(el.getAttribute('size')).to.equal('sm')
   })
 })
+
+describe('dc-select option groups', () => {
+  const GROUPED = [
+    { value: 'xbar_r', label: 'X̄-R', group: 'Variables' },
+    { value: 'imr', label: 'I-MR', group: 'Variables' },
+    { value: 'p', label: 'p', group: 'Attribute' },
+    { value: 'other', label: 'Other' },
+  ]
+
+  it('renders consecutive options of one group inside an <optgroup label>', async () => {
+    const el = await fixture<DcSelect>(html`<dc-select .options=${GROUPED} value="p"></dc-select>`)
+    const groups = el.shadowRoot!.querySelectorAll('optgroup')
+    expect(Array.from(groups).map((g) => g.label)).to.deep.equal(['Variables', 'Attribute'])
+    expect(groups[0].querySelectorAll('option').length).to.equal(2)
+    expect(el.shadowRoot!.querySelectorAll('select > option').length).to.equal(1)
+    expect(el.shadowRoot!.querySelector('select')!.value).to.equal('p')
+  })
+
+  it('renders ungrouped options exactly as before', async () => {
+    const el = await fixture<DcSelect>(html`<dc-select .options=${OPTIONS}></dc-select>`)
+    expect(el.shadowRoot!.querySelectorAll('optgroup').length).to.equal(0)
+    expect(el.shadowRoot!.querySelectorAll('select > option').length).to.equal(3)
+  })
+})

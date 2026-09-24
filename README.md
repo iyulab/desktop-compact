@@ -80,7 +80,7 @@ themselves have no light/dark awareness.
 |---|---|
 | `dc-button` | Button with `primary`/`secondary`/`ghost`/`danger`/`outline` variants and `sm`/`md` sizes, form-associated (`type="submit"`/`"reset"` participate in the owning `<form>`) |
 | `dc-input` | Text/email/password/number/search input, form-associated with native constraint validation |
-| `dc-select` | Select control, data-driven `options` property (not slotted `<option>`s — works around a shadow-DOM `<select>` HTML spec gap) |
+| `dc-select` | Select control, data-driven `options` property (not slotted `<option>`s — works around a shadow-DOM `<select>` HTML spec gap); an option's optional `group` renders consecutive options under one `<optgroup label>` |
 | `dc-textarea` | Multi-line text input, form-associated |
 | `dc-badge` | Small status/count indicator |
 | `dc-card` | Content container with consistent padding/border |
