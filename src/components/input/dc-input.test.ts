@@ -1,6 +1,7 @@
 import { fixture, html, expect } from '@open-wc/testing'
 import './dc-input.js'
 import type { DcInput } from './dc-input.js'
+import { formFixture } from '../../../test/form-fixture.js'
 
 describe('dc-input', () => {
   it('defaults to type=text and an empty value', async () => {
@@ -18,7 +19,7 @@ describe('dc-input', () => {
   })
 
   it('participates in FormData under its name', async () => {
-    const form = await fixture<HTMLFormElement>(
+    const form = await formFixture<HTMLFormElement>(
       html`<form><dc-input name="email" value="a@b.com"></dc-input></form>`,
     )
     const el = form.querySelector('dc-input') as DcInput
@@ -44,7 +45,7 @@ describe('dc-input', () => {
   })
 
   it('resets its value when the owning form resets', async () => {
-    const form = await fixture<HTMLFormElement>(html`<form><dc-input></dc-input></form>`)
+    const form = await formFixture<HTMLFormElement>(html`<form><dc-input></dc-input></form>`)
     const el = form.querySelector('dc-input') as DcInput
     el.value = 'typed'
     await el.updateComplete

@@ -2,6 +2,7 @@ import { fixture, html, expect } from '@open-wc/testing'
 import { LitElement, css } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { FormAssociatedMixin } from './form-associated.js'
+import { formFixture } from '../../test/form-fixture.js'
 
 @customElement('test-form-el')
 class TestFormEl extends FormAssociatedMixin(LitElement) {
@@ -56,13 +57,13 @@ describe('FormAssociatedMixin', () => {
   })
 
   it('exposes the owning form via the form getter', async () => {
-    const form = await fixture<HTMLFormElement>(html`<form><test-form-el></test-form-el></form>`)
+    const form = await formFixture<HTMLFormElement>(html`<form><test-form-el></test-form-el></form>`)
     const el = form.querySelector('test-form-el') as TestFormEl
     expect(el.form).to.equal(form)
   })
 
   it('participates in FormData once a value is set', async () => {
-    const form = await fixture<HTMLFormElement>(
+    const form = await formFixture<HTMLFormElement>(
       html`<form><test-form-el name="widget" value="hello"></test-form-el></form>`,
     )
     const el = form.querySelector('test-form-el') as TestFormEl
@@ -73,7 +74,7 @@ describe('FormAssociatedMixin', () => {
   })
 
   it('calls formResetCallback when the owning form resets', async () => {
-    const form = await fixture<HTMLFormElement>(html`<form><test-form-el></test-form-el></form>`)
+    const form = await formFixture<HTMLFormElement>(html`<form><test-form-el></test-form-el></form>`)
     const el = form.querySelector('test-form-el') as TestFormEl
     el.value = 'hello'
     await el.updateComplete
@@ -92,7 +93,7 @@ describe('FormAssociatedMixin', () => {
   })
 
   it('sets disabled via formDisabledCallback (fieldset disabling)', async () => {
-    const form = await fixture<HTMLFormElement>(
+    const form = await formFixture<HTMLFormElement>(
       html`<fieldset disabled><test-form-el></test-form-el></fieldset>`,
     )
     const el = form.querySelector('test-form-el') as TestFormEl

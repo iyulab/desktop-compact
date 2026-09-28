@@ -1,6 +1,7 @@
 import { fixture, html, expect } from '@open-wc/testing'
 import './dc-select.js'
 import type { DcSelect } from './dc-select.js'
+import { formFixture } from '../../../test/form-fixture.js'
 
 const OPTIONS = [
   { value: 'a', label: 'Option A' },
@@ -17,7 +18,7 @@ describe('dc-select', () => {
   })
 
   it('updates value on change and participates in FormData', async () => {
-    const form = await fixture<HTMLFormElement>(
+    const form = await formFixture<HTMLFormElement>(
       html`<form><dc-select name="letter" .options=${OPTIONS}></dc-select></form>`,
     )
     const el = form.querySelector('dc-select') as DcSelect
@@ -61,7 +62,7 @@ describe('dc-select', () => {
   })
 
   it('resets to empty when the owning form resets', async () => {
-    const form = await fixture<HTMLFormElement>(
+    const form = await formFixture<HTMLFormElement>(
       html`<form><dc-select .options=${OPTIONS}></dc-select></form>`,
     )
     const el = form.querySelector('dc-select') as DcSelect

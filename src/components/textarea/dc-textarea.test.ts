@@ -1,6 +1,7 @@
 import { fixture, html, expect } from '@open-wc/testing'
 import './dc-textarea.js'
 import type { DcTextarea } from './dc-textarea.js'
+import { formFixture } from '../../../test/form-fixture.js'
 
 describe('dc-textarea', () => {
   it('defaults to 3 rows and an empty value', async () => {
@@ -18,7 +19,7 @@ describe('dc-textarea', () => {
   })
 
   it('participates in FormData under its name', async () => {
-    const form = await fixture<HTMLFormElement>(
+    const form = await formFixture<HTMLFormElement>(
       html`<form><dc-textarea name="notes" value="hi"></dc-textarea></form>`,
     )
     const el = form.querySelector('dc-textarea') as DcTextarea
@@ -34,7 +35,7 @@ describe('dc-textarea', () => {
   })
 
   it('resets its value when the owning form resets', async () => {
-    const form = await fixture<HTMLFormElement>(html`<form><dc-textarea></dc-textarea></form>`)
+    const form = await formFixture<HTMLFormElement>(html`<form><dc-textarea></dc-textarea></form>`)
     const el = form.querySelector('dc-textarea') as DcTextarea
     el.value = 'typed'
     await el.updateComplete

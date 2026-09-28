@@ -1,6 +1,7 @@
 import { fixture, html, expect } from '@open-wc/testing'
 import './dc-button.js'
 import type { DcButton } from './dc-button.js'
+import { formFixture } from '../../../test/form-fixture.js'
 
 describe('dc-button', () => {
   it('renders slotted content', async () => {
@@ -22,7 +23,7 @@ describe('dc-button', () => {
   })
 
   it('does not submit the owning form when type=button', async () => {
-    const form = await fixture<HTMLFormElement>(html`<form><dc-button>Save</dc-button></form>`)
+    const form = await formFixture<HTMLFormElement>(html`<form><dc-button>Save</dc-button></form>`)
     let submitted = false
     form.addEventListener('submit', (e) => {
       e.preventDefault()
@@ -35,7 +36,7 @@ describe('dc-button', () => {
   })
 
   it('submits the owning form when type=submit', async () => {
-    const form = await fixture<HTMLFormElement>(html`<form><dc-button type="submit">Save</dc-button></form>`)
+    const form = await formFixture<HTMLFormElement>(html`<form><dc-button type="submit">Save</dc-button></form>`)
     let submitted = false
     form.addEventListener('submit', (e) => {
       e.preventDefault()
@@ -48,7 +49,7 @@ describe('dc-button', () => {
   })
 
   it('resets the owning form when type=reset', async () => {
-    const form = await fixture<HTMLFormElement>(html`<form>
+    const form = await formFixture<HTMLFormElement>(html`<form>
       <input name="q" value="original" />
       <dc-button type="reset">Reset</dc-button>
     </form>`)
@@ -61,7 +62,7 @@ describe('dc-button', () => {
   })
 
   it('does not fire the click handler logic when disabled', async () => {
-    const form = await fixture<HTMLFormElement>(
+    const form = await formFixture<HTMLFormElement>(
       html`<form><dc-button type="submit" disabled>Save</dc-button></form>`,
     )
     let submitted = false

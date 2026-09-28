@@ -1,6 +1,7 @@
 import { fixture, html, expect } from '@open-wc/testing'
 import './dc-segmented-control.js'
 import type { DcSegmentedControl } from './dc-segmented-control.js'
+import { formFixture } from '../../../test/form-fixture.js'
 
 const OPTIONS = [
   { value: 'day', label: 'Day' },
@@ -112,7 +113,7 @@ describe('dc-segmented-control', () => {
   })
 
   it('participates in FormData and resets with its form', async () => {
-    const form = await fixture<HTMLFormElement>(
+    const form = await formFixture<HTMLFormElement>(
       html`<form><dc-segmented-control name="period" .options=${OPTIONS} value="week"></dc-segmented-control></form>`,
     )
     const el = form.querySelector('dc-segmented-control') as DcSegmentedControl
