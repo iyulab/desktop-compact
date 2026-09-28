@@ -45,6 +45,33 @@ describe('parseClipboardRows', () => {
     expect(rows).to.deep.equal([['a', 'b']])
   })
 
+  it('reads a quoted cell that holds line breaks and tabs, as Excel copies it', () => {
+    const { rows } = parseClipboardRows('title\tsteps\nFreeze\t"1. open\n2. save\tquickly"\nSlow\tone')
+    expect(rows).to.deep.equal([
+      ['title', 'steps'],
+      ['Freeze', '1. open\n2. save\tquickly'],
+      ['Slow', 'one'],
+    ])
+  })
+
+  it('reads a doubled quote inside a quoted cell as one quote', () => {
+    const { rows } = parseClipboardRows('"say ""hi""\nnow"\tb')
+    expect(rows).to.deep.equal([['say "hi"\nnow', 'b']])
+  })
+
+  it('takes a cell that only looks quoted as written', () => {
+    const { rows } = parseClipboardRows('"a" b\tc\n"unclosed\td')
+    expect(rows).to.deep.equal([
+      ['"a" b', 'c'],
+      ['"unclosed', 'd'],
+    ])
+  })
+
+  it('reads a quoted cell at the end of the text, and a quoted blank line as a cell', () => {
+    expect(parseClipboardRows('a\t"b\r\nc"').rows).to.deep.equal([['a', 'b\nc']])
+    expect(parseClipboardRows('a\n""\nb')).to.deep.equal({ rows: [['a'], ['b']], skippedEmpty: 1 })
+  })
+
   it('returns no rows for entirely blank input', () => {
     const { rows, skippedEmpty } = parseClipboardRows('   \n\t\n  ')
     expect(rows).to.deep.equal([])
