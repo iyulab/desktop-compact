@@ -125,12 +125,12 @@
     "lit": "^3.3.3"
   },
   "devDependencies": {
-    "@open-wc/testing": "^5.0.0",
+    "@open-wc/testing": "^4.0.0",
     "@storybook/web-components": "^10.6.0",
     "@storybook/web-components-vite": "^10.6.0",
     "@types/mocha": "^10.0.10",
-    "@web/dev-server-esbuild": "^2.0.0",
-    "@web/test-runner": "^1.0.0",
+    "@web/dev-server-esbuild": "^1.0.5",
+    "@web/test-runner": "^0.19.0",
     "storybook": "^10.6.0",
     "typescript": "^6.0.3",
     "vite": "^8.3.1",
