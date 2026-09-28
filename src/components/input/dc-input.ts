@@ -4,7 +4,7 @@ import { ifDefined } from 'lit/directives/if-defined.js'
 import { LitElement, type PropertyValues } from 'lit'
 import { FormAssociatedMixin } from '../../mixins/form-associated.js'
 
-export type InputType = 'text' | 'email' | 'password' | 'number' | 'search'
+export type InputType = 'text' | 'email' | 'password' | 'number' | 'search' | 'date' | 'time' | 'datetime-local'
 
 @customElement('dc-input')
 export class DcInput extends FormAssociatedMixin(LitElement) {
@@ -52,11 +52,11 @@ export class DcInput extends FormAssociatedMixin(LitElement) {
   @property({ type: Boolean, reflect: true })
   required = false
 
-  /** Forwarded to the native `min` attribute — meaningful for `type="number"`. */
+  /** Forwarded to the native `min` attribute — meaningful for `number` and the date/time types. */
   @property()
   min?: string
 
-  /** Forwarded to the native `max` attribute — meaningful for `type="number"`. */
+  /** Forwarded to the native `max` attribute — meaningful for `number` and the date/time types. */
   @property()
   max?: string
 

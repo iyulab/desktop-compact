@@ -71,6 +71,20 @@ describe('dc-input', () => {
     expect(el.matches(':state(invalid)')).to.be.true
   })
 
+  it('takes a date as the native YYYY-MM-DD value and bounds it with min/max', async () => {
+    const el = await fixture<DcInput>(
+      html`<dc-input type="date" min="2026-01-01" max="2026-12-31" value="2027-01-01"></dc-input>`,
+    )
+    await el.updateComplete
+    const inner = el.shadowRoot!.querySelector('input')!
+    expect(inner.type).to.equal('date')
+    expect(inner.value).to.equal('2027-01-01')
+    expect(el.checkValidity()).to.be.false
+    el.value = '2026-04-02'
+    await el.updateComplete
+    expect(el.checkValidity()).to.be.true
+  })
+
   it('is accessible', async () => {
     const el = await fixture<DcInput>(html`<dc-input placeholder="Email"></dc-input>`)
     await expect(el).to.be.accessible()
