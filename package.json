@@ -99,6 +99,11 @@
       "import": "./dist/toast.js",
       "default": "./dist/toast.js"
     },
+    "./data-table": {
+      "types": "./dist/components/data-table/dc-data-table.d.ts",
+      "import": "./dist/data-table.js",
+      "default": "./dist/data-table.js"
+    },
     "./paste-rows-zone": {
       "types": "./dist/components/paste-rows-zone/dc-paste-rows-zone.d.ts",
       "import": "./dist/paste-rows-zone.js",

@@ -102,6 +102,7 @@ A component falls back to the fill when the text form is not set.
 | `dc-status-strip` | Inline `idle`/`loading`/`error`/`done` status indicator (reuses `dc-spinner` for the loading state) |
 | `dc-toast` | Single-toast display primitive — `info`/`success`/`warning`/`error` variants, no built-in stacking/queueing/auto-dismiss (consumer owns that) |
 | `dc-paste-rows-zone` | Paste-only target for bulk Excel/Word row import — parses tab-separated clipboard content, dispatches the parsed rows; no built-in feedback banner (compose with `dc-toast` for that) |
+| `dc-data-table` | Read-only table of records whose rows open something — sticky header, row header holding a button for keyboard activation, a click anywhere on a row activates it (a click that ends a text selection does not), cells keep their line breaks, optional empty label; dispatches `activate` with the row id |
 | `dc-context-menu` | Right-click context menu — Popover API for open/close (light-dismiss + top-layer stacking from the platform), roving-tabindex keyboard navigation, viewport-edge clamping |
 
 Run `npm run storybook` to browse every component interactively, including variants not shown above.
