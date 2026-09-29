@@ -31,6 +31,8 @@ export class DcButton extends FormAssociatedMixin(LitElement) {
       font-family: var(--dc-font-family, system-ui, sans-serif);
       font-size: var(--dc-font-size-md, 13px);
       font-weight: var(--dc-font-weight-medium, 500);
+      /* A label stays on one line when a row runs short of room; what yields is the row's to say. */
+      white-space: nowrap;
       cursor: pointer;
     }
     button:disabled {

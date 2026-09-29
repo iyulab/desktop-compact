@@ -9,6 +9,23 @@ describe('dc-button', () => {
     expect(el.textContent?.trim()).to.equal('Save')
   })
 
+  it('keeps its label on one line when squeezed in a row', async () => {
+    const alone = await fixture<DcButton>(html`<dc-button>Accept all</dc-button>`)
+    // Built by hand: a fixture of a plain element waits for an animation frame, which a
+    // background tab of a parallel run may not get.
+    const row = document.createElement('div')
+    row.style.cssText = 'display: flex; align-items: flex-start; width: 120px'
+    row.innerHTML = `<span>${'long text '.repeat(20)}</span><dc-button>Accept all</dc-button>`
+    document.body.append(row)
+    const el = row.querySelector('dc-button') as DcButton
+    await el.updateComplete
+    try {
+      expect(el.getBoundingClientRect().height).to.equal(alone.getBoundingClientRect().height)
+    } finally {
+      row.remove()
+    }
+  })
+
   it('defaults to type=button, variant=secondary, size=md', async () => {
     const el = await fixture<DcButton>(html`<dc-button>Save</dc-button>`)
     expect(el.type).to.equal('button')
