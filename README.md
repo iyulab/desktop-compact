@@ -85,7 +85,7 @@ A component falls back to the fill when the text form is not set.
 
 | Component | Description |
 |---|---|
-| `dc-button` | Button with `primary`/`secondary`/`ghost`/`danger`/`outline` variants and `sm`/`md` sizes, form-associated (`type="submit"`/`"reset"` participate in the owning `<form>`) |
+| `dc-button` | Button with `primary`/`secondary`/`ghost`/`danger`/`outline` variants and `sm`/`md` sizes, form-associated (`type="submit"`/`"reset"` participate in the owning `<form>`; the first `type="submit"` also submits it on Enter in a text field, as a native default button would) |
 | `dc-input` | Text/email/password/number/search input, form-associated with native constraint validation |
 | `dc-select` | Select control, data-driven `options` property (not slotted `<option>`s — works around a shadow-DOM `<select>` HTML spec gap); an option's optional `group` renders consecutive options under one `<optgroup label>` |
 | `dc-textarea` | Multi-line text input, form-associated |

@@ -1,4 +1,4 @@
-import { html, css } from 'lit'
+import { html, css, type PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { LitElement } from 'lit'
@@ -7,6 +7,12 @@ import { FormAssociatedMixin } from '../../mixins/form-associated.js'
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline'
 export type ButtonType = 'button' | 'submit' | 'reset'
 export type ButtonSize = 'sm' | 'md'
+
+/** Input types whose Enter submits a form (HTML implicit submission): the text-like ones. */
+const IMPLICIT_SUBMIT_TYPES = new Set([
+  'text', 'search', 'url', 'tel', 'email', 'password', 'number',
+  'date', 'month', 'week', 'time', 'datetime-local',
+])
 
 @customElement('dc-button')
 export class DcButton extends FormAssociatedMixin(LitElement) {
@@ -87,6 +93,62 @@ export class DcButton extends FormAssociatedMixin(LitElement) {
 
   @property({ attribute: 'aria-pressed' })
   pressedState?: string
+
+  // Enter in a text field submits a form through its default button — the first submit button.
+  // A form-associated custom element cannot be that button, so a form whose submit button is a
+  // dc-button did not submit on Enter at all. The first dc-button[type=submit] of a form that has
+  // no native submit button (the browser already handles those) submits it the same way: from a
+  // text-like input, not a textarea, and not while disabled. Taking the keydown's default keeps a
+  // single-field form, which a browser submits on Enter by itself, from submitting twice.
+  #listeningTo: HTMLFormElement | null = null
+
+  #onFormKeydown = (e: Event): void => {
+    const key = e as KeyboardEvent
+    if (key.key !== 'Enter' || key.defaultPrevented || key.isComposing || this.disabled) return
+    const form = this.#listeningTo
+    if (!form) return
+    const origin = e.composedPath()[0]
+    if (!(origin instanceof HTMLInputElement) || !IMPLICIT_SUBMIT_TYPES.has(origin.type)) return
+    const controls = [...form.elements]
+    const nativeSubmit = controls.some((el) =>
+      (el instanceof HTMLButtonElement && el.type === 'submit') ||
+      (el instanceof HTMLInputElement && (el.type === 'submit' || el.type === 'image')))
+    if (nativeSubmit) return
+    const defaultButton = controls.find((el) => el.localName === 'dc-button' && (el as DcButton).type === 'submit')
+    if (defaultButton !== this) return
+    key.preventDefault()
+    form.requestSubmit()
+  }
+
+  #listen(form: HTMLFormElement | null): void {
+    if (form === this.#listeningTo) return
+    this.#listeningTo?.removeEventListener('keydown', this.#onFormKeydown)
+    this.#listeningTo = form
+    form?.addEventListener('keydown', this.#onFormKeydown)
+  }
+
+  #syncImplicitSubmit(): void {
+    this.#listen(this.isConnected && this.type === 'submit' ? this.internals.form : null)
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.#syncImplicitSubmit()
+  }
+
+  disconnectedCallback(): void {
+    this.#listen(null)
+    super.disconnectedCallback()
+  }
+
+  formAssociatedCallback(): void {
+    this.#syncImplicitSubmit()
+  }
+
+  protected updated(changed: PropertyValues): void {
+    super.updated(changed)
+    if (changed.has('type')) this.#syncImplicitSubmit()
+  }
 
   private _handleClick(): void {
     if (this.disabled) return

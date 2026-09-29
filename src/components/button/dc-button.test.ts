@@ -48,6 +48,77 @@ describe('dc-button', () => {
     expect(submitted).to.be.true
   })
 
+  // A form-associated element cannot be a form's default button, so Enter in a field did not submit
+  // a form whose submit button is a dc-button. The button submits it the way a native one would.
+  describe('Enter in a field submits through a type=submit button', () => {
+    const enter = (target: Element): KeyboardEvent => {
+      const e = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, composed: true, cancelable: true })
+      target.dispatchEvent(e)
+      return e
+    }
+    const countSubmits = (form: HTMLFormElement): { n: number } => {
+      const c = { n: 0 }
+      form.addEventListener('submit', (e) => { e.preventDefault(); c.n++ })
+      return c
+    }
+
+    it('submits once from a text input, even with two fields', async () => {
+      const form = await formFixture<HTMLFormElement>(html`<form><input name="a"><input name="b"><dc-button type="submit">Save</dc-button></form>`)
+      const c = countSubmits(form)
+      const e = enter(form.querySelector('input')!)
+      expect(c.n).to.equal(1)
+      expect(e.defaultPrevented).to.equal(true)
+    })
+
+    it('does not submit from a textarea, where Enter is a new line', async () => {
+      const form = await formFixture<HTMLFormElement>(html`<form><textarea></textarea><dc-button type="submit">Save</dc-button></form>`)
+      const c = countSubmits(form)
+      const e = enter(form.querySelector('textarea')!)
+      expect(c.n).to.equal(0)
+      expect(e.defaultPrevented).to.equal(false)
+    })
+
+    it('does not submit while disabled', async () => {
+      const form = await formFixture<HTMLFormElement>(html`<form><input><dc-button type="submit" disabled>Save</dc-button></form>`)
+      const c = countSubmits(form)
+      enter(form.querySelector('input')!)
+      expect(c.n).to.equal(0)
+    })
+
+    it('leaves a form with a native submit button to the browser', async () => {
+      const form = await formFixture<HTMLFormElement>(html`<form><input><button type="submit">Go</button><dc-button type="submit">Save</dc-button></form>`)
+      const c = countSubmits(form)
+      const e = enter(form.querySelector('input')!)
+      expect(c.n).to.equal(0)
+      expect(e.defaultPrevented).to.equal(false)
+    })
+
+    it('does nothing for type=button, and stops once it leaves the form', async () => {
+      const form = await formFixture<HTMLFormElement>(html`<form><input><dc-button>Save</dc-button><dc-button type="submit">Go</dc-button></form>`)
+      const c = countSubmits(form)
+      const submit = form.querySelectorAll('dc-button')[1]
+      submit.remove()
+      enter(form.querySelector('input')!)
+      expect(c.n).to.equal(0)
+    })
+
+    // The default button is the first submit button; when it is disabled, Enter submits nothing
+    // (HTML implicit submission) — a later enabled one does not step in.
+    it('a disabled first submit button means Enter does not submit', async () => {
+      const form = await formFixture<HTMLFormElement>(html`<form><input><dc-button type="submit" disabled>A</dc-button><dc-button type="submit">B</dc-button></form>`)
+      const c = countSubmits(form)
+      enter(form.querySelector('input')!)
+      expect(c.n).to.equal(0)
+    })
+
+    it('two submit buttons submit the form once', async () => {
+      const form = await formFixture<HTMLFormElement>(html`<form><input><dc-button type="submit">A</dc-button><dc-button type="submit">B</dc-button></form>`)
+      const c = countSubmits(form)
+      enter(form.querySelector('input')!)
+      expect(c.n).to.equal(1)
+    })
+  })
+
   it('resets the owning form when type=reset', async () => {
     const form = await formFixture<HTMLFormElement>(html`<form>
       <input name="q" value="original" />
