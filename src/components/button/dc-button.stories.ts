@@ -59,3 +59,14 @@ export const Sizes: Story = {
     </div>
   `,
 }
+
+export const Toggles: Story = {
+  render: () => html`
+    <div style="display:flex; gap:8px;">
+      <dc-button variant="secondary" aria-pressed="true">Pressed</dc-button>
+      <dc-button variant="secondary" aria-pressed="false">Not pressed</dc-button>
+      <dc-button variant="ghost" aria-pressed="true">Pressed ghost</dc-button>
+      <dc-button variant="outline" aria-pressed="true">Pressed outline</dc-button>
+    </div>
+  `,
+}

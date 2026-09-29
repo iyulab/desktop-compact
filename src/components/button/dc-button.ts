@@ -68,6 +68,14 @@ export class DcButton extends FormAssociatedMixin(LitElement) {
       color: var(--dc-color-accent-text, var(--dc-color-accent, #2563eb));
       border-color: var(--dc-color-accent, #2563eb);
     }
+    /* A toggle's pressed state, painted as dc-segmented-control paints its checked segment.
+       Keyed on the inner button's aria-pressed (what assistive technology reads), so the
+       look cannot disagree with the announced state. Outranks every variant rule. */
+    :host([variant]) button[aria-pressed='true'] {
+      background: var(--dc-color-accent, #2563eb);
+      color: var(--dc-color-accent-contrast, #ffffff);
+      border-color: var(--dc-color-accent, #2563eb);
+    }
     :host([size='sm']) button {
       padding: var(--dc-space-1, 4px) var(--dc-space-2, 8px);
       font-size: var(--dc-font-size-sm, 12px);

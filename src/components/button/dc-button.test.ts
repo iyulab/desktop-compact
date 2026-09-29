@@ -222,4 +222,31 @@ describe('dc-button', () => {
     )
     expect(getComputedStyle(el.shadowRoot!.querySelector('button')!).color).to.equal('rgb(245, 158, 11)')
   })
+
+  // A toggle that says it is pressed must also look it — the state was announced to assistive
+  // technology and shown to nobody. Pressed reads like dc-segmented-control's checked segment.
+  const PRESSED_THEME = '--dc-color-accent: rgb(37, 99, 235); --dc-color-accent-contrast: rgb(255, 255, 255); --dc-color-surface: rgb(247, 247, 248)'
+
+  for (const variant of ['secondary', 'ghost', 'outline'] as const) {
+    it(`paints a pressed ${variant} toggle as the accent fill`, async () => {
+      const el = await fixture<DcButton>(
+        html`<dc-button variant=${variant} aria-pressed="true" style=${PRESSED_THEME}>Bold</dc-button>`,
+      )
+      const style = getComputedStyle(el.shadowRoot!.querySelector('button')!)
+      expect(style.backgroundColor).to.equal('rgb(37, 99, 235)')
+      expect(style.color).to.equal('rgb(255, 255, 255)')
+      expect(style.borderTopColor).to.equal('rgb(37, 99, 235)')
+    })
+  }
+
+  it('keeps the variant look for a toggle that is not pressed, and follows the change', async () => {
+    const el = await fixture<DcButton>(
+      html`<dc-button variant="secondary" aria-pressed="false" style=${PRESSED_THEME}>Bold</dc-button>`,
+    )
+    const inner = el.shadowRoot!.querySelector('button')!
+    expect(getComputedStyle(inner).backgroundColor).to.equal('rgb(247, 247, 248)')
+    el.setAttribute('aria-pressed', 'true')
+    await el.updateComplete
+    expect(getComputedStyle(inner).backgroundColor).to.equal('rgb(37, 99, 235)')
+  })
 })
