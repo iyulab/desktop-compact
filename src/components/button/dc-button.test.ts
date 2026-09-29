@@ -81,6 +81,36 @@ describe('dc-button', () => {
     await expect(el).to.be.accessible()
   })
 
+  it('forwards a popup trigger aria-haspopup and aria-expanded to the inner button, and follows changes', async () => {
+    const el = await fixture<DcButton>(html`<dc-button aria-haspopup="menu" aria-expanded="false">Import</dc-button>`)
+    const inner = el.shadowRoot!.querySelector('button')!
+    expect(inner.getAttribute('aria-haspopup')).to.equal('menu')
+    expect(inner.getAttribute('aria-expanded')).to.equal('false')
+    el.setAttribute('aria-expanded', 'true')
+    await el.updateComplete
+    expect(inner.getAttribute('aria-expanded')).to.equal('true')
+    el.removeAttribute('aria-haspopup')
+    await el.updateComplete
+    expect(inner.hasAttribute('aria-haspopup')).to.equal(false)
+  })
+
+  it('forwards a toggle aria-pressed to the inner button', async () => {
+    const el = await fixture<DcButton>(html`<dc-button aria-pressed="true">Bold</dc-button>`)
+    const inner = el.shadowRoot!.querySelector('button')!
+    expect(inner.getAttribute('aria-pressed')).to.equal('true')
+    el.setAttribute('aria-pressed', 'false')
+    await el.updateComplete
+    expect(inner.getAttribute('aria-pressed')).to.equal('false')
+  })
+
+  it('leaves the inner button without them when the host has none', async () => {
+    const el = await fixture<DcButton>(html`<dc-button>Save</dc-button>`)
+    const inner = el.shadowRoot!.querySelector('button')!
+    expect(inner.hasAttribute('aria-haspopup')).to.equal(false)
+    expect(inner.hasAttribute('aria-expanded')).to.equal(false)
+    expect(inner.hasAttribute('aria-pressed')).to.equal(false)
+  })
+
   it('forwards host aria-label to the inner button — required for icon-only buttons with no visible text', async () => {
     const el = await fixture<DcButton>(html`<dc-button aria-label="Close">&times;</dc-button>`)
     const inner = el.shadowRoot!.querySelector('button')!

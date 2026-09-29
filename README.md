@@ -112,7 +112,9 @@ Run `npm run storybook` to browse every component interactively, including varia
 Every component ships with an axe accessibility test as part of its test suite (`npm test`). Where a
 component composes an icon-only or otherwise unlabelled control, it forwards a consumer-supplied
 `aria-label` to the actual interactive element (not just the host) — see `dc-button`, `dc-input`,
-`dc-dialog`.
+`dc-dialog`. `dc-button` also forwards the states a button announces — `aria-haspopup` and
+`aria-expanded` for a menu or popup trigger, `aria-pressed` for a toggle — and follows their changes,
+so set them on the host as you would on a native button.
 
 ## Development
 

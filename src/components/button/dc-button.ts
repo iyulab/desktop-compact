@@ -75,6 +75,19 @@ export class DcButton extends FormAssociatedMixin(LitElement) {
   @property({ reflect: true })
   type: ButtonType = 'button'
 
+  // The inner <button> is what assistive technology reads, so the states a button announces are
+  // taken from the host's attributes, set the ordinary way, and follow their changes: a menu or
+  // popup trigger (aria-haspopup, aria-expanded) and a toggle (aria-pressed). Named apart from the
+  // native ARIA reflection properties so the element's own ariaExpanded etc. stay untouched.
+  @property({ attribute: 'aria-haspopup' })
+  popupKind?: string
+
+  @property({ attribute: 'aria-expanded' })
+  expandedState?: string
+
+  @property({ attribute: 'aria-pressed' })
+  pressedState?: string
+
   private _handleClick(): void {
     if (this.disabled) return
     if (this.type === 'submit') {
@@ -90,6 +103,9 @@ export class DcButton extends FormAssociatedMixin(LitElement) {
         type="button"
         ?disabled=${this.disabled}
         aria-label=${ifDefined(this.ariaLabel ?? undefined)}
+        aria-haspopup=${ifDefined(this.popupKind ?? undefined)}
+        aria-expanded=${ifDefined(this.expandedState ?? undefined)}
+        aria-pressed=${ifDefined(this.pressedState ?? undefined)}
         @click=${this._handleClick}
         part="button"
       >
