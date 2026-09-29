@@ -1,6 +1,7 @@
 export * from './components/button/dc-button.js'
 export * from './components/input/dc-input.js'
 export * from './components/select/dc-select.js'
+export * from './components/checkbox/dc-checkbox.js'
 export * from './components/textarea/dc-textarea.js'
 export * from './components/dialog/dc-dialog.js'
 export * from './components/confirm-dialog/dc-confirm-dialog.js'

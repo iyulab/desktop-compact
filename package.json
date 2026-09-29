@@ -29,6 +29,11 @@
       "import": "./dist/input.js",
       "default": "./dist/input.js"
     },
+    "./checkbox": {
+      "types": "./dist/components/checkbox/dc-checkbox.d.ts",
+      "import": "./dist/checkbox.js",
+      "default": "./dist/checkbox.js"
+    },
     "./select": {
       "types": "./dist/components/select/dc-select.d.ts",
       "import": "./dist/select.js",
