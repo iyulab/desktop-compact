@@ -23,8 +23,8 @@ export const Default: Story = {
 }
 
 // Demonstrates the intended composition: dc-paste-rows-zone has no internal feedback UI, so a
-// consumer wanting "N rows imported" feedback composes it with dc-toast (see cycle-1113/1114 —
-// this component is display/parse-only by design, not an oversight).
+// consumer wanting "N rows imported" feedback composes it with dc-toast (this component only
+// displays and parses — by design, not an oversight).
 export const WithToastFeedback: Story = {
   render: () => html`
     <div style="display:flex; flex-direction:column; gap:8px; max-width:320px;">
