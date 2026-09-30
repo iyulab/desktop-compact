@@ -31,8 +31,11 @@ export class DcTabBar extends LitElement {
       color: var(--dc-color-text-secondary, #55555c);
       cursor: pointer;
     }
+    /* The accent is a fill: it reads as the underline, not always as a label on the page
+       ground. The label takes the host's accent text shade when one is supplied, as
+       dc-button's outline and dc-badge already do. */
     button[aria-selected='true'] {
-      color: var(--dc-color-accent, #2563eb);
+      color: var(--dc-color-accent-text, var(--dc-color-accent, #2563eb));
       border-bottom-color: var(--dc-color-accent, #2563eb);
       font-weight: var(--dc-font-weight-medium, 500);
     }

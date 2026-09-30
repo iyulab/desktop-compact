@@ -14,6 +14,23 @@ describe('dc-tab-bar', () => {
     expect(buttons.length).to.equal(2)
   })
 
+  it('paints the active label with the accent text colour and keeps the fill for the underline', async () => {
+    // As a label the accent fill measured 2.05-3.60:1 on consumer page grounds.
+    const el = await fixture<DcTabBar>(
+      html`<dc-tab-bar .items=${ITEMS} active-id="overview" style="--dc-color-accent: rgb(245, 158, 11); --dc-color-accent-text: rgb(180, 83, 9)"></dc-tab-bar>`,
+    )
+    const active = getComputedStyle(el.shadowRoot!.querySelectorAll('button')[0])
+    expect(active.color).to.equal('rgb(180, 83, 9)')
+    expect(active.borderBottomColor).to.equal('rgb(245, 158, 11)')
+  })
+
+  it('falls back to the accent for the active label when no text colour is supplied', async () => {
+    const el = await fixture<DcTabBar>(
+      html`<dc-tab-bar .items=${ITEMS} active-id="overview" style="--dc-color-accent: rgb(245, 158, 11)"></dc-tab-bar>`,
+    )
+    expect(getComputedStyle(el.shadowRoot!.querySelectorAll('button')[0]).color).to.equal('rgb(245, 158, 11)')
+  })
+
   it('marks the active tab as aria-selected', async () => {
     const el = await fixture<DcTabBar>(html`<dc-tab-bar .items=${ITEMS} active-id="settings"></dc-tab-bar>`)
     const buttons = [...el.shadowRoot!.querySelectorAll('button')]
