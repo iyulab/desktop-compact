@@ -3,6 +3,12 @@
   "version": "0.8.2",
   "type": "module",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iyulab/desktop-compact.git"
+  },
+  "homepage": "https://github.com/iyulab/desktop-compact#readme",
+  "bugs": "https://github.com/iyulab/desktop-compact/issues",
   "engines": {
     "node": ">=22"
   },
