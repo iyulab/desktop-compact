@@ -5,6 +5,9 @@
  * so it still renders correctly even if this file is never imported.
  */
 :root {
+  /* What the browser draws itself — scrollbars, form controls — follows the palette in use. */
+  color-scheme: light;
+
   /* Color -- light (default) */
   --dc-color-bg: #ffffff;
   --dc-color-surface: #f7f7f8;
@@ -60,6 +63,7 @@
    [data-theme="light"], or opts in explicitly via [data-theme="dark"]. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
+    color-scheme: dark;
     --dc-color-bg: #17181c;
     --dc-color-surface: #1f2024;
     --dc-color-surface-hover: #2a2b30;
@@ -80,6 +84,7 @@
   }
 }
 :root[data-theme='dark'] {
+  color-scheme: dark;
   --dc-color-bg: #17181c;
   --dc-color-surface: #1f2024;
   --dc-color-surface-hover: #2a2b30;
