@@ -15,6 +15,10 @@ export class DcDialog extends LitElement {
       color: var(--dc-color-text, #1a1a1e);
       font-family: var(--dc-font-family, system-ui, sans-serif);
       font-size: var(--dc-font-size-md, 13px);
+      /* Its text is laid out as its own, not as the line it is placed in: a dialog opened from a
+         row that does not wrap still wraps within its width. */
+      white-space: normal;
+      text-align: start;
       max-width: min(var(--dc-dialog-max-width, 480px), calc(100vw - var(--dc-space-6, 24px) * 2));
     }
     dialog::backdrop {

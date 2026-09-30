@@ -70,4 +70,22 @@ describe('dc-dialog', () => {
     const innerPlain = plain.shadowRoot!.querySelector('dialog')!
     expect(getComputedStyle(innerPlain).maxWidth).to.equal('480px')
   })
+
+  it('wraps its text within its width wherever it is placed, even inside a line that does not wrap', async () => {
+    const row = document.createElement('div')
+    row.style.cssText = 'white-space: nowrap; text-align: end'
+    document.body.append(row)
+    const el = await fixture<DcDialog>(
+      html`<dc-dialog style="--dc-dialog-max-width: 300px"
+        >${'A sentence long enough to need more than one line inside the dialog. '.repeat(4)}</dc-dialog
+      >`,
+      { parentNode: row },
+    )
+    el.open = true
+    await el.updateComplete
+    const inner = el.shadowRoot!.querySelector('dialog')!
+    expect(getComputedStyle(inner).whiteSpace).to.equal('normal')
+    expect(getComputedStyle(inner).textAlign).to.equal('start')
+    expect(inner.scrollWidth).to.be.at.most(inner.clientWidth)
+  })
 })
