@@ -72,7 +72,8 @@ Every component also ships with sane fallback values, so it still renders correc
 stylesheet — `tokens.css` is for consistent cross-component theming and dark-mode support, not a hard
 dependency. Override any `--dc-*` custom property to theme; light/dark is handled by switching token
 values (via your app's own `data-theme` attribute or a `prefers-color-scheme` media query) — components
-themselves have no light/dark awareness.
+themselves have no light/dark awareness. `tokens.css` also sets `color-scheme` to match the palette in
+use, so what the browser draws itself — scrollbars, native form controls — is light or dark with it.
 
 Colour tokens come in two forms. `--dc-color-accent`, `-success`, `-warning` and `-danger` are fills:
 borders, solid buttons, the tint behind a badge. Their text forms — `--dc-color-accent-text`,
