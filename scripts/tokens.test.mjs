@@ -29,3 +29,41 @@ test('every palette declares the color-scheme its background is', () => {
     assert.equal(scheme, luminance(bg) > 0.5 ? 'light' : 'dark', `palette with background ${bg}`)
   }
 })
+
+/** Tokens the light palette (bare :root) must define. */
+const ROOT_TOKENS = [
+  '--dc-color-surface-raised', '--dc-color-rule', '--dc-color-secondary', '--dc-color-secondary-text',
+  '--dc-color-secondary-contrast', '--dc-color-accent-subtle', '--dc-color-secondary-subtle',
+  '--dc-color-success-subtle', '--dc-color-warning-subtle', '--dc-color-danger-subtle',
+  '--dc-font-size-xl', '--dc-font-size-2xl', '--dc-font-size-display', '--dc-line-height-tight',
+  '--dc-line-height-normal', '--dc-font-weight-bold', '--dc-elevation-1', '--dc-elevation-2', '--dc-elevation-3',
+  '--dc-page-eyebrow-color', '--dc-page-eyebrow-size', '--dc-page-title-size', '--dc-page-title-weight',
+  '--dc-page-description-color', '--dc-page-rule', '--dc-section-title-weight', '--dc-section-description-color',
+  '--dc-section-marker-color', '--dc-card-bg', '--dc-card-border', '--dc-card-elevation', '--dc-card-radius',
+  '--dc-card-header-size', '--dc-card-header-accent', '--dc-card-footer-bg', '--dc-field-label-size',
+  '--dc-field-label-weight', '--dc-field-label-color', '--dc-field-hint-color', '--dc-field-required-color',
+  '--dc-field-gap', '--dc-metric-size', '--dc-metric-accent-1', '--dc-metric-accent-2', '--dc-indicator-color',
+  '--dc-selection-bg', '--dc-table-header-bg', '--dc-table-header-color', '--dc-table-rule', '--dc-table-total-rule',
+]
+/** Color tokens with a literal light value — each needs its own dark value too. */
+const DARK_TOKENS = ['--dc-color-surface-raised', '--dc-color-secondary', '--dc-color-secondary-text', '--dc-color-secondary-contrast']
+
+test('the light palette defines every primitive and role token', () => {
+  const [light] = palettes(css)
+  for (const token of ROOT_TOKENS) assert.match(light, new RegExp(`${token}\\s*:`), `${token} in :root`)
+})
+
+test('both dark palettes give the literal color tokens a dark value', () => {
+  const [, ...dark] = palettes(css)
+  assert.equal(dark.length, 2)
+  for (const body of dark) for (const token of DARK_TOKENS) assert.match(body, new RegExp(`${token}\\s*:`), `${token} in a dark palette`)
+})
+
+test('secondary text reads at 4.5:1 on the background and the raised surface, in every palette', () => {
+  const contrast = (a, b) => { const [x, y] = [luminance(a), luminance(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05) }
+  for (const body of palettes(css)) {
+    const get = (t) => body.match(new RegExp(`${t}\\s*:\\s*(#[0-9a-fA-F]{6})`))?.[1]
+    const text = get('--dc-color-secondary-text')
+    for (const ground of [get('--dc-color-bg'), get('--dc-color-surface-raised')]) assert.ok(contrast(text, ground) >= 4.5, `${text} on ${ground}`)
+  }
+})

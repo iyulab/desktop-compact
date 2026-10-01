@@ -35,7 +35,7 @@ export class DcContextMenu extends LitElement {
       border: 1px solid var(--dc-color-border, #e2e2e4);
       border-radius: var(--dc-radius-sm, 4px);
       background: var(--dc-color-bg, #ffffff);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: var(--dc-elevation-2, 0 4px 16px rgba(0, 0, 0, 0.15));
       font-family: var(--dc-font-family, system-ui, sans-serif);
     }
     [part='separator'] {

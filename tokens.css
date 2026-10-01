@@ -29,6 +29,20 @@
   --dc-color-warning-text: #92400e;
   --dc-color-danger-text: #b91c1c;
   --dc-color-backdrop: rgba(0, 0, 0, 0.4);
+  /* Surfaces: bg < surface < surface-raised (a card, a popover). */
+  --dc-color-surface-raised: #ffffff;
+  /* Hairline rules (a header's underline, table rows) — the border by default, lighter when an app wants. */
+  --dc-color-rule: var(--dc-color-border);
+  /* Secondary hue — a second voice beside the accent, for small marks (a card header's figure, a badge). */
+  --dc-color-secondary: #475569;
+  --dc-color-secondary-text: #334155;
+  --dc-color-secondary-contrast: #ffffff;
+  /* Subtle grounds: a 15% tint of each fill, the ground dc-badge has always used. */
+  --dc-color-accent-subtle: color-mix(in srgb, var(--dc-color-accent) 15%, transparent);
+  --dc-color-secondary-subtle: color-mix(in srgb, var(--dc-color-secondary) 15%, transparent);
+  --dc-color-success-subtle: color-mix(in srgb, var(--dc-color-success) 15%, transparent);
+  --dc-color-warning-subtle: color-mix(in srgb, var(--dc-color-warning) 15%, transparent);
+  --dc-color-danger-subtle: color-mix(in srgb, var(--dc-color-danger) 15%, transparent);
 
   /* Spacing -- 4px base, compact density */
   --dc-space-1: 4px;
@@ -61,6 +75,51 @@
   --dc-font-weight-normal: 400;
   --dc-font-weight-medium: 500;
   --dc-font-weight-semibold: 600;
+  --dc-font-weight-bold: 700;
+  --dc-font-size-xl: 18px;
+  --dc-font-size-2xl: 22px;
+  --dc-font-size-display: 28px;
+  --dc-line-height-tight: 1.3;
+  --dc-line-height-normal: 1.5;
+
+  /* Elevation: 1 = resting card, 2 = menu/popover, 3 = dialog. */
+  --dc-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --dc-elevation-2: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --dc-elevation-3: 0 12px 32px rgba(0, 0, 0, 0.2);
+
+  /* Role tokens — components read these, apps override them. Defaults reproduce the look before
+     roles existed, so an app that overrides nothing renders as it did. */
+  --dc-page-eyebrow-color: var(--dc-color-accent-text);
+  --dc-page-eyebrow-size: var(--dc-font-size-xs);
+  --dc-page-title-size: var(--dc-font-size-2xl);
+  --dc-page-title-weight: var(--dc-font-weight-bold);
+  --dc-page-description-color: var(--dc-color-text-secondary);
+  --dc-page-rule: var(--dc-color-rule);
+  --dc-section-title-weight: var(--dc-font-weight-semibold);
+  --dc-section-description-color: var(--dc-color-text-muted);
+  --dc-section-marker-color: var(--dc-color-accent);
+  --dc-card-bg: var(--dc-color-surface);
+  --dc-card-border: 1px solid var(--dc-color-border);
+  --dc-card-elevation: none;
+  --dc-card-radius: var(--dc-radius-md);
+  --dc-card-header-size: var(--dc-font-size-md);
+  --dc-card-header-accent: var(--dc-color-secondary-text);
+  --dc-card-footer-bg: var(--dc-color-surface);
+  --dc-field-label-size: var(--dc-font-size-sm);
+  --dc-field-label-weight: var(--dc-font-weight-medium);
+  --dc-field-label-color: var(--dc-color-text-secondary);
+  --dc-field-hint-color: var(--dc-color-text-muted);
+  --dc-field-required-color: var(--dc-color-accent-text);
+  --dc-field-gap: var(--dc-space-1);
+  --dc-metric-size: var(--dc-font-size-display);
+  --dc-metric-accent-1: var(--dc-color-accent);
+  --dc-metric-accent-2: var(--dc-color-secondary);
+  --dc-indicator-color: var(--dc-color-accent);
+  --dc-selection-bg: transparent;
+  --dc-table-header-bg: var(--dc-color-surface);
+  --dc-table-header-color: var(--dc-color-text-muted);
+  --dc-table-rule: var(--dc-color-rule);
+  --dc-table-total-rule: var(--dc-color-text);
 }
 
 /* Dark theme -- OS preference unless the consumer opts out via
@@ -85,6 +144,10 @@
     --dc-color-warning-text: #fbbf24;
     --dc-color-danger-text: #f87171;
     --dc-color-backdrop: rgba(0, 0, 0, 0.6);
+    --dc-color-surface-raised: #24252a;
+    --dc-color-secondary: #94a3b8;
+    --dc-color-secondary-text: #cbd5e1;
+    --dc-color-secondary-contrast: #0f172a;
   }
 }
 :root[data-theme='dark'] {
@@ -106,4 +169,8 @@
   --dc-color-warning-text: #fbbf24;
   --dc-color-danger-text: #f87171;
   --dc-color-backdrop: rgba(0, 0, 0, 0.6);
+  --dc-color-surface-raised: #24252a;
+  --dc-color-secondary: #94a3b8;
+  --dc-color-secondary-text: #cbd5e1;
+  --dc-color-secondary-contrast: #0f172a;
 }

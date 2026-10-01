@@ -7,6 +7,15 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+### Added
+
+- Design tokens for hierarchy and depth: a raised surface, a rule color, a secondary hue (`--dc-color-secondary`,
+  `-text`, `-contrast`), subtle grounds for every fill (`--dc-color-*-subtle`), `xl`/`2xl`/`display` font sizes,
+  line heights, a bold weight and three elevations.
+- Role tokens (`--dc-page-*`, `--dc-section-*`, `--dc-card-*`, `--dc-field-*`, `--dc-metric-*`, `--dc-table-*`,
+  `--dc-indicator-color`, `--dc-selection-bg`): components read these, and an app themes a role by overriding one
+  token. Their defaults reproduce the previous look.
+
 ### Changed
 
 - `tokens.css` defines `--dc-dialog-max-width` (480px, the dialog's default), so the token check passes on
