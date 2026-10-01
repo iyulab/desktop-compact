@@ -48,6 +48,38 @@ describe('tokens.css defaults keep the 0.9 look', () => {
     const el = fixtureSync<DcSectionHeading>(html`<dc-section-heading heading="A" description="B"></dc-section-heading>`)
     await el.updateComplete
     expect(getComputedStyle(el.shadowRoot!.querySelector('h3')!).fontWeight).to.equal('600')
-    expect(getComputedStyle(el.shadowRoot!.querySelector('p')!).color).to.equal('rgb(138, 138, 146)')
+    // The muted description color is the one deliberate change since 0.9: darker, for contrast.
+    expect(getComputedStyle(el.shadowRoot!.querySelector('p')!).color).to.equal('rgb(104, 104, 112)')
   })
+
+  // WCAG 2 relative luminance and contrast ratio of two `rgb(r, g, b)` colors.
+  const luminance = (rgb: string) => {
+    const [r, g, b] = rgb.match(/\d+/g)!.slice(0, 3).map((v) => {
+      const c = Number(v) / 255
+      return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
+    })
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+  }
+  const contrast = (a: string, b: string) => {
+    const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x)
+    return (hi + 0.05) / (lo + 0.05)
+  }
+  const token = (name: string) => {
+    const probe = fixtureSync<HTMLSpanElement>(html`<span style="color: var(${name})"></span>`)
+    return getComputedStyle(probe).color
+  }
+
+  for (const theme of ['light', 'dark']) {
+    it(`muted text reads at 4.5:1 or more on the ${theme} grounds`, () => {
+      document.documentElement.dataset.theme = theme
+      try {
+        const muted = token('--dc-color-text-muted')
+        for (const ground of ['--dc-color-bg', '--dc-color-surface', '--dc-color-surface-hover']) {
+          expect(contrast(muted, token(ground)), `${muted} on ${ground}`).to.be.at.least(4.5)
+        }
+      } finally {
+        delete document.documentElement.dataset.theme
+      }
+    })
+  }
 })

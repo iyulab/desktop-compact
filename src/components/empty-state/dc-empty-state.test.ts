@@ -38,7 +38,9 @@ describe('dc-empty-state', () => {
   })
 
   it('is accessible', async () => {
-    const el = await fixture<DcEmptyState>(html`<dc-empty-state heading="No projects"></dc-empty-state>`)
+    const el = await fixture<DcEmptyState>(
+      html`<dc-empty-state heading="No projects" description="Create your first project"></dc-empty-state>`
+    )
     await expect(el).to.be.accessible()
   })
 

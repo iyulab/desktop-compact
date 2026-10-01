@@ -110,6 +110,7 @@ defaults reproduce the 0.9 look; a test keeps it that way.
 | `--dc-section-title-weight` | `--dc-font-weight-semibold` |
 | `--dc-section-description-color` | `--dc-color-text-muted` |
 | `--dc-section-marker-color` | `--dc-color-accent` |
+| `--dc-callout-size` | `--dc-font-size-sm` |
 | `--dc-card-bg` | `--dc-color-surface` |
 | `--dc-card-border` | `1px solid` `--dc-color-border` |
 | `--dc-card-elevation` | `none` |

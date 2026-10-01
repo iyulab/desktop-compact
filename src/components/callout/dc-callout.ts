@@ -21,7 +21,7 @@ export class DcCallout extends LitElement {
       background: var(--_callout-ground);
       color: var(--dc-color-text, #1a1a1e);
       font-family: var(--dc-font-family, system-ui, sans-serif);
-      font-size: var(--dc-font-size-sm, 12px);
+      font-size: var(--dc-callout-size, var(--dc-font-size-sm, 12px));
       --_callout-edge: var(--dc-color-secondary, #475569);
       --_callout-ground: var(--dc-color-secondary-subtle, color-mix(in srgb, var(--dc-color-secondary, #475569) 15%, transparent));
     }

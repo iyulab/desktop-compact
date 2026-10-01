@@ -37,7 +37,7 @@ export class DcEmptyState extends LitElement {
       margin: 0 0 var(--dc-space-4, 16px);
       max-width: 320px;
       font-size: var(--dc-font-size-sm, 12px);
-      color: var(--dc-color-text-muted, #8a8a92);
+      color: var(--dc-color-text-muted, #686870);
     }
   `
 

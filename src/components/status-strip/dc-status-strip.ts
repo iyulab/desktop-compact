@@ -22,7 +22,7 @@ export class DcStatusStrip extends LitElement {
       width: 8px;
       height: 8px;
       border-radius: var(--dc-radius-full, 9999px);
-      background: var(--dc-color-text-muted, #8a8a92);
+      background: var(--dc-color-text-muted, #686870);
     }
     :host([status='error']) .dot {
       background: var(--dc-color-danger, #dc2626);

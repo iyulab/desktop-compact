@@ -44,7 +44,7 @@ export class DcSectionHeading extends LitElement {
     p {
       margin: var(--dc-space-1, 4px) 0 0;
       font-size: var(--dc-font-size-sm, 12px);
-      color: var(--dc-section-description-color, var(--dc-color-text-muted, #8a8a92));
+      color: var(--dc-section-description-color, var(--dc-color-text-muted, #686870));
     }
     .actions {
       flex-shrink: 0;

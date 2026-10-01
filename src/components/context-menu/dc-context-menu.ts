@@ -63,7 +63,7 @@ export class DcContextMenu extends LitElement {
       outline: none;
     }
     [part='item']:disabled {
-      color: var(--dc-color-text-muted, #8a8a92);
+      color: var(--dc-color-text-muted, #686870);
       cursor: not-allowed;
     }
     [part='item'][data-danger]:not(:disabled) {

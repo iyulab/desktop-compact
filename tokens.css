@@ -15,7 +15,8 @@
   --dc-color-border: #e2e2e4;
   --dc-color-text: #1a1a1e;
   --dc-color-text-secondary: #55555c;
-  --dc-color-text-muted: #8a8a92;
+  /* At least 4.5:1 on bg, surface and surface-hover, so small muted text stays readable. */
+  --dc-color-text-muted: #686870;
   --dc-color-accent: #2563eb;
   --dc-color-accent-contrast: #ffffff;
   --dc-color-success: #16a34a;
@@ -104,6 +105,7 @@
  *   --dc-section-title-weight        → --dc-font-weight-semibold
  *   --dc-section-description-color   → --dc-color-text-muted
  *   --dc-section-marker-color        → --dc-color-accent
+ *   --dc-callout-size                → --dc-font-size-sm
  *   --dc-card-bg                     → --dc-color-surface
  *   --dc-card-border                 → 1px solid --dc-color-border
  *   --dc-card-elevation              → none
@@ -142,6 +144,7 @@
 @property --dc-section-title-weight { syntax: '*'; inherits: true; }
 @property --dc-section-description-color { syntax: '*'; inherits: true; }
 @property --dc-section-marker-color { syntax: '*'; inherits: true; }
+@property --dc-callout-size { syntax: '*'; inherits: true; }
 @property --dc-card-bg { syntax: '*'; inherits: true; }
 @property --dc-card-border { syntax: '*'; inherits: true; }
 @property --dc-card-elevation { syntax: '*'; inherits: true; }
@@ -176,7 +179,7 @@
     --dc-color-border: #313236;
     --dc-color-text: #f0f0f2;
     --dc-color-text-secondary: #b8b8bf;
-    --dc-color-text-muted: #86868f;
+    --dc-color-text-muted: #9a9aa3;
     --dc-color-accent: #5b9bf7;
     --dc-color-accent-contrast: #0b1220;
     --dc-color-success: #22c55e;
@@ -201,7 +204,7 @@
   --dc-color-border: #313236;
   --dc-color-text: #f0f0f2;
   --dc-color-text-secondary: #b8b8bf;
-  --dc-color-text-muted: #86868f;
+  --dc-color-text-muted: #9a9aa3;
   --dc-color-accent: #5b9bf7;
   --dc-color-accent-contrast: #0b1220;
   --dc-color-success: #22c55e;

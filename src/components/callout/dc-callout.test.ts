@@ -23,6 +23,13 @@ describe('dc-callout', () => {
     expect([...el.querySelectorAll('p')].map((p) => p.textContent)).to.deep.equal(['Could not open', 'Detail'])
   })
 
+  it('sets its text at the small size unless the callout size role says otherwise', async () => {
+    const plain = await fixture<DcCallout>(html`<dc-callout style="--dc-font-size-sm: 11px"><p>Hi</p></dc-callout>`)
+    expect(getComputedStyle(plain).fontSize).to.equal('11px')
+    const sized = await fixture<DcCallout>(html`<dc-callout style="--dc-font-size-sm: 11px; --dc-callout-size: 15px"><p>Hi</p></dc-callout>`)
+    expect(getComputedStyle(sized).fontSize).to.equal('15px')
+  })
+
   it('puts actions at the end', async () => {
     const el = await fixture<DcCallout>(html`<dc-callout><p>Pick one</p><button slot="actions">Pick</button></dc-callout>`)
     const slot = el.shadowRoot!.querySelector('slot[name=actions]') as HTMLSlotElement

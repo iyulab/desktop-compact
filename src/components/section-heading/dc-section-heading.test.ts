@@ -38,10 +38,10 @@ describe('dc-section-heading', () => {
     expect(getComputedStyle(el.shadowRoot!.querySelector('p')!).color).to.equal('rgb(1, 1, 1)')
   })
 
-  it('keeps its previous look without the tokens file', async () => {
+  it('keeps its previous look without the tokens file, with the darker muted description', async () => {
     const el = await fixture<DcSectionHeading>(html`<dc-section-heading heading="A" description="B"></dc-section-heading>`)
     expect(getComputedStyle(el.shadowRoot!.querySelector('h3')!).fontWeight).to.equal('600')
-    expect(getComputedStyle(el.shadowRoot!.querySelector('p')!).color).to.equal('rgb(138, 138, 146)')
+    expect(getComputedStyle(el.shadowRoot!.querySelector('p')!).color).to.equal('rgb(104, 104, 112)')
   })
 
   it('keeps the plain heading layout without marker (block, inherited leading)', async () => {
