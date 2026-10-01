@@ -41,4 +41,26 @@ describe('dc-empty-state', () => {
     const el = await fixture<DcEmptyState>(html`<dc-empty-state heading="No projects"></dc-empty-state>`)
     await expect(el).to.be.accessible()
   })
+
+  it('omits the heading element when no heading is given', async () => {
+    const el = await fixture<DcEmptyState>(
+      html`<dc-empty-state description="Nothing to show"></dc-empty-state>`
+    )
+    expect(el.shadowRoot!.querySelector('h2')).to.be.null
+  })
+
+  it('adds the heading element when a heading is set later', async () => {
+    const el = await fixture<DcEmptyState>(html`<dc-empty-state></dc-empty-state>`)
+    expect(el.shadowRoot!.querySelector('h2')).to.be.null
+    el.heading = 'No projects'
+    await elementUpdated(el)
+    expect(el.shadowRoot!.querySelector('h2')!.textContent).to.equal('No projects')
+  })
+
+  it('is accessible without a heading', async () => {
+    const el = await fixture<DcEmptyState>(
+      html`<dc-empty-state><button slot="actions">Import</button></dc-empty-state>`
+    )
+    await expect(el).to.be.accessible()
+  })
 })

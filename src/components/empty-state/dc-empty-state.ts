@@ -60,7 +60,7 @@ export class DcEmptyState extends LitElement {
       <div class="icon" ?hidden=${!this.hasIcon}>
         <slot name="icon" @slotchange=${this.#handleIconSlotChange}></slot>
       </div>
-      <h2>${this.heading}</h2>
+      ${this.heading ? html`<h2>${this.heading}</h2>` : ''}
       ${this.description ? html`<p>${this.description}</p>` : ''}
       <slot name="actions"></slot>
     `
