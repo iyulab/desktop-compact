@@ -24,12 +24,14 @@ export class DcSectionHeading extends LitElement {
     }
     h3 {
       margin: 0;
+      font-weight: var(--dc-section-title-weight, var(--dc-font-weight-semibold, 600));
+      color: var(--dc-color-text, #1a1a1e);
+    }
+    :host([marker]) h3 {
       display: flex;
       align-items: center;
       gap: var(--dc-space-2, 8px);
       line-height: var(--dc-line-height-tight, 1.3);
-      font-weight: var(--dc-section-title-weight, var(--dc-font-weight-semibold, 600));
-      color: var(--dc-color-text, #1a1a1e);
     }
     :host([marker]) h3::before {
       content: '';

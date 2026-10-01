@@ -44,6 +44,22 @@ describe('dc-section-heading', () => {
     expect(getComputedStyle(el.shadowRoot!.querySelector('p')!).color).to.equal('rgb(138, 138, 146)')
   })
 
+  it('keeps the plain heading layout without marker (block, inherited leading)', async () => {
+    const el = await fixture<DcSectionHeading>(html`<dc-section-heading heading="A"></dc-section-heading>`)
+    const h3 = el.shadowRoot!.querySelector('h3')!
+    const plain = document.createElement('h3')
+    el.shadowRoot!.appendChild(plain)
+    const plainLeading = getComputedStyle(plain).lineHeight
+    plain.remove()
+    expect(getComputedStyle(h3).display).to.equal('block')
+    expect(getComputedStyle(h3).lineHeight).to.equal(plainLeading)
+  })
+
+  it('uses flex and tight leading only with marker', async () => {
+    const el = await fixture<DcSectionHeading>(html`<dc-section-heading marker heading="A"></dc-section-heading>`)
+    expect(getComputedStyle(el.shadowRoot!.querySelector('h3')!).display).to.equal('flex')
+  })
+
   it('is accessible', async () => {
     const el = await fixture<DcSectionHeading>(html`<dc-section-heading heading="Recent runs"></dc-section-heading>`)
     await expect(el).to.be.accessible()
