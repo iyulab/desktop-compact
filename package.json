@@ -144,6 +144,11 @@
       "import": "./dist/context-menu.js",
       "default": "./dist/context-menu.js"
     },
+    "./table-styles": {
+      "types": "./dist/styles/table-styles.d.ts",
+      "import": "./dist/table-styles.js",
+      "default": "./dist/table-styles.js"
+    },
     "./tokens.css": "./tokens.css"
   },
   "scripts": {

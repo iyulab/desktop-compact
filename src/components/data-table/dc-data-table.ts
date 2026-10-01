@@ -45,13 +45,14 @@ export class DcDataTable extends LitElement {
       text-align: left;
       vertical-align: top;
       padding: var(--dc-space-2, 8px);
-      border-bottom: 1px solid var(--dc-color-border, #e2e2e4);
+      border-bottom: 1px solid var(--dc-table-rule, var(--dc-color-border, #e2e2e4));
       white-space: pre-line;
     }
     thead th {
       position: sticky;
       top: 0;
-      background: var(--dc-color-surface, #f4f4f5);
+      background: var(--dc-table-header-bg, var(--dc-color-surface, #f4f4f5));
+      color: var(--dc-table-header-color, var(--dc-color-text, #1a1a1e));
       font-weight: var(--dc-font-weight-semibold, 600);
     }
     tbody tr {

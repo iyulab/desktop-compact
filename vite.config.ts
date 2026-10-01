@@ -12,6 +12,7 @@ function discoverComponentEntries(): Record<string, string> {
     if (!statSync(dirPath).isDirectory()) continue
     entries[dir] = `src/components/${dir}/dc-${dir}.ts`
   }
+  entries['table-styles'] = 'src/styles/table-styles.ts'
   return entries
 }
 

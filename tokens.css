@@ -117,7 +117,7 @@
   --dc-indicator-color: var(--dc-color-accent);
   --dc-selection-bg: transparent;
   --dc-table-header-bg: var(--dc-color-surface);
-  --dc-table-header-color: var(--dc-color-text-muted);
+  --dc-table-header-color: var(--dc-color-text);
   --dc-table-rule: var(--dc-color-rule);
   --dc-table-total-rule: var(--dc-color-text);
 }
