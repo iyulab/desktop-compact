@@ -94,6 +94,11 @@
       "import": "./dist/empty-state.js",
       "default": "./dist/empty-state.js"
     },
+    "./field": {
+      "types": "./dist/components/field/dc-field.d.ts",
+      "import": "./dist/field.js",
+      "default": "./dist/field.js"
+    },
     "./section-heading": {
       "types": "./dist/components/section-heading/dc-section-heading.d.ts",
       "import": "./dist/section-heading.js",

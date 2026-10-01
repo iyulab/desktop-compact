@@ -18,6 +18,7 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 - `dc-badge` `secondary` variant; tinted variants read `--dc-color-*-subtle`.
 - `dc-card` `header` and `footer` slots, drawn only when filled; the card reads `--dc-card-*` role tokens.
 - `dc-section-heading` `marker`; title weight and description color read role tokens.
+- `dc-field`: a label, required mark, hint and error around one control; clicking the label focuses the control.
 
 ### Changed
 
