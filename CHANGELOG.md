@@ -7,6 +7,8 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+## [0.11.0] - 2026-10-02
+
 ### Added
 
 - `--dc-callout-size` role token: the text size of `dc-callout` (falls back to `--dc-font-size-sm`, as before).
