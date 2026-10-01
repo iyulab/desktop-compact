@@ -99,6 +99,11 @@
       "import": "./dist/callout.js",
       "default": "./dist/callout.js"
     },
+    "./metric": {
+      "types": "./dist/components/metric/dc-metric.d.ts",
+      "import": "./dist/metric.js",
+      "default": "./dist/metric.js"
+    },
     "./field": {
       "types": "./dist/components/field/dc-field.d.ts",
       "import": "./dist/field.js",
