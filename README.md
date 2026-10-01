@@ -82,6 +82,63 @@ button's label, a tinted badge's label, a danger menu item. A fill that reads we
 often under 4.5:1 as small text, so a theme that overrides a fill should override its text form too.
 A component falls back to the fill when the text form is not set.
 
+### Three layers: primitives, roles, components
+
+Tokens come in three layers:
+
+1. **Primitives** — the base palette, spacing, type and elevation: `--dc-color-surface`, `--dc-color-accent`,
+   `--dc-space-*`, `--dc-font-size-*`, `--dc-elevation-*`. `tokens.css` gives these values.
+2. **Roles** — what a part of the interface is made of: `--dc-card-bg`, `--dc-table-header-bg`,
+   `--dc-color-accent-subtle`. Components read roles.
+3. **Components** — each reads its role tokens, falls back to a primitive, then to a literal:
+   `var(--dc-card-bg, var(--dc-color-surface, #f7f7f8))`.
+
+Roles are **declared, not given a value**: `tokens.css` registers them with `@property` and sets none. A role
+that is not set therefore falls back to the primitive where the component sits, so overriding a primitive on
+the root *or on any subtree* (a panel with its own `--dc-color-surface` or `--dc-color-accent`) reaches every
+component inside it. To theme a role, set it — usually on `:root`, or on a wrapping element to scope it. The
+defaults reproduce the 0.9 look; a test keeps it that way.
+
+| Role | Falls back to |
+| --- | --- |
+| `--dc-color-rule` | `--dc-color-border` (hairline rules) |
+| `--dc-color-accent-subtle`, `-secondary-subtle`, `-success-subtle`, `-warning-subtle`, `-danger-subtle` | 15% tint of the fill |
+| `--dc-page-eyebrow-color`, `-size` | `--dc-color-accent-text`, `--dc-font-size-xs` |
+| `--dc-page-title-size`, `-weight` | `--dc-font-size-2xl`, `--dc-font-weight-bold` |
+| `--dc-page-description-color` | `--dc-color-text-secondary` |
+| `--dc-page-rule` | `--dc-color-rule` |
+| `--dc-section-title-weight` | `--dc-font-weight-semibold` |
+| `--dc-section-description-color` | `--dc-color-text-muted` |
+| `--dc-section-marker-color` | `--dc-color-accent` |
+| `--dc-card-bg` | `--dc-color-surface` |
+| `--dc-card-border` | `1px solid` `--dc-color-border` |
+| `--dc-card-elevation` | `none` |
+| `--dc-card-radius` | `--dc-radius-md` |
+| `--dc-card-header-size`, `-accent` | `--dc-font-size-md`, `--dc-color-secondary-text` |
+| `--dc-card-footer-bg` | `--dc-color-surface` |
+| `--dc-field-label-size`, `-weight`, `-color` | `--dc-font-size-sm`, `--dc-font-weight-medium`, `--dc-color-text-secondary` |
+| `--dc-field-hint-color` | `--dc-color-text-secondary` |
+| `--dc-field-required-color` | `--dc-color-accent-text` |
+| `--dc-field-gap` | `--dc-space-1` |
+| `--dc-metric-size` | `--dc-font-size-display` |
+| `--dc-metric-accent-1`, `-accent-2` | `--dc-color-accent`, `--dc-color-secondary` |
+| `--dc-indicator-color` | `--dc-color-accent` |
+| `--dc-selection-bg` | `transparent` |
+| `--dc-table-header-bg`, `-header-color` | `--dc-color-surface`, `--dc-color-text` |
+| `--dc-table-rule` | `--dc-color-rule` |
+| `--dc-table-total-rule` | `--dc-color-text` |
+
+```css
+:root {
+  --dc-card-border: none;
+  --dc-card-elevation: var(--dc-elevation-1);
+  --dc-selection-bg: color-mix(in srgb, var(--dc-color-accent) 10%, transparent);
+}
+```
+
+The Storybook story `Foundations/Hierarchy` shows the parts together, and `BrandOverride` the same screen
+with roles overridden on a wrapping element.
+
 ### Checking token references
 
 A `var(--dc-…, fallback)` whose token no stylesheet defines falls back silently — often to a light
@@ -92,7 +149,7 @@ code reads a `--dc-*` token nothing defines:
 desktop-compact-check-tokens [--defined <css>]... <dir|file>...
 ```
 
-This package's `tokens.css` always counts as defined; each `--defined` adds another stylesheet (your
+A token registered with `@property` (the role tokens) counts as defined. This package's `tokens.css` always counts as defined; each `--defined` adds another stylesheet (your
 app's own, or another design-token package's). Directories are scanned recursively for `.ts`, `.js`,
 `.mjs` and `.css` files, skipping `node_modules` and dot-directories. Every undefined token is printed
 as `--dc-x in <path>` and the command exits 1; otherwise it prints `[tokens] ok — N defined` and exits 0.
