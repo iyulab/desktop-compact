@@ -11,7 +11,7 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 - `--dc-callout-size` role token: the text size of `dc-callout` (falls back to `--dc-font-size-sm`, as before).
 - `fieldAria` on `dc-input`, `dc-select` and `dc-textarea` (a `FieldAria`: description, invalid, required), put on
-  their native element as `aria-description`, `aria-invalid` and `aria-required`.
+  their native element as `aria-description`, `aria-invalid` and `aria-required`. `FieldAria` is exported.
 
 ### Changed
 

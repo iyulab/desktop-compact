@@ -1,5 +1,6 @@
 export * from './components/button/dc-button.js'
 export * from './components/input/dc-input.js'
+export type { FieldAria } from './mixins/form-associated.js'
 export * from './components/select/dc-select.js'
 export * from './components/checkbox/dc-checkbox.js'
 export * from './components/textarea/dc-textarea.js'
