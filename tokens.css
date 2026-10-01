@@ -50,6 +50,7 @@
 
   /* Typography */
   --dc-font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --dc-font-mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
   --dc-font-size-xs: 11px;
   --dc-font-size-sm: 12px;
   --dc-font-size-md: 13px;

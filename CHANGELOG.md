@@ -7,6 +7,10 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+### Added
+
+- `--dc-font-mono` token for fixed-width text (codes, keys, paths, keyboard shortcuts).
+
 ## [0.9.0] - 2026-10-01
 
 ### Added
