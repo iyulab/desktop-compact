@@ -6,6 +6,12 @@ import { customElement, property } from 'lit/decorators.js'
  * control keeps its own accessible name (`aria-label`) — a label in this shadow root cannot point
  * into the control's — so the label here is for the eye, and clicking it focuses the control. The slotted child must itself
  * be the focusable control (or a host that delegates focus).
+ *
+ * What a screen reader needs from the field reaches the control itself: the hint or error is its
+ * description, an error marks it invalid, and `required` marks it required. A native `input`,
+ * `select` or `textarea` gets `aria-description`, `aria-invalid` and `aria-required` (the field
+ * owns those three on it); a `dc-input`, `dc-select` or `dc-textarea` gets them through its
+ * `fieldAria` and puts them on its native element.
  */
 @customElement('dc-field')
 export class DcField extends LitElement {
@@ -53,6 +59,25 @@ export class DcField extends LitElement {
 
   updated() {
     this.style.setProperty('--_field-span', String(this.span || 1))
+    this.#describeControl()
+  }
+
+  /** Hands the hint or error, invalid and required to the control (see the class description). */
+  #describeControl = () => {
+    const control = this.querySelector<HTMLElement>(':scope > *')
+    if (!control) return
+    const aria = { description: this.error || this.hint, invalid: this.error !== '', required: this.required }
+    if ('fieldAria' in control) {
+      ;(control as HTMLElement & { fieldAria?: typeof aria }).fieldAria = aria
+    } else if (control instanceof HTMLInputElement || control instanceof HTMLSelectElement || control instanceof HTMLTextAreaElement) {
+      const set = (name: string, value: string) => (value ? control.setAttribute(name, value) : control.removeAttribute(name))
+      set('aria-description', aria.description)
+      set('aria-invalid', aria.invalid ? 'true' : '')
+      set('aria-required', aria.required && !control.required ? 'true' : '')
+    } else if (control.localName.includes('-') && !customElements.get(control.localName)) {
+      // A control defined later: describe it once it is.
+      void customElements.whenDefined(control.localName).then(this.#describeControl)
+    }
   }
 
   #focusControl = () => {
@@ -63,7 +88,7 @@ export class DcField extends LitElement {
   render() {
     return html`
       <span class="label" @click=${this.#focusControl}>${this.label}${this.required ? html`<span class="required" aria-hidden="true">*</span>` : nothing}</span>
-      <slot></slot>
+      <slot @slotchange=${this.#describeControl}></slot>
       <div aria-live="polite">
         ${this.error ? html`<p class="error">${this.error}</p>` : this.hint ? html`<p class="hint">${this.hint}</p>` : nothing}
       </div>

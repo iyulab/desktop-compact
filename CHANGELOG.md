@@ -10,12 +10,21 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 ### Added
 
 - `--dc-callout-size` role token: the text size of `dc-callout` (falls back to `--dc-font-size-sm`, as before).
+- `fieldAria` on `dc-input`, `dc-select` and `dc-textarea` (a `FieldAria`: description, invalid, required), put on
+  their native element as `aria-description`, `aria-invalid` and `aria-required`.
 
 ### Changed
 
 - `--dc-color-text-muted` is darker in the light palette (`#686870`) and lighter in the dark one (`#9a9aa3`): small muted text
   — an empty state's or a section's description, a table's secondary cells, a menu's shortcut — now reads at 4.5:1 or more
   on the page ground, a surface and a hovered surface (it read 2.9–3.4:1 in light). Component fallbacks follow.
+
+### Fixed
+
+- `dc-field` now tells assistive technology what it shows: its hint, or its error, becomes the control's description, an
+  error marks the control invalid, and `required` marks it required. Before, the hint and error were only announced as
+  they changed, never when the control was focused, and `required` was a mark for the eye only. A native control gets
+  the three `aria-*` attributes; a `dc-input`, `dc-select` or `dc-textarea` gets them through `fieldAria`.
 
 ## [0.10.1] - 2026-10-02
 

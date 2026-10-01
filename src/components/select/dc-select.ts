@@ -139,6 +139,9 @@ export class DcSelect extends FormAssociatedMixin(LitElement) {
         ?disabled=${this.disabled}
         ?required=${this.required}
         aria-label=${ifDefined(this.ariaLabel ?? undefined)}
+        aria-description=${ifDefined(this.fieldAria?.description || undefined)}
+        aria-invalid=${ifDefined(this.fieldAria?.invalid ? 'true' : undefined)}
+        aria-required=${ifDefined(this.fieldAria?.required && !this.required ? 'true' : undefined)}
         @change=${this._handleChange}
         part="select"
       >

@@ -115,6 +115,9 @@ export class DcInput extends FormAssociatedMixin(LitElement) {
         min=${ifDefined(this.min)}
         max=${ifDefined(this.max)}
         aria-label=${ifDefined(this.ariaLabel ?? undefined)}
+        aria-description=${ifDefined(this.fieldAria?.description || undefined)}
+        aria-invalid=${ifDefined(this.fieldAria?.invalid ? 'true' : undefined)}
+        aria-required=${ifDefined(this.fieldAria?.required && !this.required ? 'true' : undefined)}
         @input=${this._handleInput}
         part="input"
       />

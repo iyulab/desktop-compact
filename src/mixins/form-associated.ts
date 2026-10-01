@@ -4,9 +4,22 @@ import { property } from 'lit/decorators.js'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T = object> = new (...args: any[]) => T
 
+/**
+ * What a field around a control says about it, for assistive technology: the hint or error shown
+ * under it (its description), whether that is an error, and whether a value is required. A field
+ * in another shadow root cannot point at the control's own element by id, so it hands these over
+ * and the control puts them on its native element. Set by `dc-field`.
+ */
+export interface FieldAria {
+  description: string
+  invalid: boolean
+  required: boolean
+}
+
 export declare class FormAssociatedInterface {
   readonly internals: ElementInternals
   disabled: boolean
+  fieldAria?: FieldAria
   readonly form: HTMLFormElement | null
   readonly validity: ValidityState
   readonly validationMessage: string
@@ -34,6 +47,10 @@ export const FormAssociatedMixin = <T extends Constructor<LitElement>>(superClas
 
     @property({ type: Boolean, reflect: true })
     disabled = false
+
+    /** What a surrounding `dc-field` says about this control; see {@link FieldAria}. */
+    @property({ attribute: false })
+    fieldAria?: FieldAria
 
     constructor(...args: any[]) {
       super(...args)
