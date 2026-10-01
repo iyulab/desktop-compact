@@ -1,0 +1,2 @@
+# Executables keep LF so the shebang works wherever the package is packed.
+bin/** text eol=lf
