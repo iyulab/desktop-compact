@@ -22,3 +22,13 @@ export const Default: Story = {
     </dc-card>
   `,
 }
+
+export const WithHeaderAndFooter: Story = {
+  render: () => html`
+    <dc-card style="max-width:420px">
+      <span slot="header">New session <b data-accent style="color: var(--dc-card-header-accent)">10</b></span>
+      Fields go here.
+      <button slot="footer">Save</button>
+    </dc-card>
+  `,
+}
