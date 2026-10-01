@@ -177,7 +177,7 @@ Run it from your test script, for example:
 | `dc-delete-confirm-button` | Two-state delete trigger: icon-only button swaps to a visible confirm button on click, resets on blur |
 | `dc-empty-state` | Empty-state placeholder (icon slot, heading, description, actions slot) |
 | `dc-section-heading` | Section heading with consistent typography |
-| `dc-field` | Label, required mark, hint and error around one control |
+| `dc-field` | Label, required mark, hint and error around one control; the hint or error, invalid and required reach the control for screen readers |
 | `dc-tab-bar` | Tab list (`role="tablist"`/`"tab"` + `aria-selected`) — roving-tabindex keyboard navigation (Arrow keys wrap, Home/End); `activation="manual"` for panels slow to show |
 | `dc-segmented-control` | One value out of a few, all visible (`role="radiogroup"`/`"radio"` + `aria-checked`) — single Tab stop, arrow keys move and select (skipping disabled), form-associated, `change` on user pick only |
 | `dc-status-strip` | Inline `idle`/`loading`/`error`/`done` status indicator (reuses `dc-spinner` for the loading state) |
