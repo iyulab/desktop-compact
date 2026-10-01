@@ -25,6 +25,7 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 - `dc-field`: a label, required mark, hint and error around one control; clicking the label focuses the control.
 - `dc-callout`: an info, success, warning or danger note with an edge, a subtle ground and an actions slot.
 - `dc-metric`: a figure on a card with a label, unit, an optional accent band and a line under it.
+- A test pins that, with `tokens.css` loaded, the card, badge and section heading keep their 0.9 look.
 
 ### Changed
 
