@@ -22,7 +22,9 @@ export class DcCard extends LitElement {
     :host([has-header]),
     :host([has-footer]) {
       padding: 0;
-      overflow: hidden;
+    }
+    .body {
+      display: contents;
     }
     .header,
     .footer {
@@ -48,13 +50,20 @@ export class DcCard extends LitElement {
     }
     :host([has-header]) .body,
     :host([has-footer]) .body {
+      display: block;
       padding: var(--dc-space-4, 16px);
     }
     :host([compact][has-header]) .body,
     :host([compact][has-footer]) .body {
       padding: var(--dc-space-2, 8px);
     }
+    :host([compact][has-header]) .header,
+    :host([compact][has-footer]) .footer {
+      padding: var(--dc-space-2, 8px) var(--dc-space-3, 12px);
+    }
     :host([has-footer]) .footer {
+      border-bottom-left-radius: inherit;
+      border-bottom-right-radius: inherit;
       display: flex;
       justify-content: flex-end;
       align-items: center;

@@ -122,6 +122,27 @@ describe('dc-card', () => {
     expect(getComputedStyle(h2).fontWeight).to.equal('600')
   })
 
+  it('adds no box of its own to a default card', async () => {
+    const el = await fixture<DcCard>(html`<dc-card>Body</dc-card>`)
+    expect(getComputedStyle(el.shadowRoot!.querySelector('.body')!).display).to.equal('contents')
+  })
+
+  it('does not clip the activator focus ring on a card with a header', async () => {
+    const el = await fixture<DcCard>(html`<dc-card activator-label="Open"><span slot="header">H</span>Body</dc-card>`)
+    await new Promise((r) => setTimeout(r))
+    await el.updateComplete
+    expect(el.hasAttribute('has-header')).to.be.true
+    expect(getComputedStyle(el).overflow).to.equal('visible')
+  })
+
+  it('keeps compact spacing in the header and body', async () => {
+    const el = await fixture<DcCard>(html`<dc-card compact><span slot="header">H</span>Body</dc-card>`)
+    await new Promise((r) => setTimeout(r))
+    await el.updateComplete
+    expect(getComputedStyle(el.shadowRoot!.querySelector('.body')!).paddingTop).to.equal('8px')
+    expect(getComputedStyle(el.shadowRoot!.querySelector('.header')!).paddingTop).to.equal('8px')
+  })
+
   it('is accessible with header and footer', async () => {
     const el = await fixture<DcCard>(html`<dc-card><span slot="header">H</span>Body<button slot="footer">Save</button></dc-card>`)
     await expect(el).to.be.accessible()
