@@ -24,13 +24,25 @@ export class DcSectionHeading extends LitElement {
     }
     h3 {
       margin: 0;
-      font-weight: var(--dc-font-weight-semibold, 600);
+      display: flex;
+      align-items: center;
+      gap: var(--dc-space-2, 8px);
+      line-height: var(--dc-line-height-tight, 1.3);
+      font-weight: var(--dc-section-title-weight, var(--dc-font-weight-semibold, 600));
       color: var(--dc-color-text, #1a1a1e);
+    }
+    :host([marker]) h3::before {
+      content: '';
+      flex: none;
+      width: 3px;
+      height: 0.95em;
+      border-radius: 2px;
+      background: var(--dc-section-marker-color, var(--dc-color-accent, #2563eb));
     }
     p {
       margin: var(--dc-space-1, 4px) 0 0;
       font-size: var(--dc-font-size-sm, 12px);
-      color: var(--dc-color-text-muted, #8a8a92);
+      color: var(--dc-section-description-color, var(--dc-color-text-muted, #8a8a92));
     }
     .actions {
       flex-shrink: 0;
@@ -44,6 +56,10 @@ export class DcSectionHeading extends LitElement {
 
   @property()
   description = ''
+
+  /** A short bar before the heading in the section marker color — marks a section among siblings. */
+  @property({ type: Boolean, reflect: true })
+  marker = false
 
   @property({ reflect: true })
   size: SectionHeadingSize = 'md'

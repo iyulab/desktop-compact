@@ -25,3 +25,7 @@ export const Default: Story = {
     </dc-section-heading>
   `,
 }
+
+export const Marker: Story = {
+  render: () => html`<dc-section-heading marker heading="Sessions" description="Newest first"></dc-section-heading>`,
+}
