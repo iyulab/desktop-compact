@@ -7,6 +7,8 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-10-01
+
 ### Added
 
 - `tableStyles` (`@iyulab/desktop-compact/table-styles`): shared styles for a semantic `<table>` in a component's shadow root — header row, row headers, numeric cells (`.num`), a totals footer — over the `--dc-table-*` role tokens. `dc-data-table` reads the same table role tokens (rendering is unchanged by default).
