@@ -94,6 +94,11 @@
       "import": "./dist/empty-state.js",
       "default": "./dist/empty-state.js"
     },
+    "./callout": {
+      "types": "./dist/components/callout/dc-callout.d.ts",
+      "import": "./dist/callout.js",
+      "default": "./dist/callout.js"
+    },
     "./field": {
       "types": "./dist/components/field/dc-field.d.ts",
       "import": "./dist/field.js",
