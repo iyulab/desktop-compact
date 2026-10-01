@@ -82,6 +82,21 @@ describe('dc-data-table', () => {
     expect(el.shadowRoot!.querySelector('.empty')!.textContent).to.equal('No records yet')
   })
 
+  it('paints the header and the rules with the table role tokens', async () => {
+    const el = await table()
+    el.style.setProperty('--dc-table-header-bg', 'rgb(10, 20, 30)')
+    el.style.setProperty('--dc-table-rule', 'rgb(40, 50, 60)')
+    const root = el.shadowRoot!
+    expect(getComputedStyle(root.querySelector('thead th')!).backgroundColor).to.equal('rgb(10, 20, 30)')
+    expect(getComputedStyle(root.querySelector('tbody tr > *')!).borderBottomColor).to.equal('rgb(40, 50, 60)')
+  })
+
+  it('draws its rules in the rule color when no table rule is set', async () => {
+    const el = await table()
+    el.style.setProperty('--dc-color-rule', 'rgb(70, 80, 90)')
+    expect(getComputedStyle(el.shadowRoot!.querySelector('tbody tr > *')!).borderBottomColor).to.equal('rgb(70, 80, 90)')
+  })
+
   it('is accessible', async () => {
     const el = await table()
     await expect(el).to.be.accessible()

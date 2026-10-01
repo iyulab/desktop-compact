@@ -64,6 +64,30 @@ test('--defined adds the tokens of another stylesheet', () => {
   )
 })
 
+test('an @property registration counts as a definition', () => {
+  withFixture(
+    {
+      'extra.css': "@property --dc-extra-role { syntax: '*'; inherits: true; }",
+      'src/a.ts': 'css`color: var(--dc-extra-role, var(--dc-color-text));`',
+    },
+    (dir) => assert.equal(run(dir, '--defined', 'extra.css', 'src').status, 0),
+  )
+})
+
+test('a token named only in a stylesheet comment is not defined', () => {
+  withFixture(
+    {
+      'extra.css': '/* --dc-extra-ghost: 4px; @property --dc-extra-ghost { } */ :root { --dc-extra-real: 1px; }',
+      'src/a.ts': 'css`gap: var(--dc-extra-ghost);`',
+    },
+    (dir) => {
+      const r = run(dir, '--defined', 'extra.css', 'src')
+      assert.equal(r.status, 1)
+      assert.match(r.stderr, /--dc-extra-ghost in src\/a\.ts/)
+    },
+  )
+})
+
 test('skips node_modules, dot-directories and unscanned extensions', () => {
   withFixture(
     {

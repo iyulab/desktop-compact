@@ -31,18 +31,10 @@
   --dc-color-backdrop: rgba(0, 0, 0, 0.4);
   /* Surfaces: bg < surface < surface-raised (a card, a popover). */
   --dc-color-surface-raised: #ffffff;
-  /* Hairline rules (a header's underline, table rows) — the border by default, lighter when an app wants. */
-  --dc-color-rule: var(--dc-color-border);
   /* Secondary hue — a second voice beside the accent, for small marks (a card header's figure, a badge). */
   --dc-color-secondary: #475569;
   --dc-color-secondary-text: #334155;
   --dc-color-secondary-contrast: #ffffff;
-  /* Subtle grounds: a 15% tint of each fill, the ground dc-badge has always used. */
-  --dc-color-accent-subtle: color-mix(in srgb, var(--dc-color-accent) 15%, transparent);
-  --dc-color-secondary-subtle: color-mix(in srgb, var(--dc-color-secondary) 15%, transparent);
-  --dc-color-success-subtle: color-mix(in srgb, var(--dc-color-success) 15%, transparent);
-  --dc-color-warning-subtle: color-mix(in srgb, var(--dc-color-warning) 15%, transparent);
-  --dc-color-danger-subtle: color-mix(in srgb, var(--dc-color-danger) 15%, transparent);
 
   /* Spacing -- 4px base, compact density */
   --dc-space-1: 4px;
@@ -86,41 +78,92 @@
   --dc-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.06);
   --dc-elevation-2: 0 4px 16px rgba(0, 0, 0, 0.15);
   --dc-elevation-3: 0 12px 32px rgba(0, 0, 0, 0.2);
-
-  /* Role tokens — components read these, apps override them. Defaults reproduce the look before
-     roles existed, so an app that overrides nothing renders as it did. */
-  --dc-page-eyebrow-color: var(--dc-color-accent-text);
-  --dc-page-eyebrow-size: var(--dc-font-size-xs);
-  --dc-page-title-size: var(--dc-font-size-2xl);
-  --dc-page-title-weight: var(--dc-font-weight-bold);
-  --dc-page-description-color: var(--dc-color-text-secondary);
-  --dc-page-rule: var(--dc-color-rule);
-  --dc-section-title-weight: var(--dc-font-weight-semibold);
-  --dc-section-description-color: var(--dc-color-text-muted);
-  --dc-section-marker-color: var(--dc-color-accent);
-  --dc-card-bg: var(--dc-color-surface);
-  --dc-card-border: 1px solid var(--dc-color-border);
-  --dc-card-elevation: none;
-  --dc-card-radius: var(--dc-radius-md);
-  --dc-card-header-size: var(--dc-font-size-md);
-  --dc-card-header-accent: var(--dc-color-secondary-text);
-  --dc-card-footer-bg: var(--dc-color-surface);
-  --dc-field-label-size: var(--dc-font-size-sm);
-  --dc-field-label-weight: var(--dc-font-weight-medium);
-  --dc-field-label-color: var(--dc-color-text-secondary);
-  --dc-field-hint-color: var(--dc-color-text-secondary);
-  --dc-field-required-color: var(--dc-color-accent-text);
-  --dc-field-gap: var(--dc-space-1);
-  --dc-metric-size: var(--dc-font-size-display);
-  --dc-metric-accent-1: var(--dc-color-accent);
-  --dc-metric-accent-2: var(--dc-color-secondary);
-  --dc-indicator-color: var(--dc-color-accent);
-  --dc-selection-bg: transparent;
-  --dc-table-header-bg: var(--dc-color-surface);
-  --dc-table-header-color: var(--dc-color-text);
-  --dc-table-rule: var(--dc-color-rule);
-  --dc-table-total-rule: var(--dc-color-text);
 }
+
+/*
+ * Derived and role tokens — declared, not given a value.
+ *
+ * A custom property whose value reads another token is resolved on the element that sets it. Set on
+ * :root, `--dc-card-bg` would carry the root surface everywhere, and a panel that sets its own
+ * `--dc-color-surface` would no longer reach a card inside it. So these tokens are only registered
+ * here; with no value, each component falls back to the base tokens, read live where it sits. An app
+ * themes a role by setting the token (on :root or on any subtree); left unset, each resolves to:
+ *
+ *   --dc-color-rule                  → --dc-color-border          hairline rules (header underline, table rows)
+ *   --dc-color-accent-subtle         → 15% tint of --dc-color-accent      (subtle grounds: badge, callout)
+ *   --dc-color-secondary-subtle      → 15% tint of --dc-color-secondary
+ *   --dc-color-success-subtle        → 15% tint of --dc-color-success
+ *   --dc-color-warning-subtle        → 15% tint of --dc-color-warning
+ *   --dc-color-danger-subtle         → 15% tint of --dc-color-danger
+ *   --dc-page-eyebrow-color          → --dc-color-accent-text
+ *   --dc-page-eyebrow-size           → --dc-font-size-xs
+ *   --dc-page-title-size             → --dc-font-size-2xl
+ *   --dc-page-title-weight           → --dc-font-weight-bold
+ *   --dc-page-description-color      → --dc-color-text-secondary
+ *   --dc-page-rule                   → --dc-color-rule
+ *   --dc-section-title-weight        → --dc-font-weight-semibold
+ *   --dc-section-description-color   → --dc-color-text-muted
+ *   --dc-section-marker-color        → --dc-color-accent
+ *   --dc-card-bg                     → --dc-color-surface
+ *   --dc-card-border                 → 1px solid --dc-color-border
+ *   --dc-card-elevation              → none
+ *   --dc-card-radius                 → --dc-radius-md
+ *   --dc-card-header-size            → --dc-font-size-md
+ *   --dc-card-header-accent          → --dc-color-secondary-text
+ *   --dc-card-footer-bg              → --dc-color-surface
+ *   --dc-field-label-size            → --dc-font-size-sm
+ *   --dc-field-label-weight          → --dc-font-weight-medium
+ *   --dc-field-label-color           → --dc-color-text-secondary
+ *   --dc-field-hint-color            → --dc-color-text-secondary
+ *   --dc-field-required-color        → --dc-color-accent-text
+ *   --dc-field-gap                   → --dc-space-1
+ *   --dc-metric-size                 → --dc-font-size-display
+ *   --dc-metric-accent-1             → --dc-color-accent
+ *   --dc-metric-accent-2             → --dc-color-secondary
+ *   --dc-indicator-color             → --dc-color-accent
+ *   --dc-selection-bg                → transparent
+ *   --dc-table-header-bg             → --dc-color-surface
+ *   --dc-table-header-color          → --dc-color-text
+ *   --dc-table-rule                  → --dc-color-rule
+ *   --dc-table-total-rule            → --dc-color-text
+ */
+@property --dc-color-rule { syntax: '*'; inherits: true; }
+@property --dc-color-accent-subtle { syntax: '*'; inherits: true; }
+@property --dc-color-secondary-subtle { syntax: '*'; inherits: true; }
+@property --dc-color-success-subtle { syntax: '*'; inherits: true; }
+@property --dc-color-warning-subtle { syntax: '*'; inherits: true; }
+@property --dc-color-danger-subtle { syntax: '*'; inherits: true; }
+@property --dc-page-eyebrow-color { syntax: '*'; inherits: true; }
+@property --dc-page-eyebrow-size { syntax: '*'; inherits: true; }
+@property --dc-page-title-size { syntax: '*'; inherits: true; }
+@property --dc-page-title-weight { syntax: '*'; inherits: true; }
+@property --dc-page-description-color { syntax: '*'; inherits: true; }
+@property --dc-page-rule { syntax: '*'; inherits: true; }
+@property --dc-section-title-weight { syntax: '*'; inherits: true; }
+@property --dc-section-description-color { syntax: '*'; inherits: true; }
+@property --dc-section-marker-color { syntax: '*'; inherits: true; }
+@property --dc-card-bg { syntax: '*'; inherits: true; }
+@property --dc-card-border { syntax: '*'; inherits: true; }
+@property --dc-card-elevation { syntax: '*'; inherits: true; }
+@property --dc-card-radius { syntax: '*'; inherits: true; }
+@property --dc-card-header-size { syntax: '*'; inherits: true; }
+@property --dc-card-header-accent { syntax: '*'; inherits: true; }
+@property --dc-card-footer-bg { syntax: '*'; inherits: true; }
+@property --dc-field-label-size { syntax: '*'; inherits: true; }
+@property --dc-field-label-weight { syntax: '*'; inherits: true; }
+@property --dc-field-label-color { syntax: '*'; inherits: true; }
+@property --dc-field-hint-color { syntax: '*'; inherits: true; }
+@property --dc-field-required-color { syntax: '*'; inherits: true; }
+@property --dc-field-gap { syntax: '*'; inherits: true; }
+@property --dc-metric-size { syntax: '*'; inherits: true; }
+@property --dc-metric-accent-1 { syntax: '*'; inherits: true; }
+@property --dc-metric-accent-2 { syntax: '*'; inherits: true; }
+@property --dc-indicator-color { syntax: '*'; inherits: true; }
+@property --dc-selection-bg { syntax: '*'; inherits: true; }
+@property --dc-table-header-bg { syntax: '*'; inherits: true; }
+@property --dc-table-header-color { syntax: '*'; inherits: true; }
+@property --dc-table-rule { syntax: '*'; inherits: true; }
+@property --dc-table-total-rule { syntax: '*'; inherits: true; }
 
 /* Dark theme -- OS preference unless the consumer opts out via
    [data-theme="light"], or opts in explicitly via [data-theme="dark"]. */

@@ -14,8 +14,11 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
   `-text`, `-contrast`), subtle grounds for every fill (`--dc-color-*-subtle`), `xl`/`2xl`/`display` font sizes,
   line heights, a bold weight and three elevations.
 - Role tokens (`--dc-page-*`, `--dc-section-*`, `--dc-card-*`, `--dc-field-*`, `--dc-metric-*`, `--dc-table-*`,
-  `--dc-indicator-color`, `--dc-selection-bg`): components read these, and an app themes a role by overriding one
-  token. Their defaults reproduce the previous look.
+  `--dc-indicator-color`, `--dc-selection-bg`): components read these, and an app themes a role by setting one
+  token. `tokens.css` declares them (`@property`, no value) rather than giving them values, as it does the rule
+  color and the subtle grounds; unset, each component falls back to the base tokens where it sits, so the
+  previous look is unchanged and overriding a base token (`--dc-color-surface`, `--dc-color-accent`, …) on any
+  subtree still reaches every component inside it. `tokens.css` lists what each role resolves to.
 - `dc-badge` `secondary` variant; tinted variants read `--dc-color-*-subtle`.
 - `dc-card` `header` and `footer` slots, drawn only when filled; the card reads `--dc-card-*` role tokens.
 - `dc-section-heading` `marker`; title weight and description color read role tokens.
@@ -27,6 +30,8 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 - `tokens.css` defines `--dc-dialog-max-width` (480px, the dialog's default), so the token check passes on
   code that reads it; setting it on a `dc-dialog` still overrides it per dialog.
+- `desktop-compact-check-tokens` counts a token registered with `@property` as defined, and no longer counts a
+  token that appears only inside a stylesheet comment.
 
 ## [0.9.1] - 2026-10-01
 

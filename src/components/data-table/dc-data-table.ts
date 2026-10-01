@@ -45,7 +45,7 @@ export class DcDataTable extends LitElement {
       text-align: left;
       vertical-align: top;
       padding: var(--dc-space-2, 8px);
-      border-bottom: 1px solid var(--dc-table-rule, var(--dc-color-border, #e2e2e4));
+      border-bottom: 1px solid var(--dc-table-rule, var(--dc-color-rule, var(--dc-color-border, #e2e2e4)));
       white-space: pre-line;
     }
     thead th {

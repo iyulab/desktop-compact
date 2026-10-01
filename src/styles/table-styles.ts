@@ -16,7 +16,7 @@ export const tableStyles = css`
   td {
     text-align: left;
     padding: var(--dc-space-2, 8px) var(--dc-space-3, 12px);
-    border-bottom: 1px solid var(--dc-table-rule, var(--dc-color-border, #e2e2e4));
+    border-bottom: 1px solid var(--dc-table-rule, var(--dc-color-rule, var(--dc-color-border, #e2e2e4)));
     white-space: nowrap;
   }
   thead th {

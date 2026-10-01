@@ -15,7 +15,10 @@ import { fileURLToPath } from 'node:url'
 
 const USAGE = 'usage: desktop-compact-check-tokens [--defined <css>]... <dir|file>...'
 const SCANNED = new Set(['.ts', '.js', '.mjs', '.css'])
-const DEFINITION = /(--dc-[a-z0-9-]+)\s*:/g
+// A token is defined by a declaration (`--dc-x: …`) or registered by `@property --dc-x { … }` — a
+// registered token without a value leaves the reading component's fallback in effect, by design.
+const DEFINITION = /(--dc-[a-z0-9-]+)\s*:|@property\s+(--dc-[a-z0-9-]+)\s*\{/g
+const COMMENT = /\/\*[\s\S]*?\*\//g
 const REFERENCE = /var\(\s*(--dc-[a-z0-9-]+)/g
 const OWN_TOKENS = fileURLToPath(new URL('../tokens.css', import.meta.url))
 
@@ -82,7 +85,9 @@ function* sourceFiles(path) {
 
 const { stylesheets, targets } = parseArgs(process.argv.slice(2))
 
-const defined = new Set(stylesheets.flatMap((css) => [...read(css).matchAll(DEFINITION)].map((m) => m[1])))
+const defined = new Set(
+  stylesheets.flatMap((css) => [...read(css).replace(COMMENT, '').matchAll(DEFINITION)].map((m) => m[1] ?? m[2])),
+)
 
 const missing = new Set()
 for (const target of targets) {

@@ -48,9 +48,31 @@ const ROOT_TOKENS = [
 /** Color tokens with a literal light value — each needs its own dark value too. */
 const DARK_TOKENS = ['--dc-color-surface-raised', '--dc-color-secondary', '--dc-color-secondary-text', '--dc-color-secondary-contrast']
 
-test('the light palette defines every primitive and role token', () => {
+/** Tokens registered with `@property` — declared without a value, so a component's fallback applies. */
+const declared = new Set([...css.matchAll(/@property\s+(--dc-[a-z0-9-]+)\s*\{/g)].map((m) => m[1]))
+
+test('the light palette defines or declares every primitive and role token', () => {
   const [light] = palettes(css)
-  for (const token of ROOT_TOKENS) assert.match(light, new RegExp(`${token}\\s*:`), `${token} in :root`)
+  for (const token of ROOT_TOKENS) {
+    assert.ok(new RegExp(`${token}\\s*:`).test(light) || declared.has(token), `${token} in :root or an @property rule`)
+  }
+})
+
+// A token whose value reads another token is resolved where it is set: set on :root, it would freeze
+// the root value of the base token, and a subtree overriding that base token would no longer reach a
+// component reading the derived one. Derived tokens are declared instead; components derive them.
+test('no palette gives a token a value that reads another token', () => {
+  for (const body of palettes(css)) assert.doesNotMatch(body, /--dc-[a-z0-9-]+\s*:[^;]*var\(/)
+})
+
+test('declared tokens carry no initial value, so the component fallback applies', () => {
+  const rules = [...css.matchAll(/@property\s+(--dc-[a-z0-9-]+)\s*\{([^}]*)\}/g)]
+  assert.ok(rules.length > 0)
+  for (const [, name, body] of rules) {
+    assert.match(body, /syntax\s*:\s*'\*'/, `${name} syntax`)
+    assert.match(body, /inherits\s*:\s*true/, `${name} inherits`)
+    assert.doesNotMatch(body, /initial-value/, `${name} initial-value`)
+  }
 })
 
 test('both dark palettes give the literal color tokens a dark value', () => {
