@@ -7,6 +7,8 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+## [0.10.1] - 2026-10-02
+
 ### Fixed
 
 - `dc-empty-state` no longer renders an empty `<h2>` when `heading` is empty; the heading element appears only when a heading is set.
