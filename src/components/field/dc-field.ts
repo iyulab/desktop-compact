@@ -18,7 +18,7 @@ export class DcField extends LitElement {
       font-family: var(--dc-font-family, system-ui, sans-serif);
     }
     :host([span]:not([span='0'])) {
-      grid-column-end: span var(--dc-field-span);
+      grid-column-end: span var(--_field-span);
     }
     .label {
       font-size: var(--dc-field-label-size, var(--dc-font-size-sm, 12px));
@@ -52,7 +52,7 @@ export class DcField extends LitElement {
   @property({ type: Number, reflect: true }) span = 0
 
   updated() {
-    this.style.setProperty('--dc-field-span', String(this.span || 1))
+    this.style.setProperty('--_field-span', String(this.span || 1))
   }
 
   #focusControl = () => {
