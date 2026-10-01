@@ -108,7 +108,7 @@
   --dc-field-label-size: var(--dc-font-size-sm);
   --dc-field-label-weight: var(--dc-font-weight-medium);
   --dc-field-label-color: var(--dc-color-text-secondary);
-  --dc-field-hint-color: var(--dc-color-text-muted);
+  --dc-field-hint-color: var(--dc-color-text-secondary);
   --dc-field-required-color: var(--dc-color-accent-text);
   --dc-field-gap: var(--dc-space-1);
   --dc-metric-size: var(--dc-font-size-display);

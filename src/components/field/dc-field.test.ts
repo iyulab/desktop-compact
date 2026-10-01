@@ -77,7 +77,7 @@ describe('dc-field', () => {
   })
 
   it('is accessible', async () => {
-    const el = await fixture<DcField>(html`<dc-field label="Date" hint="Calendar date" required style="--dc-field-hint-color: #55555c"><input aria-label="Date" /></dc-field>`)
+    const el = await fixture<DcField>(html`<dc-field label="Date" hint="Calendar date" required><input aria-label="Date" /></dc-field>`)
     await expect(el).to.be.accessible()
   })
 })

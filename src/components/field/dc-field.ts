@@ -4,7 +4,8 @@ import { customElement, property } from 'lit/decorators.js'
 /**
  * A form field's frame: a visible label above one control, then a hint or an error below it. The
  * control keeps its own accessible name (`aria-label`) — a label in this shadow root cannot point
- * into the control's — so the label here is for the eye, and clicking it focuses the control.
+ * into the control's — so the label here is for the eye, and clicking it focuses the control. The slotted child must itself
+ * be the focusable control (or a host that delegates focus).
  */
 @customElement('dc-field')
 export class DcField extends LitElement {
@@ -36,7 +37,7 @@ export class DcField extends LitElement {
       font-size: var(--dc-font-size-sm, 12px);
     }
     .hint {
-      color: var(--dc-field-hint-color, var(--dc-color-text-muted, #8a8a92));
+      color: var(--dc-field-hint-color, var(--dc-color-text-secondary, #55555c));
     }
     .error {
       color: var(--dc-color-danger-text, var(--dc-color-danger, #dc2626));
