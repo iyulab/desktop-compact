@@ -7,6 +7,12 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+### Added
+
+- `desktop-compact-check-tokens` command: fails when code reads a `--dc-*` design token that neither
+  this package's `tokens.css` nor any stylesheet passed with `--defined` defines, so a mistyped or
+  removed token no longer falls back silently.
+
 ### Changed
 
 - `npm pack` builds first, so a locally packed tarball never carries a stale `dist`.

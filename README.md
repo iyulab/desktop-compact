@@ -82,6 +82,26 @@ button's label, a tinted badge's label, a danger menu item. A fill that reads we
 often under 4.5:1 as small text, so a theme that overrides a fill should override its text form too.
 A component falls back to the fill when the text form is not set.
 
+### Checking token references
+
+A `var(--dc-…, fallback)` whose token no stylesheet defines falls back silently — often to a light
+default that only looks wrong in the dark scheme. The package ships a command that fails when your
+code reads a `--dc-*` token nothing defines:
+
+```bash
+desktop-compact-check-tokens [--defined <css>]... <dir|file>...
+```
+
+This package's `tokens.css` always counts as defined; each `--defined` adds another stylesheet (your
+app's own, or another design-token package's). Directories are scanned recursively for `.ts`, `.js`,
+`.mjs` and `.css` files, skipping `node_modules` and dot-directories. Every undefined token is printed
+as `--dc-x in <path>` and the command exits 1; otherwise it prints `[tokens] ok — N defined` and exits 0.
+Run it from your test script, for example:
+
+```json
+"scripts": { "check:tokens": "desktop-compact-check-tokens --defined src/styles.css src" }
+```
+
 ## Components (v1 — complete, 17/17)
 
 | Component | Description |
@@ -126,6 +146,7 @@ npm install
 npm test              # @web/test-runner, real Chromium
 npm run typecheck
 npm run guard          # forge-ignorance scan (this package must stay domain-neutral)
+npm run guard:test     # node tests for the scripts and the check-tokens command
 npm run build          # per-component ESM output, type declarations
 npm run storybook      # interactive component browser
 ```
