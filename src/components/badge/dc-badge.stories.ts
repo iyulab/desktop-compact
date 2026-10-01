@@ -8,7 +8,7 @@ const meta: Meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'accent', 'success', 'warning', 'danger'],
+      options: ['default', 'accent', 'secondary', 'success', 'warning', 'danger'],
     },
   },
   args: {
@@ -28,9 +28,14 @@ export const AllVariants: Story = {
     <div style="display:flex; gap:8px;">
       <dc-badge variant="default">Default</dc-badge>
       <dc-badge variant="accent">Accent</dc-badge>
+      <dc-badge variant="secondary">Secondary</dc-badge>
       <dc-badge variant="success">Success</dc-badge>
       <dc-badge variant="warning">Warning</dc-badge>
       <dc-badge variant="danger">Danger</dc-badge>
     </div>
   `,
+}
+
+export const Secondary: Story = {
+  render: () => html`<dc-badge variant="secondary">Group</dc-badge>`,
 }

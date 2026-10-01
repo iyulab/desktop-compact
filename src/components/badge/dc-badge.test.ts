@@ -33,4 +33,22 @@ describe('dc-badge', () => {
       expect(getComputedStyle(el.shadowRoot!.querySelector('span')!).color, v).to.equal('rgb(1, 2, 3)')
     }
   })
+
+  it('has a secondary variant: subtle ground, secondary text', async () => {
+    const el = await fixture<DcBadge>(html`<dc-badge variant="secondary" style="--dc-color-secondary-subtle: rgb(1, 2, 3); --dc-color-secondary-text: rgb(4, 5, 6)">x</dc-badge>`)
+    const span = el.shadowRoot!.querySelector('span')!
+    expect(getComputedStyle(span).backgroundColor).to.equal('rgb(1, 2, 3)')
+    expect(getComputedStyle(span).color).to.equal('rgb(4, 5, 6)')
+  })
+
+  it('reads the subtle-ground token for its tinted variants', async () => {
+    const el = await fixture<DcBadge>(html`<dc-badge variant="warning" style="--dc-color-warning-subtle: rgb(7, 8, 9)">x</dc-badge>`)
+    expect(getComputedStyle(el.shadowRoot!.querySelector('span')!).backgroundColor).to.equal('rgb(7, 8, 9)')
+  })
+
+  it('keeps its previous ground when no subtle token is defined (an app without the tokens file)', async () => {
+    const el = await fixture<DcBadge>(html`<dc-badge variant="accent" style="--dc-color-accent: rgb(0, 0, 200)">x</dc-badge>`)
+    const bg = getComputedStyle(el.shadowRoot!.querySelector('span')!).backgroundColor
+    expect(bg).to.match(/0\.15\)$|color\(srgb 0 0 0\.78\d* \/ 0\.15\)/)
+  })
 })

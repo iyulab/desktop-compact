@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
-export type BadgeVariant = 'default' | 'accent' | 'success' | 'warning' | 'danger'
+export type BadgeVariant = 'default' | 'accent' | 'secondary' | 'success' | 'warning' | 'danger'
 
 @customElement('dc-badge')
 export class DcBadge extends LitElement {
@@ -24,23 +24,26 @@ export class DcBadge extends LitElement {
       background: var(--dc-color-surface-hover, #ececed);
       color: var(--dc-color-text-secondary, #55555c);
     }
-    /* Tinted variants: the ground is a 15% tint of the fill, the label is the fill's
-       text form when the host supplies one (--dc-color-<variant>-text). The fill as
-       text on its own tint is what drops a label under 4.5:1 on light themes. */
+    /* Tinted variants: the ground is the fill's subtle token (a 15% tint by default), the label the
+       fill's text form. The fill as text on its own tint is what drops a label under 4.5:1. */
     :host([variant='accent']) span {
-      background: color-mix(in srgb, var(--dc-color-accent, #2563eb) 15%, transparent);
+      background: var(--dc-color-accent-subtle, color-mix(in srgb, var(--dc-color-accent, #2563eb) 15%, transparent));
       color: var(--dc-color-accent-text, var(--dc-color-accent, #2563eb));
     }
+    :host([variant='secondary']) span {
+      background: var(--dc-color-secondary-subtle, color-mix(in srgb, var(--dc-color-secondary, #475569) 15%, transparent));
+      color: var(--dc-color-secondary-text, var(--dc-color-secondary, #475569));
+    }
     :host([variant='success']) span {
-      background: color-mix(in srgb, var(--dc-color-success, #16a34a) 15%, transparent);
+      background: var(--dc-color-success-subtle, color-mix(in srgb, var(--dc-color-success, #16a34a) 15%, transparent));
       color: var(--dc-color-success-text, var(--dc-color-success, #16a34a));
     }
     :host([variant='warning']) span {
-      background: color-mix(in srgb, var(--dc-color-warning, #d97706) 15%, transparent);
+      background: var(--dc-color-warning-subtle, color-mix(in srgb, var(--dc-color-warning, #d97706) 15%, transparent));
       color: var(--dc-color-warning-text, var(--dc-color-warning, #d97706));
     }
     :host([variant='danger']) span {
-      background: color-mix(in srgb, var(--dc-color-danger, #dc2626) 15%, transparent);
+      background: var(--dc-color-danger-subtle, color-mix(in srgb, var(--dc-color-danger, #dc2626) 15%, transparent));
       color: var(--dc-color-danger-text, var(--dc-color-danger, #dc2626));
     }
   `

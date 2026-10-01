@@ -15,6 +15,7 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 - Role tokens (`--dc-page-*`, `--dc-section-*`, `--dc-card-*`, `--dc-field-*`, `--dc-metric-*`, `--dc-table-*`,
   `--dc-indicator-color`, `--dc-selection-bg`): components read these, and an app themes a role by overriding one
   token. Their defaults reproduce the previous look.
+- `dc-badge` `secondary` variant; tinted variants read `--dc-color-*-subtle`.
 
 ### Changed
 
