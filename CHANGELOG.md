@@ -7,6 +7,11 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+### Changed
+
+- `tokens.css` defines `--dc-dialog-max-width` (480px, the dialog's default), so the token check passes on
+  code that reads it; setting it on a `dc-dialog` still overrides it per dialog.
+
 ## [0.9.1] - 2026-10-01
 
 ### Added

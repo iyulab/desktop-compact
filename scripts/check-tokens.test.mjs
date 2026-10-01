@@ -98,3 +98,8 @@ test('exits 2 when a path cannot be read', () => {
     assert.equal(run(dir, '--defined', 'nowhere.css', '.').status, 2)
   })
 })
+
+test("the package's own components read only tokens its tokens.css defines", () => {
+  const r = run(fileURLToPath(new URL('..', import.meta.url)), 'src')
+  assert.equal(r.status, 0, r.stderr)
+})

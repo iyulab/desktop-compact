@@ -44,6 +44,9 @@
   --dc-radius-lg: 10px;
   --dc-radius-full: 9999px;
 
+  /* Component sizes -- override on the element or here */
+  --dc-dialog-max-width: 480px;
+
   /* State (theme-agnostic) */
   --dc-opacity-disabled: 0.5;
   --dc-focus-ring-width: 2px;
