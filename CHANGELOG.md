@@ -7,6 +7,8 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-10-01
+
 ### Added
 
 - `desktop-compact-check-tokens` command: fails when code reads a `--dc-*` design token that neither
