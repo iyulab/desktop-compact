@@ -7,6 +7,8 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+## [0.11.1] - 2026-10-02
+
 ### Fixed
 
 - `dc-select` shows a `value` set from outside after the selection was changed once — by a person picking an option, or by
