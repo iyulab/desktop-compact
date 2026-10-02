@@ -7,6 +7,12 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+### Fixed
+
+- `dc-select` shows a `value` set from outside after the selection was changed once — by a person picking an option, or by
+  setting the select's value. Before, it kept showing the earlier choice (or the first option) while `value` held the new one,
+  since an option's `selected` attribute stops deciding the selection once it has been changed.
+
 ## [0.11.0] - 2026-10-02
 
 ### Added

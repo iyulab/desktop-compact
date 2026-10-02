@@ -30,6 +30,26 @@ describe('dc-select', () => {
     expect(new FormData(form).get('letter')).to.equal('b')
   })
 
+  it('shows a value set from outside after a person picked one', async () => {
+    const el = await fixture<DcSelect>(html`<dc-select .options=${OPTIONS} placeholder="Pick"></dc-select>`)
+    const inner = el.shadowRoot!.querySelector('select')!
+    inner.value = 'b'
+    inner.dispatchEvent(new Event('change', { bubbles: true }))
+    await el.updateComplete
+
+    el.value = ''
+    await el.updateComplete
+    expect(inner.value).to.equal('')
+
+    el.value = 'b'
+    await el.updateComplete
+    expect(inner.value).to.equal('b')
+
+    el.value = 'a'
+    await el.updateComplete
+    expect(inner.value).to.equal('a')
+  })
+
   it('dispatches a bubbling, composed change event on the host when the value changes', async () => {
     const el = await fixture<DcSelect>(html`<dc-select .options=${OPTIONS}></dc-select>`)
     const seen: Event[] = []

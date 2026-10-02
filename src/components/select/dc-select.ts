@@ -91,6 +91,11 @@ export class DcSelect extends FormAssociatedMixin(LitElement) {
   }
 
   protected updated(changed: PropertyValues<this>): void {
+    // An option's `selected` attribute only picks it until the selection has been changed once (by a
+    // person, or by setting the select's value); after that the value has to be set on the select.
+    if ((changed.has('value') || changed.has('options')) && this._inner.value !== this.value) {
+      this._inner.value = this.value
+    }
     if (changed.has('value') || changed.has('required') || changed.has('options')) {
       this.internals.setFormValue(this.value)
       this._syncValidity()
