@@ -210,6 +210,10 @@ npm run build          # per-component ESM output, type declarations
 npm run storybook      # interactive component browser
 ```
 
+`tsc` is TypeScript 7 (`@typescript/native`), while `typescript` resolves to `@typescript/typescript6`:
+TypeScript 7 has no JavaScript compiler API yet, and the declaration build reads one. The alias goes
+once `vite-plugin-dts` runs on TypeScript 7 alone.
+
 ## License
 
 MIT
