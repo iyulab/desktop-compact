@@ -12,6 +12,9 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 - `--dc-control-bg`: the ground of `dc-input`, `dc-select` and `dc-textarea`. Unset, it is `--dc-color-bg`, as
   before. An app whose page ground is tinted — paper, not white — sets it (to `--dc-color-surface-raised`, say) so
   the controls on its cards do not read as disabled.
+- `tableStyles` pinned cells: a `th.pin` / `td.pin` stays at the start while a wide table scrolls across, on a solid
+  ground (`--dc-table-pin-bg`, default `--dc-color-surface-raised`); a run of pinned columns gives each its offset
+  in `--dc-table-pin-left`. A pinned header cell stays above the pinned body cells.
 
 ### Changed
 

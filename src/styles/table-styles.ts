@@ -32,6 +32,19 @@ export const tableStyles = css`
     border-bottom: 0;
     box-shadow: inset 0 -1px 0 var(--dc-table-rule, var(--dc-color-rule, var(--dc-color-border, #e2e2e4)));
   }
+  /* A pinned cell (.pin) stays at the start while a wide table scrolls across; a run of pinned columns sets
+     each one's offset in --dc-table-pin-left. It needs a solid ground for the cells passing under it. */
+  th.pin,
+  td.pin {
+    position: sticky;
+    left: var(--dc-table-pin-left, 0);
+    z-index: 1;
+    background: var(--dc-table-pin-bg, var(--dc-color-surface-raised, var(--dc-color-bg, #ffffff)));
+  }
+  thead th.pin {
+    z-index: 2;
+    background: var(--dc-table-header-bg, var(--dc-color-surface, #f7f7f8));
+  }
   tbody th {
     font-weight: var(--dc-font-weight-medium, 500);
   }

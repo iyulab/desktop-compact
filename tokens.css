@@ -129,6 +129,8 @@
  *   --dc-table-header-color          → --dc-color-text
  *   --dc-table-rule                  → --dc-color-rule
  *   --dc-table-total-rule            → --dc-color-text
+ *   --dc-table-pin-bg                → --dc-color-surface-raised  (a pinned cell's ground)
+ *   --dc-table-pin-left              → 0                          (a pinned cell's offset from the start)
  */
 @property --dc-color-rule { syntax: '*'; inherits: true; }
 @property --dc-color-accent-subtle { syntax: '*'; inherits: true; }
@@ -169,6 +171,8 @@
 @property --dc-table-header-color { syntax: '*'; inherits: true; }
 @property --dc-table-rule { syntax: '*'; inherits: true; }
 @property --dc-table-total-rule { syntax: '*'; inherits: true; }
+@property --dc-table-pin-bg { syntax: '*'; inherits: true; }
+@property --dc-table-pin-left { syntax: '*'; inherits: true; }
 
 /* Dark theme -- OS preference unless the consumer opts out via
    [data-theme="light"], or opts in explicitly via [data-theme="dark"]. */
