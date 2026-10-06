@@ -7,6 +7,8 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+## [0.12.0] - 2026-10-06
+
 ### Added
 
 - `--dc-control-bg`: the ground of `dc-input`, `dc-select` and `dc-textarea`. Unset, it is `--dc-color-bg`, as
