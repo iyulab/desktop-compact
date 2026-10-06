@@ -7,7 +7,17 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+### Added
+
+- `--dc-control-bg`: the ground of `dc-input`, `dc-select` and `dc-textarea`. Unset, it is `--dc-color-bg`, as
+  before. An app whose page ground is tinted — paper, not white — sets it (to `--dc-color-surface-raised`, say) so
+  the controls on its cards do not read as disabled.
+
 ### Changed
+
+- `tableStyles`: the header row is sticky — it stays in view while the rows scroll in whatever box scrolls the
+  table — and the rule under it is drawn as an inset shadow so it moves with the header (a collapsed border stays
+  behind with the rows). A table that scrolls with its page is unchanged until its box bounds its height.
 
 - Development: `tsc` (and `npm run typecheck`) is TypeScript 7, installed as `@typescript/native`; `typescript`
   resolves to `@typescript/typescript6`, whose compiler API the declaration build reads. The published files are

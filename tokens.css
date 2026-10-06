@@ -119,6 +119,7 @@
  *   --dc-field-hint-color            → --dc-color-text-secondary
  *   --dc-field-required-color        → --dc-color-accent-text
  *   --dc-field-gap                   → --dc-space-1
+ *   --dc-control-bg                  → --dc-color-bg              (input, select, textarea ground)
  *   --dc-metric-size                 → --dc-font-size-display
  *   --dc-metric-accent-1             → --dc-color-accent
  *   --dc-metric-accent-2             → --dc-color-secondary
@@ -158,6 +159,7 @@
 @property --dc-field-hint-color { syntax: '*'; inherits: true; }
 @property --dc-field-required-color { syntax: '*'; inherits: true; }
 @property --dc-field-gap { syntax: '*'; inherits: true; }
+@property --dc-control-bg { syntax: '*'; inherits: true; }
 @property --dc-metric-size { syntax: '*'; inherits: true; }
 @property --dc-metric-accent-1 { syntax: '*'; inherits: true; }
 @property --dc-metric-accent-2 { syntax: '*'; inherits: true; }

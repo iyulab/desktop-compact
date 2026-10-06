@@ -28,6 +28,14 @@ describe('tableStyles', () => {
     expect(getComputedStyle(el.shadowRoot!.querySelector('tfoot td')!).borderTopColor).to.equal('rgb(2, 2, 2)')
   })
 
+  it('keeps the header row in view while the rows scroll in a bounded box, its rule going with it', async () => {
+    const el = await fixture<TableHost>(html`<table-styles-host style="--dc-table-rule: rgb(3, 3, 3)"></table-styles-host>`)
+    const th = el.shadowRoot!.querySelector('thead th')!
+    expect(getComputedStyle(th).position).to.equal('sticky')
+    expect(getComputedStyle(th).top).to.equal('0px')
+    expect(getComputedStyle(th).boxShadow).to.contain('rgb(3, 3, 3)')
+  })
+
   it('bolds the total row', async () => {
     const el = await fixture<TableHost>(html`<table-styles-host></table-styles-host>`)
     expect(Number(getComputedStyle(el.shadowRoot!.querySelector('tfoot td')!).fontWeight)).to.be.at.least(700)

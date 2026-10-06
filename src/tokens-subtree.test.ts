@@ -1,6 +1,9 @@
 import { fixtureSync, html, expect } from '@open-wc/testing'
 import './components/card/dc-card.js'
 import './components/badge/dc-badge.js'
+import './components/input/dc-input.js'
+import './components/select/dc-select.js'
+import './components/textarea/dc-textarea.js'
 import './components/data-table/dc-data-table.js'
 import type { DcDataTable } from './components/data-table/dc-data-table.js'
 
@@ -56,6 +59,22 @@ describe('tokens.css on a themed subtree', () => {
     expect(getComputedStyle(th).backgroundColor).to.equal('rgb(1, 2, 3)')
     // The header's rule is the table rule (the last body row draws none).
     expect(getComputedStyle(th).borderBottomColor).to.equal('rgb(4, 5, 6)')
+  })
+
+  it('draws text controls on the page ground, or on the control ground a subtree sets', async () => {
+    const root = fixtureSync<HTMLDivElement>(html`
+      <div style="--dc-color-bg: rgb(7, 8, 9)">
+        <dc-input></dc-input><dc-select></dc-select><dc-textarea></dc-textarea>
+        <div style="--dc-control-bg: rgb(10, 11, 12)"><dc-input></dc-input><dc-select></dc-select><dc-textarea></dc-textarea></div>
+      </div>
+    `)
+    const grounds = await Promise.all(
+      [...root.querySelectorAll<HTMLElement & { updateComplete: Promise<boolean> }>('dc-input, dc-select, dc-textarea')].map(async (el) => {
+        await el.updateComplete
+        return getComputedStyle(el.shadowRoot!.querySelector('input, select, textarea')!).backgroundColor
+      }),
+    )
+    expect(grounds).to.deep.equal([...Array(3).fill('rgb(7, 8, 9)'), ...Array(3).fill('rgb(10, 11, 12)')])
   })
 
   it('lets a subtree accent reach a badge tint', async () => {

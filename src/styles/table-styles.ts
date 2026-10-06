@@ -19,11 +19,18 @@ export const tableStyles = css`
     border-bottom: 1px solid var(--dc-table-rule, var(--dc-color-rule, var(--dc-color-border, #e2e2e4)));
     white-space: nowrap;
   }
+  /* The header row stays in view while the rows scroll under it, in whatever box scrolls the table. A
+     collapsed border stays behind with the rows, so the rule under the header is drawn as a shadow it carries. */
   thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
     font-size: var(--dc-font-size-sm, 12px);
     font-weight: var(--dc-font-weight-semibold, 600);
     color: var(--dc-table-header-color, var(--dc-color-text, #1a1a1e));
     background: var(--dc-table-header-bg, var(--dc-color-surface, #f7f7f8));
+    border-bottom: 0;
+    box-shadow: inset 0 -1px 0 var(--dc-table-rule, var(--dc-color-rule, var(--dc-color-border, #e2e2e4)));
   }
   tbody th {
     font-weight: var(--dc-font-weight-medium, 500);

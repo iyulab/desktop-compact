@@ -42,7 +42,7 @@ export class DcSelect extends FormAssociatedMixin(LitElement) {
       padding: var(--dc-space-2, 8px) var(--dc-space-3, 12px);
       border: 1px solid var(--dc-color-border, #e2e2e4);
       border-radius: var(--dc-radius-sm, 4px);
-      background: var(--dc-color-bg, #ffffff);
+      background: var(--dc-control-bg, var(--dc-color-bg, #ffffff));
       color: var(--dc-color-text, #1a1a1e);
       font-family: var(--dc-font-family, system-ui, sans-serif);
       font-size: var(--dc-font-size-md, 13px);
