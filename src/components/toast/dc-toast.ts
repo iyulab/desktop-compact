@@ -26,6 +26,9 @@ const VARIANT_ROLE: Record<ToastVariant, 'status' | 'alert'> = {
  * Single-toast display primitive — renders one notification given its props. Stacking, queueing,
  * positioning, and auto-dismiss timing are consumer responsibilities; this component holds no
  * store and does not remove itself from the DOM.
+ *
+ * @slot icon - Replaces the variant's glyph with the consumer's own mark. The icon is decorative and
+ *   hidden from assistive technology: the live-region role and the message carry the meaning.
  */
 @customElement('dc-toast')
 export class DcToast extends LitElement {
@@ -85,7 +88,7 @@ export class DcToast extends LitElement {
   render() {
     return html`
       <div part="root" role=${VARIANT_ROLE[this.variant]}>
-        <span part="icon">${VARIANT_ICON[this.variant]}</span>
+        <span part="icon" aria-hidden="true"><slot name="icon">${VARIANT_ICON[this.variant]}</slot></span>
         <span part="message">${this.message}</span>
         ${this.actionLabel
           ? html`<dc-button part="action" variant="ghost" @click=${this._handleAction}

@@ -11,6 +11,16 @@ describe('dc-toast', () => {
     expect(el.dismissLabel).to.equal('')
   })
 
+  it('shows the variant glyph unless the consumer slots its own icon, hidden from assistive technology', async () => {
+    const plain = await fixture<DcToast>(html`<dc-toast variant="success"></dc-toast>`)
+    const icon = plain.shadowRoot!.querySelector('[part="icon"]')!
+    expect(icon.getAttribute('aria-hidden')).to.equal('true')
+    expect(icon.textContent?.trim()).to.equal('✓')
+    const own = await fixture<DcToast>(html`<dc-toast><span slot="icon" id="mark">*</span></dc-toast>`)
+    const slot = own.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="icon"]')!
+    expect(slot.assignedElements().map((e) => e.id)).to.deep.equal(['mark'])
+  })
+
   it('reflects the variant attribute', async () => {
     const el = await fixture<DcToast>(html`<dc-toast variant="error"></dc-toast>`)
     expect(el.getAttribute('variant')).to.equal('error')

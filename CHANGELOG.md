@@ -7,6 +7,10 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+### Added
+
+- `dc-toast`: an `icon` slot replaces the variant's glyph with the consumer's own mark. The icon is now hidden from assistive technology — it is decorative; the live-region role and the message carry the meaning.
+
 ## [0.12.0] - 2026-10-06
 
 ### Added
