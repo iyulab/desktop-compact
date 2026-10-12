@@ -7,6 +7,25 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+### Added
+
+- `--dc-control-height` (34px) and `--dc-control-height-sm` (26px): one height for the one-line controls —
+  `dc-input`, `dc-select`, `dc-button` and `dc-segmented-control`, each at its size — so a row of them lines up.
+  Before, a select stood 2px taller than a button beside it and a segmented control several pixels shorter.
+- `--dc-control-border`: the outline of `dc-input`, `dc-select`, `dc-textarea` and `dc-segmented-control`. Unset,
+  it is `--dc-color-border`, as before. A dark theme whose border colour is faint on the control ground sets it so
+  the controls keep a visible edge (non-text contrast, WCAG 1.4.11) without darkening every card's border.
+
+### Changed
+
+- `dc-segmented-control` takes the font size of a button of its size (13px, `sm` 12px) as well as its height.
+- `dc-field` adds no space under its control while it has no hint or error, so its control's bottom edge is the
+  field's: a button beside a field in a row aligned to the end now lines up with the control, not 4px below it.
+- `dc-select` shows its placeholder in the muted text colour while no value is chosen, so a required select with
+  an empty value no longer reads as if its placeholder were the chosen value.
+- `dc-input type="search"` draws its clear button in the secondary text colour (the text colour on hover) instead
+  of the system's blue.
+
 ## [0.12.1] - 2026-10-08
 
 ### Added

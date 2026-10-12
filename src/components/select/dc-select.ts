@@ -39,13 +39,21 @@ export class DcSelect extends FormAssociatedMixin(LitElement) {
     select {
       box-sizing: border-box;
       width: 100%;
+      height: var(--dc-control-height, 34px);
       padding: var(--dc-space-2, 8px) var(--dc-space-3, 12px);
-      border: 1px solid var(--dc-color-border, #e2e2e4);
+      border: 1px solid var(--dc-control-border, var(--dc-color-border, #e2e2e4));
       border-radius: var(--dc-radius-sm, 4px);
       background: var(--dc-control-bg, var(--dc-color-bg, #ffffff));
       color: var(--dc-color-text, #1a1a1e);
       font-family: var(--dc-font-family, system-ui, sans-serif);
       font-size: var(--dc-font-size-md, 13px);
+    }
+    /* The placeholder stands where a value would: it reads as a placeholder does, the choices as text. */
+    select.placeholder {
+      color: var(--dc-color-text-muted, #686870);
+    }
+    select.placeholder option {
+      color: var(--dc-color-text, #1a1a1e);
     }
     select:disabled {
       opacity: var(--dc-opacity-disabled, 0.5);
@@ -59,6 +67,7 @@ export class DcSelect extends FormAssociatedMixin(LitElement) {
       border-color: var(--dc-color-danger, #dc2626);
     }
     :host([size='sm']) select {
+      height: var(--dc-control-height-sm, 26px);
       padding: var(--dc-space-1, 4px) var(--dc-space-2, 8px);
       font-size: var(--dc-font-size-sm, 12px);
     }
@@ -147,6 +156,7 @@ export class DcSelect extends FormAssociatedMixin(LitElement) {
         aria-description=${ifDefined(this.fieldAria?.description || undefined)}
         aria-invalid=${ifDefined(this.fieldAria?.invalid ? 'true' : undefined)}
         aria-required=${ifDefined(this.fieldAria?.required && !this.required ? 'true' : undefined)}
+        class=${showPlaceholder && this.value === '' ? 'placeholder' : ''}
         @change=${this._handleChange}
         part="select"
       >

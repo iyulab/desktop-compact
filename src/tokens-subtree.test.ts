@@ -77,6 +77,22 @@ describe('tokens.css on a themed subtree', () => {
     expect(grounds).to.deep.equal([...Array(3).fill('rgb(7, 8, 9)'), ...Array(3).fill('rgb(10, 11, 12)')])
   })
 
+  it('outlines the controls with the border colour, or with the control border a subtree sets', async () => {
+    const root = fixtureSync<HTMLDivElement>(html`
+      <div style="--dc-color-border: rgb(7, 8, 9)">
+        <dc-input></dc-input><dc-select></dc-select><dc-textarea></dc-textarea>
+        <div style="--dc-control-border: rgb(10, 11, 12)"><dc-input></dc-input><dc-select></dc-select><dc-textarea></dc-textarea></div>
+      </div>
+    `)
+    const borders = await Promise.all(
+      [...root.querySelectorAll<HTMLElement & { updateComplete: Promise<boolean> }>('dc-input, dc-select, dc-textarea')].map(async (el) => {
+        await el.updateComplete
+        return getComputedStyle(el.shadowRoot!.querySelector('input, select, textarea')!).borderTopColor
+      }),
+    )
+    expect(borders).to.deep.equal([...Array(3).fill('rgb(7, 8, 9)'), ...Array(3).fill('rgb(10, 11, 12)')])
+  })
+
   it('lets a subtree accent reach a badge tint', async () => {
     const root = fixtureSync<HTMLDivElement>(html`
       <div style="--dc-color-accent: rgb(0, 0, 200)"><dc-badge variant="accent">New</dc-badge></div>

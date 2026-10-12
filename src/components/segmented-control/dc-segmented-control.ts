@@ -30,7 +30,9 @@ export class DcSegmentedControl extends FormAssociatedMixin(LitElement) {
     }
     .group {
       display: inline-flex;
-      border: 1px solid var(--dc-color-border, #e2e2e4);
+      box-sizing: border-box;
+      height: var(--dc-control-height, 34px);
+      border: 1px solid var(--dc-control-border, var(--dc-color-border, #e2e2e4));
       border-radius: var(--dc-radius-sm, 4px);
       overflow: hidden;
     }
@@ -42,8 +44,8 @@ export class DcSegmentedControl extends FormAssociatedMixin(LitElement) {
       background: var(--dc-color-surface, #ffffff);
       color: var(--dc-color-text-secondary, #55555c);
       font: inherit;
-      font-size: var(--dc-font-size-sm, 12px);
-      padding: var(--dc-space-1, 4px) var(--dc-space-3, 12px);
+      font-size: var(--dc-font-size-md, 13px);
+      padding: 0 var(--dc-space-3, 12px);
       cursor: pointer;
       white-space: nowrap;
     }
@@ -67,9 +69,12 @@ export class DcSegmentedControl extends FormAssociatedMixin(LitElement) {
       outline: var(--dc-focus-ring-width, 2px) solid var(--dc-color-accent, #2563eb);
       outline-offset: -2px;
     }
+    :host([size='sm']) .group {
+      height: var(--dc-control-height-sm, 26px);
+    }
     :host([size='sm']) button {
-      padding: 2px var(--dc-space-2, 8px);
-      font-size: var(--dc-font-size-xs, 11px);
+      padding: 0 var(--dc-space-2, 8px);
+      font-size: var(--dc-font-size-sm, 12px);
     }
   `
 

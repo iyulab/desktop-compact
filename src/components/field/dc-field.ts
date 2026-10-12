@@ -18,7 +18,6 @@ export class DcField extends LitElement {
   static styles = css`
     :host {
       display: grid;
-      gap: var(--dc-field-gap, var(--dc-space-1, 4px));
       align-content: start;
       min-width: 0;
       font-family: var(--dc-font-family, system-ui, sans-serif);
@@ -30,6 +29,7 @@ export class DcField extends LitElement {
       font-size: var(--dc-field-label-size, var(--dc-font-size-sm, 12px));
       font-weight: var(--dc-field-label-weight, var(--dc-font-weight-medium, 500));
       color: var(--dc-field-label-color, var(--dc-color-text-secondary, #55555c));
+      margin-bottom: var(--dc-field-gap, var(--dc-space-1, 4px));
       cursor: default;
       user-select: none;
     }
@@ -39,7 +39,7 @@ export class DcField extends LitElement {
     }
     .hint,
     .error {
-      margin: 0;
+      margin: var(--dc-field-gap, var(--dc-space-1, 4px)) 0 0;
       font-size: var(--dc-font-size-sm, 12px);
     }
     .hint {

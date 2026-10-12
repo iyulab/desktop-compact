@@ -25,7 +25,9 @@ export class DcButton extends FormAssociatedMixin(LitElement) {
       align-items: center;
       justify-content: center;
       gap: var(--dc-space-2, 8px);
-      padding: var(--dc-space-2, 8px) var(--dc-space-3, 12px);
+      box-sizing: border-box;
+      height: var(--dc-control-height, 34px);
+      padding: 0 var(--dc-space-3, 12px);
       border-radius: var(--dc-radius-sm, 4px);
       border: 1px solid transparent;
       font-family: var(--dc-font-family, system-ui, sans-serif);
@@ -77,7 +79,8 @@ export class DcButton extends FormAssociatedMixin(LitElement) {
       border-color: var(--dc-color-accent, #2563eb);
     }
     :host([size='sm']) button {
-      padding: var(--dc-space-1, 4px) var(--dc-space-2, 8px);
+      height: var(--dc-control-height-sm, 26px);
+      padding: 0 var(--dc-space-2, 8px);
       font-size: var(--dc-font-size-sm, 12px);
     }
   `

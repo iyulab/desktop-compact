@@ -137,4 +137,13 @@ describe('dc-field', () => {
     const el = await fixture<DcField>(html`<dc-field label="Date" hint="Calendar date" required><input aria-label="Date" /></dc-field>`)
     await expect(el).to.be.accessible()
   })
+
+  it('ends at its control when it has no hint or error, so a button beside it lines up with the control', async () => {
+    const el = await fixture<DcField>(html`<dc-field label="Kind"><dc-select aria-label="Kind"></dc-select></dc-field>`)
+    const control = el.querySelector('dc-select')!
+    expect(el.getBoundingClientRect().bottom).to.equal(control.getBoundingClientRect().bottom)
+    el.hint = 'A hint'
+    await el.updateComplete
+    expect(el.getBoundingClientRect().bottom).to.be.greaterThan(control.getBoundingClientRect().bottom)
+  })
 })

@@ -135,4 +135,14 @@ describe('dc-select option groups', () => {
     expect(el.shadowRoot!.querySelectorAll('optgroup').length).to.equal(0)
     expect(el.shadowRoot!.querySelectorAll('select > option').length).to.equal(3)
   })
+
+  it('shows its placeholder as a placeholder, not as a chosen value, until a value is chosen', async () => {
+    const el = await fixture<DcSelect>(html`<dc-select placeholder="Kind" .options=${OPTIONS}></dc-select>`)
+    const select = el.shadowRoot!.querySelector('select')!
+    expect(select.classList.contains('placeholder')).to.equal(true)
+    expect(getComputedStyle(select).color).to.not.equal(getComputedStyle(select.querySelector('option:not([hidden])')!).color)
+    el.value = OPTIONS[0].value
+    await el.updateComplete
+    expect(select.classList.contains('placeholder')).to.equal(false)
+  })
 })

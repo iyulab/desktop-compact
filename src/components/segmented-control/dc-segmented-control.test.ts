@@ -1,7 +1,9 @@
-import { fixture, html, expect } from '@open-wc/testing'
+import { fixture, fixtureSync, html, expect } from '@open-wc/testing'
 import './dc-segmented-control.js'
 import type { DcSegmentedControl } from './dc-segmented-control.js'
 import { formFixture } from '../../../test/form-fixture.js'
+import '../select/dc-select.js'
+import '../button/dc-button.js'
 
 const OPTIONS = [
   { value: 'day', label: 'Day' },
@@ -131,5 +133,20 @@ describe('dc-segmented-control', () => {
       html`<dc-segmented-control .options=${OPTIONS} value="week" aria-label="Period"></dc-segmented-control>`,
     )
     await expect(el).to.be.accessible()
+  })
+
+  it('stands as tall as a select and a button of its size, so a toolbar row lines up', async () => {
+    for (const size of ['md', 'sm']) {
+      const row = fixtureSync<HTMLDivElement>(html`<div style="display: flex; align-items: start">
+        <dc-segmented-control size=${size} .options=${OPTIONS} value="day"></dc-segmented-control>
+        <dc-select size=${size} .options=${OPTIONS}></dc-select>
+        <dc-button size=${size}>Go</dc-button>
+      </div>`)
+      await Promise.all([...row.children].map((c) => (c as HTMLElement & { updateComplete: Promise<boolean> }).updateComplete))
+      const height = (sel: string, inner: string) => (row.querySelector(sel)!.shadowRoot!.querySelector(inner) as HTMLElement).getBoundingClientRect().height
+      const group = height('dc-segmented-control', '.group')
+      expect(Math.abs(group - height("dc-select", "select")), `${size}: segmented ${group}, select ${height("dc-select", "select")}, button ${height("dc-button", "button")}`).to.be.at.most(1)
+      expect(Math.abs(group - height('dc-button', 'button')), `${size}: segmented ${group}, button`).to.be.at.most(1)
+    }
   })
 })
