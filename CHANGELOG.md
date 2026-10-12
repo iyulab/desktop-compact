@@ -7,6 +7,8 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+## [0.13.0] - 2026-10-13
+
 ### Added
 
 - `--dc-control-height` (34px) and `--dc-control-height-sm` (26px): one height for the one-line controls —
