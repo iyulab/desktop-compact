@@ -7,6 +7,8 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+## [0.13.1] - 2026-10-13
+
 ### Fixed
 
 - `dc-input` takes `size="sm"` (26px, `--dc-control-height-sm`), as `dc-select`, `dc-button` and
