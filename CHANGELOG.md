@@ -7,6 +7,12 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+### Fixed
+
+- `dc-input` takes `size="sm"` (26px, `--dc-control-height-sm`), as `dc-select`, `dc-button` and
+  `dc-segmented-control` do. It had no size, so in a dense row of `sm` controls an input stood 8px taller than the
+  select beside it. `InputSize` is exported with it.
+
 ## [0.13.0] - 2026-10-13
 
 ### Added

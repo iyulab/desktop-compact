@@ -2,6 +2,7 @@ import { fixture, fixtureSync, html, expect } from '@open-wc/testing'
 import './dc-segmented-control.js'
 import type { DcSegmentedControl } from './dc-segmented-control.js'
 import { formFixture } from '../../../test/form-fixture.js'
+import '../input/dc-input.js'
 import '../select/dc-select.js'
 import '../button/dc-button.js'
 
@@ -135,10 +136,11 @@ describe('dc-segmented-control', () => {
     await expect(el).to.be.accessible()
   })
 
-  it('stands as tall as a select and a button of its size, so a toolbar row lines up', async () => {
+  it('stands as tall as an input, a select and a button of its size, so a toolbar row lines up', async () => {
     for (const size of ['md', 'sm']) {
       const row = fixtureSync<HTMLDivElement>(html`<div style="display: flex; align-items: start">
         <dc-segmented-control size=${size} .options=${OPTIONS} value="day"></dc-segmented-control>
+        <dc-input size=${size} type="search"></dc-input>
         <dc-select size=${size} .options=${OPTIONS}></dc-select>
         <dc-button size=${size}>Go</dc-button>
       </div>`)
@@ -147,6 +149,7 @@ describe('dc-segmented-control', () => {
       const group = height('dc-segmented-control', '.group')
       expect(Math.abs(group - height("dc-select", "select")), `${size}: segmented ${group}, select ${height("dc-select", "select")}, button ${height("dc-button", "button")}`).to.be.at.most(1)
       expect(Math.abs(group - height('dc-button', 'button')), `${size}: segmented ${group}, button`).to.be.at.most(1)
+      expect(Math.abs(group - height('dc-input', 'input')), `${size}: segmented ${group}, input ${height('dc-input', 'input')}`).to.be.at.most(1)
     }
   })
 })

@@ -5,6 +5,7 @@ import { LitElement, type PropertyValues } from 'lit'
 import { FormAssociatedMixin } from '../../mixins/form-associated.js'
 
 export type InputType = 'text' | 'email' | 'password' | 'number' | 'search' | 'date' | 'time' | 'datetime-local'
+export type InputSize = 'sm' | 'md'
 
 @customElement('dc-input')
 export class DcInput extends FormAssociatedMixin(LitElement) {
@@ -51,6 +52,11 @@ export class DcInput extends FormAssociatedMixin(LitElement) {
     :host(:state(invalid)) input {
       border-color: var(--dc-color-danger, #dc2626);
     }
+    :host([size='sm']) input {
+      height: var(--dc-control-height-sm, 26px);
+      padding: var(--dc-space-1, 4px) var(--dc-space-2, 8px);
+      font-size: var(--dc-font-size-sm, 12px);
+    }
   `
 
   @property({ reflect: true })
@@ -61,6 +67,10 @@ export class DcInput extends FormAssociatedMixin(LitElement) {
 
   @property({ reflect: true })
   type: InputType = 'text'
+
+  /** `sm` for a dense row — a toolbar or a filter bar — at the height of a `sm` select or button. */
+  @property({ reflect: true })
+  size: InputSize = 'md'
 
   @property()
   placeholder = ''
