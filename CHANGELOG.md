@@ -7,6 +7,15 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+### Added
+
+- `u-bridge.css` (`@iyulab/desktop-compact/u-bridge.css`): desktop-compact as the house theme of the `--u-` components
+  (`@iyulab/components` and the widgets built on it, such as chat-components). Loaded after the u tokens and
+  `tokens.css`, it points the u role tokens — grounds, text, lines, the accent and status fills with their tints,
+  radius, elevation, spacing, type — and the neutral scale some u components read directly at the `--dc-` tokens,
+  in the `iyu.house` cascade layer: over the u defaults, under the app's own CSS. Light and dark follow
+  desktop-compact; the u sheets' own dark palette is not needed.
+
 ## [0.13.1] - 2026-10-13
 
 ### Fixed

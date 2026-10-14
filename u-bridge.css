@@ -1,0 +1,150 @@
+/*
+ * desktop-compact as the house theme of the `--u-` components.
+ *
+ *   import '@iyulab/components/styles/tokens.css';   // the u tokens' own defaults
+ *   import '@iyulab/desktop-compact/tokens.css';
+ *   import '@iyulab/desktop-compact/u-bridge.css';
+ *
+ * Widgets built on `@iyulab/components` (chat-components, data-components, …) paint with `--u-`
+ * tokens. In an app drawn with desktop-compact they would bring another palette, other fonts and
+ * other corners. This sheet points those tokens at the `--dc-` ones, in the `iyu.house` cascade layer
+ * the u tokens leave for a house theme: it wins over their defaults (`iyu.base`), and the app's own
+ * unlayered CSS still wins over it.
+ *
+ * Light and dark follow desktop-compact: every value here reads a `--dc-` token, and those switch with
+ * the system (or `data-theme`). The u sheets' own dark palette — scoped to `:root[theme="dark"]` — is
+ * not needed. The neutral scale is pointed too: some u components paint with it directly.
+ *
+ * Read on `:root`: a `--dc-` token set on a subtree changes these only where it is set on `:root`.
+ */
+@layer iyu.base, iyu.house;
+
+@layer iyu.house {
+  :root {
+    /* Type */
+    --u-font-base: var(--dc-font-family);
+    --u-font-modern: var(--dc-font-family);
+    --u-font-mono: var(--dc-font-mono);
+    --u-text-body-size: var(--dc-font-size-md);
+    --u-text-body-leading: var(--dc-line-height-normal);
+    --u-text-caption-size: var(--dc-font-size-xs);
+    --u-text-label-size: var(--dc-font-size-sm);
+    --u-text-subtitle-size: var(--dc-font-size-lg);
+    --u-text-title-size: var(--dc-font-size-xl);
+    --u-text-display-size: var(--dc-font-size-display);
+
+    /* The neutral scale, light to dark as the page is — read straight by some components. */
+    --u-neutral-0: var(--dc-color-bg);
+    --u-neutral-50: var(--dc-color-surface);
+    --u-neutral-100: var(--dc-color-surface);
+    --u-neutral-200: var(--dc-color-surface-hover);
+    --u-neutral-300: var(--dc-color-border);
+    --u-neutral-400: color-mix(in srgb, var(--dc-color-border) 50%, var(--dc-color-text-muted));
+    --u-neutral-500: var(--dc-color-text-muted);
+    --u-neutral-600: var(--dc-color-text-muted);
+    --u-neutral-700: var(--dc-color-text-secondary);
+    --u-neutral-800: var(--dc-color-text-secondary);
+    --u-neutral-900: var(--dc-color-text);
+    --u-neutral-1000: var(--dc-color-text);
+
+    /* Grounds */
+    --u-bg-color: var(--dc-color-bg);
+    --u-bg-color-hover: var(--dc-color-surface-hover);
+    --u-bg-color-active: var(--dc-color-surface-hover);
+    --u-bg-color-disabled: var(--dc-color-surface);
+    --u-bg-color-raised: var(--dc-color-surface-raised);
+    --u-bg-color-raised-hover: var(--dc-color-surface-hover);
+    --u-bg-color-inverse: var(--dc-color-text);
+    --u-canvas-bg-color: var(--dc-color-surface);
+    --u-panel-bg-color: var(--dc-color-surface);
+    --u-input-bg-color: var(--dc-color-bg);
+    --u-overlay-bg-color: var(--dc-color-backdrop);
+    --u-tooltip-bg-color: var(--dc-color-text);
+    --u-tooltip-txt-color: var(--dc-color-bg);
+
+    /* Text and icons */
+    --u-txt-color: var(--dc-color-text);
+    --u-txt-color-strong: var(--dc-color-text);
+    --u-txt-color-hover: var(--dc-color-text);
+    --u-txt-color-active: var(--dc-color-text);
+    --u-txt-color-weak: var(--dc-color-text-secondary);
+    --u-txt-color-weaker: var(--dc-color-text-muted);
+    --u-txt-color-disabled: var(--dc-color-text-muted);
+    --u-txt-color-inverse: var(--dc-color-bg);
+    --u-link-txt-color: var(--dc-color-accent-text);
+    --u-icon-color: var(--dc-color-text-secondary);
+    --u-icon-color-hover: var(--dc-color-text);
+    --u-icon-color-active: var(--dc-color-text);
+    --u-icon-color-disabled: var(--dc-color-text-muted);
+    --u-icon-color-inverse: var(--dc-color-bg);
+
+    /* Lines */
+    --u-border-color: var(--dc-color-border);
+    --u-border-color-weak: var(--dc-color-border);
+    --u-border-color-hover: var(--dc-color-text-muted);
+    --u-border-color-strong: var(--dc-color-text-muted);
+    --u-input-border-color: var(--dc-color-border);
+    --u-input-border-color-hover: var(--dc-color-text-muted);
+    --u-input-border-color-focus: var(--dc-color-accent);
+    --u-input-border-color-invalid: var(--dc-color-danger);
+    --u-focus-ring-color: var(--dc-color-accent);
+
+    /* Roles: the fill, its text form, and tints of it on the page ground */
+    --u-primary-color: var(--dc-color-accent);
+    --u-primary-color-strong: var(--dc-color-accent-text);
+    --u-primary-txt-color: var(--dc-color-accent-text);
+    --u-primary-bg-color: color-mix(in srgb, var(--dc-color-accent) 12%, var(--dc-color-bg));
+    --u-primary-color-weak: color-mix(in srgb, var(--dc-color-accent) 40%, var(--dc-color-bg));
+    --u-primary-color-weaker: color-mix(in srgb, var(--dc-color-accent) 20%, var(--dc-color-bg));
+    --u-primary-color-weakest: color-mix(in srgb, var(--dc-color-accent) 8%, var(--dc-color-bg));
+    --u-info-color: var(--dc-color-accent);
+    --u-info-color-strong: var(--dc-color-accent-text);
+    --u-info-txt-color: var(--dc-color-accent-text);
+    --u-info-bg-color: color-mix(in srgb, var(--dc-color-accent) 12%, var(--dc-color-bg));
+    --u-info-color-weak: color-mix(in srgb, var(--dc-color-accent) 40%, var(--dc-color-bg));
+    --u-info-color-weaker: color-mix(in srgb, var(--dc-color-accent) 20%, var(--dc-color-bg));
+    --u-info-color-weakest: color-mix(in srgb, var(--dc-color-accent) 8%, var(--dc-color-bg));
+    --u-success-color: var(--dc-color-success);
+    --u-success-color-strong: var(--dc-color-success-text);
+    --u-success-txt-color: var(--dc-color-success-text);
+    --u-success-bg-color: color-mix(in srgb, var(--dc-color-success) 12%, var(--dc-color-bg));
+    --u-success-color-weak: color-mix(in srgb, var(--dc-color-success) 40%, var(--dc-color-bg));
+    --u-success-color-weaker: color-mix(in srgb, var(--dc-color-success) 20%, var(--dc-color-bg));
+    --u-success-color-weakest: color-mix(in srgb, var(--dc-color-success) 8%, var(--dc-color-bg));
+    --u-warning-color: var(--dc-color-warning);
+    --u-warning-color-strong: var(--dc-color-warning-text);
+    --u-warning-txt-color: var(--dc-color-warning-text);
+    --u-warning-bg-color: color-mix(in srgb, var(--dc-color-warning) 12%, var(--dc-color-bg));
+    --u-warning-color-weak: color-mix(in srgb, var(--dc-color-warning) 40%, var(--dc-color-bg));
+    --u-warning-color-weaker: color-mix(in srgb, var(--dc-color-warning) 20%, var(--dc-color-bg));
+    --u-warning-color-weakest: color-mix(in srgb, var(--dc-color-warning) 8%, var(--dc-color-bg));
+    --u-danger-color: var(--dc-color-danger);
+    --u-danger-color-strong: var(--dc-color-danger-text);
+    --u-danger-txt-color: var(--dc-color-danger-text);
+    --u-danger-bg-color: color-mix(in srgb, var(--dc-color-danger) 12%, var(--dc-color-bg));
+    --u-danger-color-weak: color-mix(in srgb, var(--dc-color-danger) 40%, var(--dc-color-bg));
+    --u-danger-color-weaker: color-mix(in srgb, var(--dc-color-danger) 20%, var(--dc-color-bg));
+    --u-danger-color-weakest: color-mix(in srgb, var(--dc-color-danger) 8%, var(--dc-color-bg));
+    --u-selection-color: color-mix(in srgb, var(--dc-color-accent) 25%, transparent);
+
+    /* Shape and depth */
+    --u-radius-sm: var(--dc-radius-sm);
+    --u-radius-md: var(--dc-radius-md);
+    --u-radius-lg: var(--dc-radius-lg);
+    --u-radius-xl: var(--dc-radius-lg);
+    --u-radius-pill: var(--dc-radius-full);
+    --u-field-radius: var(--dc-radius-md);
+    --u-shadow-sm: var(--dc-elevation-1);
+    --u-shadow-md: var(--dc-elevation-2);
+    --u-shadow-lg: var(--dc-elevation-3);
+    --u-shadow-xl: var(--dc-elevation-3);
+
+    /* Space: desktop-compact's 4px steps */
+    --u-space-2xs: 2px;
+    --u-space-xs: var(--dc-space-1);
+    --u-space-sm: var(--dc-space-2);
+    --u-space-md: var(--dc-space-3);
+    --u-space-lg: var(--dc-space-4);
+    --u-space-xl: var(--dc-space-6);
+  }
+}

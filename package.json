@@ -15,7 +15,8 @@
   "files": [
     "bin",
     "dist",
-    "tokens.css"
+    "tokens.css",
+    "u-bridge.css"
   ],
   "bin": {
     "desktop-compact-check-tokens": "bin/check-tokens.mjs"
@@ -149,7 +150,8 @@
       "import": "./dist/table-styles.js",
       "default": "./dist/table-styles.js"
     },
-    "./tokens.css": "./tokens.css"
+    "./tokens.css": "./tokens.css",
+    "./u-bridge.css": "./u-bridge.css"
   },
   "scripts": {
     "build": "vite build",
