@@ -7,6 +7,8 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+## [0.14.0] - 2026-10-14
+
 ### Added
 
 - `u-bridge.css` (`@iyulab/desktop-compact/u-bridge.css`): desktop-compact as the house theme of the `--u-` components
