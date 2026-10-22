@@ -7,6 +7,8 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+## [0.15.0] - 2026-10-23
+
 ### Added
 
 - `isModalOpen()` — whether a modal is open now: a `dc-dialog` (and so a `dc-confirm-dialog`), or anything that says
