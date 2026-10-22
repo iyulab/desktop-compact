@@ -150,6 +150,11 @@
       "import": "./dist/table-styles.js",
       "default": "./dist/table-styles.js"
     },
+    "./modal": {
+      "types": "./dist/lib/modal.d.ts",
+      "import": "./dist/modal.js",
+      "default": "./dist/modal.js"
+    },
     "./tokens.css": "./tokens.css",
     "./u-bridge.css": "./u-bridge.css"
   },

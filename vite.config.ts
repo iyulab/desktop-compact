@@ -13,6 +13,8 @@ function discoverComponentEntries(): Record<string, string> {
     entries[dir] = `src/components/${dir}/dc-${dir}.ts`
   }
   entries['table-styles'] = 'src/styles/table-styles.ts'
+  // The modal registry on its own, so a consumer asking isModalOpen() takes no component with it.
+  entries['modal'] = 'src/lib/modal.ts'
   return entries
 }
 
