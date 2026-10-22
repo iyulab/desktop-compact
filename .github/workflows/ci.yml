@@ -15,7 +15,6 @@ jobs:
           node-version: 22
       - run: npm ci
       - run: npm run guard:test
-      - run: npm run guard
       - run: npm run typecheck
       - run: npm run build
       - run: npm test

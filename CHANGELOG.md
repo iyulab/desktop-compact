@@ -7,6 +7,12 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+### Removed
+
+- The `guard` script and its token list (development only — not part of the package). A list of
+  names to keep out of a public repository publishes them once it is committed there; a consumer
+  that wants that check runs it from its own repository against this one.
+
 ## [0.14.0] - 2026-10-14
 
 ### Added

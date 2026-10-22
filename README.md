@@ -204,7 +204,6 @@ also painted pressed — the accent fill `dc-segmented-control` uses for its che
 npm install
 npm test              # @web/test-runner, real Chromium
 npm run typecheck
-npm run guard          # forge-ignorance scan (this package must stay domain-neutral)
 npm run guard:test     # node tests for the scripts and the check-tokens command
 npm run build          # per-component ESM output, type declarations
 npm run storybook      # interactive component browser
