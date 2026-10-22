@@ -186,6 +186,10 @@ Run it from your test script, for example:
 | `dc-data-table` | Read-only table of records whose rows open something — sticky header, row header holding a button for keyboard activation, a click anywhere on a row activates it (a click that ends a text selection does not), cells keep their line breaks, optional empty label; dispatches `activate` with the row id |
 | `dc-context-menu` | Right-click context menu — Popover API for open/close (light-dismiss + top-layer stacking from the platform), roving-tabindex keyboard navigation, viewport-edge clamping |
 
+`isModalOpen()` says whether a modal is open — a `dc-dialog`, or anything that registers itself with
+`setModalOpen(owner, open)` — and `document` fires `dc-modal-change` when that changes: an app's keyboard shortcuts
+stay quiet while it is (`if (isModalOpen()) return`), with no search through shadow roots.
+
 Run `npm run storybook` to browse every component interactively, including variants not shown above.
 
 ## Accessibility

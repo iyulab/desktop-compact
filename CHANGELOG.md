@@ -7,6 +7,13 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+### Added
+
+- `isModalOpen()` — whether a modal is open now: a `dc-dialog` (and so a `dc-confirm-dialog`), or anything that says
+  so with `setModalOpen(owner, open)`. `document` fires `dc-modal-change` (`{ open }`) whenever it changes. The
+  platform's `:modal` cannot be asked across shadow roots, so an app keeping its keyboard shortcuts quiet while a
+  dialog is open no longer has to search every shadow root for one.
+
 ### Removed
 
 - The `guard` script and its token list (development only — not part of the package). A list of

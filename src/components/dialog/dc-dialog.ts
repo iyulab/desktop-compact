@@ -2,6 +2,7 @@ import { html, css, LitElement } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import type { PropertyValues } from 'lit'
+import { setModalOpen } from '../../lib/modal.js'
 
 @customElement('dc-dialog')
 export class DcDialog extends LitElement {
@@ -55,10 +56,12 @@ export class DcDialog extends LitElement {
   disconnectedCallback(): void {
     super.disconnectedCallback()
     this._stateObserver?.disconnect()
+    setModalOpen(this, false)
   }
 
   protected updated(changed: PropertyValues<this>): void {
     if (!changed.has('open')) return
+    setModalOpen(this, this.open)
     if (this.open && !this._inner.open) {
       this._inner.showModal()
     } else if (!this.open && this._inner.open) {
