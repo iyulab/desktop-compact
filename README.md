@@ -33,6 +33,11 @@ Or import everything via the barrel:
 import '@iyulab/desktop-compact'
 ```
 
+The barrel registers every component when it is imported — that is what importing it does — so a bundle that takes
+anything from it takes them all, whatever it names. For one helper, use its own subpath: `isModalOpen` from
+`@iyulab/desktop-compact/modal` brings no component along. The package declares no `sideEffects`: each component's
+module registers its element, and no list of files would let a bundler drop the components a barrel import evaluates.
+
 ## Usage
 
 ```html
