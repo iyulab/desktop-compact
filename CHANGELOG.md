@@ -7,6 +7,8 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+## [0.15.1] - 2026-10-23
+
 ### Added
 
 - `@iyulab/desktop-compact/modal` — `isModalOpen` and `setModalOpen` on their own, so asking whether a modal is open
