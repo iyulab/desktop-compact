@@ -25,10 +25,28 @@ export class DcDialog extends LitElement {
     dialog::backdrop {
       background: var(--dc-color-backdrop, rgba(0, 0, 0, 0.4));
     }
+    /* A sheet along the window's end edge (the right one in a left-to-right page), full height: a
+       detail or a history beside what it describes, still modal — the same focus trap, Escape and
+       backdrop as a centred dialog. */
+    :host([placement='end']) dialog {
+      margin-block: 0;
+      margin-inline: auto 0;
+      height: 100%;
+      max-height: 100%;
+      width: min(var(--dc-dialog-sheet-width, 384px), 100vw);
+      max-width: 100vw;
+      border-width: 0;
+      border-inline-start-width: 1px;
+      border-radius: 0;
+    }
   `
 
   @property({ type: Boolean, reflect: true })
   open = false
+
+  /** `center` (default) — in the middle of the window; `end` — a full-height sheet along the end edge. */
+  @property({ reflect: true })
+  placement: 'center' | 'end' = 'center'
 
   @query('dialog')
   private _inner!: HTMLDialogElement

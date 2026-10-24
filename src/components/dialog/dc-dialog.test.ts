@@ -88,4 +88,33 @@ describe('dc-dialog', () => {
     expect(getComputedStyle(inner).textAlign).to.equal('start')
     expect(inner.scrollWidth).to.be.at.most(inner.clientWidth)
   })
+
+  it('opens as a full-height sheet along the end edge with placement="end", and in the middle without it', async () => {
+    const sheet = await fixture<DcDialog>(html`<dc-dialog placement="end">Content</dc-dialog>`)
+    sheet.open = true
+    await sheet.updateComplete
+    const box = sheet.shadowRoot!.querySelector('dialog')!.getBoundingClientRect()
+    expect(Math.round(box.right)).to.equal(document.documentElement.clientWidth)
+    expect(Math.round(box.top)).to.equal(0)
+    expect(Math.round(box.height)).to.equal(window.innerHeight)
+    expect(Math.round(box.width)).to.equal(Math.min(384, window.innerWidth))
+
+    const centred = await fixture<DcDialog>(html`<dc-dialog>Content</dc-dialog>`)
+    centred.open = true
+    await centred.updateComplete
+    const middle = centred.shadowRoot!.querySelector('dialog')!.getBoundingClientRect()
+    const gapStart = middle.left
+    const gapEnd = document.documentElement.clientWidth - middle.right
+    expect(Math.abs(gapStart - gapEnd)).to.be.below(2)
+    sheet.open = false
+    centred.open = false
+  })
+
+  it('takes a consumer-set --dc-dialog-sheet-width for the sheet', async () => {
+    const sheet = await fixture<DcDialog>(html`<dc-dialog placement="end" style="--dc-dialog-sheet-width: 300px">Content</dc-dialog>`)
+    sheet.open = true
+    await sheet.updateComplete
+    expect(Math.round(sheet.shadowRoot!.querySelector('dialog')!.getBoundingClientRect().width)).to.equal(300)
+    sheet.open = false
+  })
 })

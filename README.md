@@ -177,7 +177,7 @@ Run it from your test script, for example:
 | `dc-badge` | Small status/count indicator |
 | `dc-card` | Content container with consistent padding/border |
 | `dc-spinner` | Loading indicator |
-| `dc-dialog` | Modal dialog (native `<dialog>` + `showModal()` — focus trap, backdrop, Escape-to-close all come from the platform) |
+| `dc-dialog` | Modal dialog (native `<dialog>` + `showModal()` — focus trap, backdrop, Escape-to-close all come from the platform); `placement="end"` makes it a full-height sheet along the end edge |
 | `dc-confirm-dialog` | `dc-dialog` + two `dc-button`s composed into a confirm/cancel flow |
 | `dc-delete-confirm-button` | Two-state delete trigger: icon-only button swaps to a visible confirm button on click, resets on blur |
 | `dc-empty-state` | Empty-state placeholder (icon slot, heading, description, actions slot) |
