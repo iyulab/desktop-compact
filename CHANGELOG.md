@@ -12,7 +12,7 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 - `dc-dialog` `placement="end"` — a full-height sheet along the window's end edge (the right one in a left-to-right
   page), for a detail or a history shown beside what it describes. Still a modal `<dialog>`: the same focus trap,
   Escape, backdrop and entry in the modal registry as a centred one. Its width is `--dc-dialog-sheet-width` (default
-  384px).
+  384px, defined in `tokens.css`).
 
 ## [0.15.1] - 2026-10-23
 

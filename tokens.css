@@ -53,6 +53,7 @@
 
   /* Component sizes -- override on the element or here */
   --dc-dialog-max-width: 480px;
+  --dc-dialog-sheet-width: 384px;
   /* One height for the one-line controls -- input, select, button, segmented control -- so a row of them lines up */
   --dc-control-height: 34px;
   --dc-control-height-sm: 26px;
