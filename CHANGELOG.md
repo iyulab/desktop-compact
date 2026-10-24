@@ -7,6 +7,8 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+## [0.16.0] - 2026-10-24
+
 ### Added
 
 - `dc-dialog` `placement="end"` — a full-height sheet along the window's end edge (the right one in a left-to-right
