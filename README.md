@@ -7,8 +7,8 @@ consumer-supplied), Shadow DOM + CSS custom-property tokens for theming.
 Not a general-purpose or mobile-density kit — it targets the density and interaction patterns of
 desktop utility software specifically. Layout/structure (sidebars, docking panels, toolbars) belongs
 in [`desktop-patterns`](https://github.com/iyulab/desktop-patterns); native platform integration
-(file dialogs, tray, window control) belongs in
-[`electron-kit`](https://github.com/iyulab/electron-kit). This package knows about neither, and
+(file dialogs, tray, window control) belongs in the shell-side kit of the desktop shell an app uses
+(for a Tauri app, [`tauri-kit`](https://github.com/iyulab/tauri-kit)). This package knows about neither, and
 knows nothing about any specific consuming application — it is the lowest layer, with no dependencies
 of its own.
 
