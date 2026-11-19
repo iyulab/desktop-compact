@@ -7,6 +7,10 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+### Changed
+
+- README: no longer says docking panels belong in `desktop-patterns` — neither package has them.
+
 ## [0.16.0] - 2026-10-24
 
 ### Added
