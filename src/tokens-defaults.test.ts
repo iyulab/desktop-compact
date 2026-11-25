@@ -2,12 +2,15 @@ import { fixtureSync, html, expect } from '@open-wc/testing'
 import './components/card/dc-card.js'
 import './components/badge/dc-badge.js'
 import './components/section-heading/dc-section-heading.js'
+import './components/input/dc-input.js'
+import type { DcInput } from './components/input/dc-input.js'
 import type { DcCard } from './components/card/dc-card.js'
 import type { DcBadge } from './components/badge/dc-badge.js'
 import type { DcSectionHeading } from './components/section-heading/dc-section-heading.js'
 
 // With the package's tokens.css loaded — as every consuming app has it — the parts look as they did
-// in 0.9.1: the role tokens added in 0.10 must default to the old look. The wrappers are mounted with
+// in 0.9.1: the role tokens added in 0.10 must default to the old look. Two changes since are deliberate,
+// both for contrast: the muted text colour and the outline of controls. The wrappers are mounted with
 // fixtureSync: fixture() would wait for an animation frame, which a background test page may not get.
 describe('tokens.css defaults keep the 0.9 look', () => {
   let link: HTMLLinkElement
@@ -70,6 +73,21 @@ describe('tokens.css defaults keep the 0.9 look', () => {
   }
 
   for (const theme of ['light', 'dark']) {
+    // WCAG 2.2 SC 1.4.11: what is needed to find a control reads at 3:1 against what is next to it.
+    it(`a text control's outline reads at 3:1 or more on the ${theme} grounds`, async () => {
+      document.documentElement.dataset.theme = theme
+      try {
+        const input = fixtureSync<DcInput>(html`<dc-input></dc-input>`)
+        await input.updateComplete
+        const outline = getComputedStyle(input.shadowRoot!.querySelector('input')!).borderTopColor
+        for (const ground of ['--dc-color-bg', '--dc-color-surface', '--dc-color-surface-hover', '--dc-color-surface-raised']) {
+          expect(contrast(outline, token(ground)), `${outline} on ${ground}`).to.be.at.least(3)
+        }
+      } finally {
+        delete document.documentElement.dataset.theme
+      }
+    })
+
     it(`muted text reads at 4.5:1 or more on the ${theme} grounds`, () => {
       document.documentElement.dataset.theme = theme
       try {

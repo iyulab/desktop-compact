@@ -7,14 +7,23 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
 
 ## [Unreleased]
 
+### Changed
+
+- Controls are outlined with a new colour, `--dc-color-border-control` (light `#87878f`, dark `#74757d`),
+  at least 3:1 on every ground (WCAG 1.4.11). Before, a text field's edge was the decorative border colour,
+  1.3:1. This covers `dc-input`, `dc-select`, `dc-textarea`, `dc-segmented-control`, a `secondary`
+  `dc-button`, `dc-paste-rows-zone` and, through `u-bridge.css`, `--u-input-border-color`. `--dc-color-border`
+  keeps its value and still draws cards, dialogs, menus, toasts, tab bars, tables and rules. **If your palette
+  sets `--dc-color-border`, controls no longer follow it:** set `--dc-color-border-control` too (set it to your
+  border colour to keep the previous look). An app that already sets `--dc-control-border` sees no change.
+
 ### Fixed
 
 - `--dc-control-border` now reaches every outline that marks a control: besides `dc-input`, `dc-select`,
   `dc-textarea` and the `dc-segmented-control` group, the dividers between its segments, a `secondary`
   `dc-button` and `dc-paste-rows-zone`; through `u-bridge.css`, also `--u-input-border-color`. They drew
   `--dc-color-border` directly, so an app that gave its controls a stronger outline got it on some of them
-  only. Unset, nothing changes. Cards, dialogs, menus, toasts, tab bars, tables and rules keep
-  `--dc-color-border`; `dc-checkbox` is drawn by the platform.
+  only. `dc-checkbox` is drawn by the platform.
 
 ### Changed
 

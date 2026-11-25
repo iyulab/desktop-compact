@@ -57,7 +57,10 @@ describe('u-bridge.css', () => {
   })
 
   it('outlines u inputs as desktop-compact outlines its controls', () => {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    expect(painted('--u-input-border-color')).to.equal('rgb(116, 117, 125)')
     document.documentElement.setAttribute('data-theme', 'light')
+    expect(painted('--u-input-border-color')).to.equal('rgb(135, 135, 143)')
     const own = document.createElement('style')
     own.textContent = ':root { --dc-control-border: rgb(7, 8, 9); }'
     document.head.append(own)

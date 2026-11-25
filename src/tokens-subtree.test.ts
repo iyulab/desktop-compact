@@ -120,9 +120,11 @@ describe('tokens.css on a themed subtree', () => {
     expect(getComputedStyle(card).borderTopColor).to.equal('rgb(7, 8, 9)')
   })
 
-  it('outlines every control with the border colour when no control border is set', async () => {
-    const root = fixtureSync<HTMLDivElement>(html`<div style="--dc-color-border: rgb(7, 8, 9)">${controls()}</div>`)
-    expect(await outlines(root)).to.deep.equal(all('rgb(7, 8, 9)'))
+  it('outlines every control with the control outline colour a subtree sets, not with the border colour', async () => {
+    const root = fixtureSync<HTMLDivElement>(html`
+      <div style="--dc-color-border-control: rgb(13, 14, 15); --dc-color-border: rgb(7, 8, 9)">${controls()}</div>
+    `)
+    expect(await outlines(root)).to.deep.equal(all('rgb(13, 14, 15)'))
   })
 
   it('lets a subtree accent reach a badge tint', async () => {

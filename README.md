@@ -108,7 +108,7 @@ defaults reproduce the 0.9 look; a test keeps it that way.
 | --- | --- |
 | `--dc-color-rule` | `--dc-color-border` (hairline rules) |
 | `--dc-control-bg` | `--dc-color-bg` (input, select, textarea ground) |
-| `--dc-control-border` | `--dc-color-border` (a control's outline: input, select, textarea, segmented group and dividers, secondary button, paste zone) |
+| `--dc-control-border` | `--dc-color-border-control` (a control's outline: input, select, textarea, segmented group and dividers, secondary button, paste zone) |
 | `--dc-color-accent-subtle`, `-secondary-subtle`, `-success-subtle`, `-warning-subtle`, `-danger-subtle` | 15% tint of the fill |
 | `--dc-page-eyebrow-color`, `-size` | `--dc-color-accent-text`, `--dc-font-size-xs` |
 | `--dc-page-title-size`, `-weight` | `--dc-font-size-2xl`, `--dc-font-weight-bold` |

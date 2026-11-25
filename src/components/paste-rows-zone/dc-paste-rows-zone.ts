@@ -23,7 +23,7 @@ export class DcPasteRowsZone extends LitElement {
       field-sizing: content;
       text-align: center;
       padding: var(--dc-space-2, 8px) var(--dc-space-3, 12px);
-      border: 1px dashed var(--dc-control-border, var(--dc-color-border, #e2e2e4));
+      border: 1px dashed var(--dc-control-border, var(--dc-color-border-control, #87878f));
       border-radius: var(--dc-radius-sm, 4px);
       background: transparent;
       color: var(--dc-color-text-secondary, #55555c);

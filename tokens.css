@@ -13,6 +13,9 @@
   --dc-color-surface: #f7f7f8;
   --dc-color-surface-hover: #ececed;
   --dc-color-border: #e2e2e4;
+  /* The outline of a control: at least 3:1 on every ground above and below (WCAG 1.4.11). --dc-color-border
+     is the quieter line, for edges nobody has to find: cards, rules, menus. */
+  --dc-color-border-control: #87878f;
   --dc-color-text: #1a1a1e;
   --dc-color-text-secondary: #55555c;
   /* At least 4.5:1 on bg, surface and surface-hover, so small muted text stays readable. */
@@ -124,7 +127,7 @@
  *   --dc-field-required-color        → --dc-color-accent-text
  *   --dc-field-gap                   → --dc-space-1
  *   --dc-control-bg                  → --dc-color-bg              (input, select, textarea ground)
- *   --dc-control-border              → --dc-color-border          (a control's outline: input, select, textarea,
+ *   --dc-control-border              → --dc-color-border-control  (a control's outline: input, select, textarea,
  *                                                          segmented group and dividers, secondary button, paste zone)
  *   --dc-metric-size                 → --dc-font-size-display
  *   --dc-metric-accent-1             → --dc-color-accent
@@ -190,6 +193,7 @@
     --dc-color-surface: #1f2024;
     --dc-color-surface-hover: #2a2b30;
     --dc-color-border: #313236;
+    --dc-color-border-control: #74757d;
     --dc-color-text: #f0f0f2;
     --dc-color-text-secondary: #b8b8bf;
     --dc-color-text-muted: #9a9aa3;
@@ -215,6 +219,7 @@
   --dc-color-surface: #1f2024;
   --dc-color-surface-hover: #2a2b30;
   --dc-color-border: #313236;
+  --dc-color-border-control: #74757d;
   --dc-color-text: #f0f0f2;
   --dc-color-text-secondary: #b8b8bf;
   --dc-color-text-muted: #9a9aa3;

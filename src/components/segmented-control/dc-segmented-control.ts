@@ -32,7 +32,7 @@ export class DcSegmentedControl extends FormAssociatedMixin(LitElement) {
       display: inline-flex;
       box-sizing: border-box;
       height: var(--dc-control-height, 34px);
-      border: 1px solid var(--dc-control-border, var(--dc-color-border, #e2e2e4));
+      border: 1px solid var(--dc-control-border, var(--dc-color-border-control, #87878f));
       border-radius: var(--dc-radius-sm, 4px);
       overflow: hidden;
     }
@@ -40,7 +40,7 @@ export class DcSegmentedControl extends FormAssociatedMixin(LitElement) {
       appearance: none;
       margin: 0;
       border: none;
-      border-inline-start: 1px solid var(--dc-control-border, var(--dc-color-border, #e2e2e4));
+      border-inline-start: 1px solid var(--dc-control-border, var(--dc-color-border-control, #87878f));
       background: var(--dc-color-surface, #ffffff);
       color: var(--dc-color-text-secondary, #55555c);
       font: inherit;

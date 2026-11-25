@@ -52,7 +52,7 @@ export class DcButton extends FormAssociatedMixin(LitElement) {
     :host([variant='secondary']) button {
       background: var(--dc-color-surface, #f7f7f8);
       color: var(--dc-color-text, #1a1a1e);
-      border-color: var(--dc-control-border, var(--dc-color-border, #e2e2e4));
+      border-color: var(--dc-control-border, var(--dc-color-border-control, #87878f));
     }
     :host([variant='ghost']) button {
       background: transparent;
