@@ -15,7 +15,9 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
   `dc-button`, `dc-paste-rows-zone` and, through `u-bridge.css`, `--u-input-border-color`. `--dc-color-border`
   keeps its value and still draws cards, dialogs, menus, toasts, tab bars, tables and rules. **If your palette
   sets `--dc-color-border`, controls no longer follow it:** set `--dc-color-border-control` too (set it to your
-  border colour to keep the previous look). An app that sets `--dc-control-border` keeps its colour on every control (see Fixed below for the ones it reaches now).
+  border colour to keep the previous look). An app that sets `--dc-control-border` keeps its colour on every
+  control (see Fixed below for the ones it reaches now).
+- README: no longer says docking panels belong in `desktop-patterns` — neither package has them.
 
 ### Fixed
 
@@ -24,10 +26,6 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
   `dc-button` and `dc-paste-rows-zone`; through `u-bridge.css`, also `--u-input-border-color`. They drew
   `--dc-color-border` directly, so an app that gave its controls a stronger outline got it on some of them
   only. An app that sets the role will see those now take it too. `dc-checkbox` is drawn by the platform.
-
-### Changed
-
-- README: no longer says docking panels belong in `desktop-patterns` — neither package has them.
 
 ## [0.16.0] - 2026-10-24
 
