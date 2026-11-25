@@ -1,4 +1,4 @@
-import { fixture, html, expect } from '@open-wc/testing'
+import { fixture, fixtureSync, html, expect } from '@open-wc/testing'
 import './dc-select.js'
 import type { DcSelect } from './dc-select.js'
 import { formFixture } from '../../../test/form-fixture.js'
@@ -135,6 +135,36 @@ describe('dc-select option groups', () => {
     expect(el.shadowRoot!.querySelectorAll('optgroup').length).to.equal(0)
     expect(el.shadowRoot!.querySelectorAll('select > option').length).to.equal(3)
   })
+
+  // A native select cuts its text off at its content box: with a fixed height, whatever vertical padding
+  // leaves must still hold a whole line, or descenders are lost (a «y» reads as a «v»).
+  for (const [size, tokens] of [
+    ['md', ''],
+    ['md', '--dc-font-size-md: 16px'],
+    ['sm', ''],
+    ['sm', '--dc-font-size-sm: 14px'],
+  ] as const) {
+    it(`leaves room for a whole line of its text at size ${size} ${tokens || 'with the default tokens'}`, async () => {
+      // fixtureSync: fixture() waits for an animation frame, which a background test page may not get.
+      const wrap = fixtureSync<HTMLDivElement>(
+        html`<div style=${tokens}><dc-select size=${size} .options=${OPTIONS} value="a"></dc-select></div>`,
+      )
+      const el = wrap.querySelector('dc-select') as DcSelect
+      await el.updateComplete
+      const select = el.shadowRoot!.querySelector('select')!
+      const style = getComputedStyle(select)
+      const px = (v: string) => parseFloat(v)
+      const content =
+        select.getBoundingClientRect().height -
+        px(style.paddingTop) - px(style.paddingBottom) - px(style.borderTopWidth) - px(style.borderBottomWidth)
+      const probe = document.createElement('span')
+      probe.style.font = style.font
+      probe.style.lineHeight = 'normal'
+      probe.textContent = 'gjpqy'
+      wrap.append(probe)
+      expect(content, `${style.fontSize} text`).to.be.at.least(probe.getBoundingClientRect().height)
+    })
+  }
 
   it('shows its placeholder as a placeholder, not as a chosen value, until a value is chosen', async () => {
     const el = await fixture<DcSelect>(html`<dc-select placeholder="Kind" .options=${OPTIONS}></dc-select>`)

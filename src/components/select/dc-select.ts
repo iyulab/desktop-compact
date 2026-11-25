@@ -40,7 +40,9 @@ export class DcSelect extends FormAssociatedMixin(LitElement) {
       box-sizing: border-box;
       width: 100%;
       height: var(--dc-control-height, 34px);
-      padding: var(--dc-space-2, 8px) var(--dc-space-3, 12px);
+      /* No vertical padding: the height is fixed, a select centres its text itself, and it cuts the text
+         off at whatever the padding leaves. */
+      padding: 0 var(--dc-space-3, 12px);
       border: 1px solid var(--dc-control-border, var(--dc-color-border-control, #87878f));
       border-radius: var(--dc-radius-sm, 4px);
       background: var(--dc-control-bg, var(--dc-color-bg, #ffffff));
@@ -68,7 +70,7 @@ export class DcSelect extends FormAssociatedMixin(LitElement) {
     }
     :host([size='sm']) select {
       height: var(--dc-control-height-sm, 26px);
-      padding: var(--dc-space-1, 4px) var(--dc-space-2, 8px);
+      padding: 0 var(--dc-space-2, 8px);
       font-size: var(--dc-font-size-sm, 12px);
     }
   `

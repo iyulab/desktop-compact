@@ -26,6 +26,9 @@ release may change the API). Releases up to 0.8.2 are recorded in the git histor
   `dc-button` and `dc-paste-rows-zone`; through `u-bridge.css`, also `--u-input-border-color`. They drew
   `--dc-color-border` directly, so an app that gave its controls a stronger outline got it on some of them
   only. An app that sets the role will see those now take it too. `dc-checkbox` is drawn by the platform.
+- `dc-select` no longer cuts off the bottom of its text. Its height is fixed, and the vertical padding left
+  less than one line of it — by about a pixel at the default 13px, more with a larger `--dc-font-size-md`,
+  where a «y» read as a «v». The padding is horizontal only now; the height is unchanged.
 
 ## [0.16.0] - 2026-10-24
 
