@@ -40,7 +40,7 @@ export class DcSegmentedControl extends FormAssociatedMixin(LitElement) {
       appearance: none;
       margin: 0;
       border: none;
-      border-inline-start: 1px solid var(--dc-color-border, #e2e2e4);
+      border-inline-start: 1px solid var(--dc-control-border, var(--dc-color-border, #e2e2e4));
       background: var(--dc-color-surface, #ffffff);
       color: var(--dc-color-text-secondary, #55555c);
       font: inherit;

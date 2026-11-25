@@ -56,6 +56,19 @@ describe('u-bridge.css', () => {
     expect(painted('--u-neutral-0')).to.equal('rgb(23, 24, 28)')
   })
 
+  it('outlines u inputs as desktop-compact outlines its controls', () => {
+    document.documentElement.setAttribute('data-theme', 'light')
+    const own = document.createElement('style')
+    own.textContent = ':root { --dc-control-border: rgb(7, 8, 9); }'
+    document.head.append(own)
+    try {
+      expect(painted('--u-input-border-color')).to.equal('rgb(7, 8, 9)')
+      expect(painted('--u-border-color')).to.equal('rgb(226, 226, 228)')
+    } finally {
+      own.remove()
+    }
+  })
+
   it("leaves the app's own unlayered CSS the last word", () => {
     document.documentElement.setAttribute('data-theme', 'light')
     const own = document.createElement('style')

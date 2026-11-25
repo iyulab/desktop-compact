@@ -83,7 +83,7 @@
     --u-border-color-weak: var(--dc-color-border);
     --u-border-color-hover: var(--dc-color-text-muted);
     --u-border-color-strong: var(--dc-color-text-muted);
-    --u-input-border-color: var(--dc-color-border);
+    --u-input-border-color: var(--dc-control-border, var(--dc-color-border));
     --u-input-border-color-hover: var(--dc-color-text-muted);
     --u-input-border-color-focus: var(--dc-color-accent);
     --u-input-border-color-invalid: var(--dc-color-danger);

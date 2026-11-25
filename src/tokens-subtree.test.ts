@@ -5,6 +5,9 @@ import './components/input/dc-input.js'
 import './components/select/dc-select.js'
 import './components/textarea/dc-textarea.js'
 import './components/data-table/dc-data-table.js'
+import './components/button/dc-button.js'
+import './components/segmented-control/dc-segmented-control.js'
+import './components/paste-rows-zone/dc-paste-rows-zone.js'
 import type { DcDataTable } from './components/data-table/dc-data-table.js'
 
 // With tokens.css loaded, a base token overridden on a subtree (a panel with its own surface or
@@ -77,20 +80,49 @@ describe('tokens.css on a themed subtree', () => {
     expect(grounds).to.deep.equal([...Array(3).fill('rgb(7, 8, 9)'), ...Array(3).fill('rgb(10, 11, 12)')])
   })
 
-  it('outlines the controls with the border colour, or with the control border a subtree sets', async () => {
-    const root = fixtureSync<HTMLDivElement>(html`
-      <div style="--dc-color-border: rgb(7, 8, 9)">
-        <dc-input></dc-input><dc-select></dc-select><dc-textarea></dc-textarea>
-        <div style="--dc-control-border: rgb(10, 11, 12)"><dc-input></dc-input><dc-select></dc-select><dc-textarea></dc-textarea></div>
-      </div>
-    `)
-    const borders = await Promise.all(
-      [...root.querySelectorAll<HTMLElement & { updateComplete: Promise<boolean> }>('dc-input, dc-select, dc-textarea')].map(async (el) => {
-        await el.updateComplete
-        return getComputedStyle(el.shadowRoot!.querySelector('input, select, textarea')!).borderTopColor
-      }),
+  // Every outline that marks a control's extent: the text controls, the segmented group and the dividers
+  // between its segments, a secondary button, and the paste zone.
+  const controls = () => html`
+    <dc-input></dc-input><dc-select></dc-select><dc-textarea></dc-textarea>
+    <dc-segmented-control .options=${[{ value: 'a', label: 'A' }, { value: 'b', label: 'B' }]} value="a"></dc-segmented-control>
+    <dc-button>Save</dc-button><dc-paste-rows-zone></dc-paste-rows-zone>
+  `
+
+  /** The outline colours those controls paint under `root`, keyed by what draws them. */
+  async function outlines(root: Element): Promise<Record<string, string>> {
+    const paint = async (tag: string, selector: string, side: 'borderTopColor' | 'borderLeftColor' = 'borderTopColor') => {
+      const el = root.querySelector<HTMLElement & { updateComplete: Promise<boolean> }>(`:scope > ${tag}`)!
+      await el.updateComplete
+      return getComputedStyle(el.shadowRoot!.querySelector(selector)!)[side]
+    }
+    return {
+      input: await paint('dc-input', 'input'),
+      select: await paint('dc-select', 'select'),
+      textarea: await paint('dc-textarea', 'textarea'),
+      segmentedGroup: await paint('dc-segmented-control', '.group'),
+      segmentDivider: await paint('dc-segmented-control', 'button:nth-of-type(2)', 'borderLeftColor'),
+      secondaryButton: await paint('dc-button', 'button'),
+      pasteZone: await paint('dc-paste-rows-zone', 'textarea'),
+    }
+  }
+  const all = (colour: string) =>
+    Object.fromEntries(
+      ['input', 'select', 'textarea', 'segmentedGroup', 'segmentDivider', 'secondaryButton', 'pasteZone'].map((k) => [k, colour]),
     )
-    expect(borders).to.deep.equal([...Array(3).fill('rgb(7, 8, 9)'), ...Array(3).fill('rgb(10, 11, 12)')])
+
+  it('outlines every control with the control border a subtree sets, and leaves cards alone', async () => {
+    const root = fixtureSync<HTMLDivElement>(html`
+      <div style="--dc-control-border: rgb(10, 11, 12); --dc-color-border: rgb(7, 8, 9)">${controls()}<dc-card>Body</dc-card></div>
+    `)
+    expect(await outlines(root)).to.deep.equal(all('rgb(10, 11, 12)'))
+    const card = root.querySelector('dc-card')!
+    await card.updateComplete
+    expect(getComputedStyle(card).borderTopColor).to.equal('rgb(7, 8, 9)')
+  })
+
+  it('outlines every control with the border colour when no control border is set', async () => {
+    const root = fixtureSync<HTMLDivElement>(html`<div style="--dc-color-border: rgb(7, 8, 9)">${controls()}</div>`)
+    expect(await outlines(root)).to.deep.equal(all('rgb(7, 8, 9)'))
   })
 
   it('lets a subtree accent reach a badge tint', async () => {

@@ -124,7 +124,8 @@
  *   --dc-field-required-color        → --dc-color-accent-text
  *   --dc-field-gap                   → --dc-space-1
  *   --dc-control-bg                  → --dc-color-bg              (input, select, textarea ground)
- *   --dc-control-border              → --dc-color-border          (input, select, textarea, segmented outline)
+ *   --dc-control-border              → --dc-color-border          (a control's outline: input, select, textarea,
+ *                                                          segmented group and dividers, secondary button, paste zone)
  *   --dc-metric-size                 → --dc-font-size-display
  *   --dc-metric-accent-1             → --dc-color-accent
  *   --dc-metric-accent-2             → --dc-color-secondary
